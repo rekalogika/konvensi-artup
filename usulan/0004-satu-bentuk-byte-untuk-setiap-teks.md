@@ -5,7 +5,7 @@
 | Nomor | 0004 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | [S-13], N-3, N-8, Lampiran A |
 | Jenis perubahan | perubahan tidak kompatibel |
@@ -77,3 +77,10 @@ Tidak kompatibel; MINOR selama MAYOR bernilai 0 ([R-2]).
 - U+200C dan U+200D bermakna dalam aksara tertentu (misalnya Arab); bila Lampiran memuat teks beraksara non-Latin, pengecualian perlu ditambahkan.
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima**, [S-13] pilihan A dan rumusan N-8 apa adanya.
+Pilihan A dipilih karena selaras dengan N-3 dan karena penampil Markdown menampilkan pergantian baris lunak sebagai spasi, sehingga tampilan tidak berubah.
+Contoh penutup di Lampiran A disesuaikan.
+Pengecualian untuk U+200C dan U+200D pada aksara non-Latin belum diperlukan; bila Lampiran beraksara non-Latin ditemukan, diusulkan tersendiri.
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
