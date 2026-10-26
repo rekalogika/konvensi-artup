@@ -200,13 +200,23 @@ class Pemeriksa:
             elif tabel[kunci][1].lower() != nilai.lower():
                 self.lapor(tabel[kunci][0], "identitas",
                            f"{kunci} '{tabel[kunci][1]}' berbeda dengan frontmatter '{nilai}'")
+        pengenal = str(fm.get("id", ""))
+        if "Pengenal" in tabel and tabel["Pengenal"][1].strip("`") != pengenal:
+            self.lapor(tabel["Pengenal"][0], "R-7",
+                       f"Pengenal '{tabel['Pengenal'][1]}' berbeda dengan id frontmatter '{pengenal}'")
         rujukan = next((v for k, v in tabel.items() if k.startswith("Rujukan singkat")), None)
         if rujukan and RE_SEMVER.match(versi):
             mayor_minor = ".".join(versi.split(".")[:2])
-            m = re.search(r"transkripsi-peraturan/(\d+\.\d+)", rujukan[1])
-            if not m or m.group(1) != mayor_minor:
-                self.lapor(rujukan[0], "R-1",
-                           f"rujukan singkat tidak sama dengan transkripsi-peraturan/{mayor_minor}")
+            m = re.search(r"`([^`/]+)/(\d+\.\d+)`", rujukan[1])
+            if not m:
+                self.lapor(rujukan[0], "R-1", "rujukan singkat bukan `pengenal/MAYOR.MINOR`")
+            else:
+                if m.group(1) != pengenal:
+                    self.lapor(rujukan[0], "R-7",
+                               f"pengenal teknis '{m.group(1)}' berbeda dengan id frontmatter '{pengenal}'")
+                if m.group(2) != mayor_minor:
+                    self.lapor(rujukan[0], "R-1",
+                               f"rujukan singkat tidak sama dengan {pengenal}/{mayor_minor}")
 
         for i in range(dok.awal_badan, akhir_pembuka):
             m = re.search(r"berstatus \*\*(\w+)\*\*", dok.baris[i])

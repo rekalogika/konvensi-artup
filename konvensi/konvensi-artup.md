@@ -1,5 +1,5 @@
 ---
-id: konvensi/transkripsi-peraturan
+id: transkripsi-peraturan
 nama: Konvensi Artup
 judul: Konvensi Artup — Konvensi Transkripsi Peraturan Perundang-undangan ke Format Markdown
 versi: 0.1.0
@@ -12,7 +12,6 @@ penyusun:
   - nama: Claude (Anthropic)
     peran: penulis draf
 menggantikan: null
-digantikan_oleh: null
 ---
 
 # Konvensi Artup
@@ -22,7 +21,7 @@ Konvensi Transkripsi Peraturan Perundang-undangan ke Format Markdown
 | Identitas | Nilai |
 |---|---|
 | Nama | Konvensi Artup |
-| Pengenal | `konvensi/transkripsi-peraturan` |
+| Pengenal | `transkripsi-peraturan` |
 | Versi | 0.1.0 |
 | Status | Draf |
 | Tanggal | 2026-10-26 |
@@ -864,6 +863,13 @@ Berkas transkripsi WAJIB merujuk pengenal teknis, sehingga perubahan nama di kem
 [R-6] Berkas transkripsi BOLEH merujuk versi konvensi yang masih draf selama penyusunan.
 Berkas transkripsi TIDAK BOLEH berstatus `verified` sebelum versi konvensi yang dirujuknya final dan tercantum dalam daftar rilis konvensi.
 
+[R-7] Frontmatter dokumen konvensi WAJIB memuat isian `id`, `nama`, `judul`, `versi`, `status`, dan `tanggal`, dan BOLEH memuat `bahasa`, `penyusun`, dan `menggantikan`.
+Nilai `id` WAJIB sama dengan pengenal teknis menurut [R-5].
+Nilai `status` WAJIB berupa `draf` atau `final`.
+
+[R-8] Dokumen konvensi TIDAK BOLEH memuat informasi tentang versi yang menggantikannya.
+Hubungan antarversi konvensi ditentukan dari daftar rilis konvensi menurut [R-3].
+
 ## 14. Lampiran A: Contoh Berkas Minimal
 
 Contoh berikut dipersingkat; tanda `…` menggantikan teks yang dihilangkan dan bukan bagian dari berkas yang sebenarnya.
@@ -1013,4 +1019,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). |

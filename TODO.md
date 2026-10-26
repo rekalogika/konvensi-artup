@@ -32,7 +32,7 @@ Butir yang menyangkut fakta hukum tidak boleh diisi dari ingatan; cocokkan denga
 
 ## Alat
 
-- [ ] Perluas pemeriksa bila usulan 0002 diterima: `id` sama dengan pengenal teknis [R-5].
+- [x] Perluas pemeriksa: `id` sama dengan pengenal teknis ([R-7], usulan 0002).
 - [ ] Pertimbangkan pemeriksaan kata kunci normatif tanpa kode aturan (usulan 0005) di `alat/periksa_konvensi.py`.
 
 ## Tahap berikutnya

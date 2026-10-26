@@ -23,7 +23,7 @@ import periksa_konvensi as pk  # noqa: E402
 
 CONTOH_SESUAI = """\
 ---
-id: konvensi/contoh
+id: transkripsi-peraturan
 nama: Konvensi Contoh
 judul: Konvensi Contoh
 versi: 0.1.0
@@ -102,7 +102,7 @@ class UjiPemeriksa(unittest.TestCase):
         self.assertEqual(kode(periksa(CONTOH_SESUAI + "\n")), ["F-6"])
 
     def test_frontmatter(self):
-        self.assertIn("frontmatter", kode(periksa(CONTOH_SESUAI.replace("id: konvensi/contoh\n", "id: [\n"))))
+        self.assertIn("frontmatter", kode(periksa(CONTOH_SESUAI.replace("id: transkripsi-peraturan\n", "id: [\n"))))
         self.assertIn("frontmatter", kode(periksa(CONTOH_SESUAI.replace("nama: Konvensi Contoh\n", ""))))
         self.assertIn("R-1", kode(periksa(CONTOH_SESUAI.replace("versi: 0.1.0", "versi: 0.1"))))
 
@@ -113,6 +113,16 @@ class UjiPemeriksa(unittest.TestCase):
         self.assertEqual(kode(t), ["identitas"])
         t = periksa(CONTOH_SESUAI.replace("| 0.1.0 | 2026-10-26 | Draf", "| 0.0.9 | 2026-10-26 | Draf"))
         self.assertEqual(kode(t), ["R-2"])
+
+    def test_pengenal(self):
+        t = periksa(CONTOH_SESUAI.replace("id: transkripsi-peraturan", "id: konvensi/transkripsi-peraturan"))
+        self.assertEqual(kode(t), ["R-7"])
+        dengan_baris = CONTOH_SESUAI.replace("| Versi | 0.1.0 |", "| Pengenal | `transkripsi-peraturan` |\n| Versi | 0.1.0 |")
+        self.assertEqual(periksa(dengan_baris), [])
+        t = periksa(dengan_baris.replace("| Pengenal | `transkripsi-peraturan` |", "| Pengenal | `lain` |"))
+        self.assertEqual(kode(t), ["R-7"])
+        t = periksa(CONTOH_SESUAI.replace("`transkripsi-peraturan/0.1`", "`transkripsi-peraturan/0.2`"))
+        self.assertEqual(kode(t), ["R-1"])
 
     def test_kode_ganda_dan_lompatan(self):
         t = periksa(CONTOH_SESUAI.replace("- [F-2]", "- [F-1]"))
