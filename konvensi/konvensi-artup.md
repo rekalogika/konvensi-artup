@@ -130,9 +130,20 @@ Kode tersebut dipakai untuk merujuk ketentuan dalam laporan verifikasi dan hasil
 | Berkas transkripsi | Berkas Markdown yang dihasilkan menurut konvensi ini. |
 | Frontmatter | Blok metadata YAML di awal berkas transkripsi. |
 | Badan teks | Seluruh isi berkas transkripsi setelah frontmatter. |
+| Berkas pendamping | Berkas selain berkas transkripsi, misalnya gambar atau diagram, yang dirujuk dengan notasi `{berkas:…}` (Bagian 8.3). |
+| Teks asli | Teks peraturan sebagaimana ditetapkan dan diundangkan, tanpa penggabungan perubahan. |
+| Teks konsolidasi | Teks yang menggabungkan suatu peraturan dengan perubahan-perubahannya pada suatu titik waktu; berada di luar cakupan versi ini (Bagian 1.2). |
+| Peraturan perubahan | Peraturan yang mengubah peraturan lain, umumnya melalui Pasal berangka Romawi (Bagian 6.8). |
+| Komponen naskah | Salah satu dari: naskah utama (judul, pembukaan, batang tubuh, dan penutup), Penjelasan, atau Lampiran. Dalam isian `ekspresi.komponen`, naskah utama ditulis `batang-tubuh`. |
+| Pembukaan | Bagian naskah antara judul dan batang tubuh: frasa "DENGAN RAHMAT TUHAN YANG MAHA ESA", jabatan pembentuk, konsiderans, dasar hukum, frasa persetujuan bersama, dan diktum ([C-1] butir 2 sampai 7). |
+| Konsiderans | Unsur pembukaan yang diawali kata "Menimbang". |
+| Dasar hukum | Unsur pembukaan yang diawali kata "Mengingat". |
+| Diktum | Unsur pembukaan yang memuat "MEMUTUSKAN:" dan "Menetapkan:" beserta nama peraturan yang ditetapkan. |
+| Batang tubuh | Bagian naskah antara pembukaan dan penutup yang memuat Pasal-Pasal beserta pengelompokannya dalam Buku, BAB, Bagian, dan Paragraf. |
+| Penutup | Bagian naskah setelah batang tubuh yang memuat unsur [C-1] butir 9 sampai 11. |
 | Unsur struktur | Satuan susunan naskah: Buku, BAB, Bagian, Paragraf, Pasal, ayat, dan rincian. |
 | Rincian | Unsur bertanda huruf atau angka di dalam Pasal atau ayat, misalnya `a.`, `1.`, `a)`, `1)`. |
-| Label | Penanda unsur sebagaimana tertulis di naskah, misalnya "Pasal 5", "(2)", "huruf a.". |
+| Label | Penanda unsur sebagaimana tertulis di naskah, misalnya "Pasal 5", "(2)", "a.", atau "Huruf a" dalam penjelasan pasal demi pasal. |
 | Notasi konvensi | Tanda yang ditambahkan oleh konvensi dan bukan teks sumber (Bagian 8). |
 | Penanda keraguan | Notasi `{?…?}` untuk teks yang belum dipastikan sesuai sumber. |
 | Karya | Peraturan sebagai entitas hukum abstrak, misalnya UU 27/2022. |
@@ -141,6 +152,16 @@ Kode tersebut dipakai untuk merujuk ketentuan dalam laporan verifikasi dan hasil
 | Register | Daftar seluruh berkas transkripsi beserta status dan nilai hashnya (Bagian 11.5). |
 | Transkriptor | Orang atau proses yang menghasilkan berkas transkripsi. |
 | Verifikator | Pihak yang membandingkan berkas transkripsi dengan naskah sumber dan menyatakan kesesuaiannya. |
+| Entri verifikasi | Butir dalam isian `verifikasi` yang mencatat satu verifikator dan hasil pemeriksaannya (Bagian 9.4). |
+| Ketik ganda | Metode transkripsi berupa dua transkripsi independen yang dibandingkan secara otomatis ([V-2]). |
+| Pengenal teknis | Pengenal konvensi yang dirujuk berkas transkripsi, yaitu `transkripsi-peraturan` ([R-5]). |
+| Daftar rilis konvensi | Daftar versi final konvensi beserta nilai hashnya, yang dikelola bersama dokumen konvensi ([R-3]). |
+
+Catatan: istilah teknik penyusunan peraturan (pembukaan, konsiderans, dasar hukum, diktum, batang tubuh, penutup) dipakai dengan arti yang sama seperti dalam Lampiran II UU 12/2011; definisi di atas hanya merangkum letaknya dalam naskah.
+
+Catatan: "Bagian" dan "Paragraf" berhuruf awal kapital yang diikuti bilangan tingkat (misalnya "Bagian Kesatu", "Paragraf 1") merujuk unsur struktur peraturan.
+"Bagian" yang diikuti nomor angka (misalnya "Bagian 6.5") merujuk bagian dokumen ini.
+"paragraf" berhuruf kecil merujuk paragraf Markdown.
 
 ## 3. Prinsip Dasar
 
@@ -545,7 +566,7 @@ Nilai setiap isian WAJIB sesuai dengan kolom Tipe, dengan arti sebagai berikut:
 | `ekspresi.jenis_teks` | WAJIB | string | `asli` (versi 0.1 hanya mengenal nilai ini) |
 | `ekspresi.bahasa` | WAJIB | string | Kode ISO 639-3, misalnya `ind` |
 | `ekspresi.tanggal` | WAJIB | tanggal | Untuk teks asli: tanggal pengundangan, atau tanggal penetapan bila tidak diundangkan |
-| `ekspresi.bagian` | WAJIB | daftar | Bagian yang dimuat: `batang-tubuh`, `penjelasan`, `lampiran` |
+| `ekspresi.komponen` | WAJIB | daftar | Komponen naskah yang dimuat: `batang-tubuh`, `penjelasan`, `lampiran` |
 | `sumber.jenis` | WAJIB | string | Misalnya `Salinan resmi Kementerian Sekretariat Negara` |
 | `sumber.diperoleh_dari` | WAJIB | string | Nama situs atau instansi penyedia |
 | `sumber.url` | WAJIB | string | URL berkas sumber |
@@ -570,7 +591,7 @@ Nilai setiap isian WAJIB sesuai dengan kolom Tipe, dengan arti sebagai berikut:
 | `afiliasi` | WAJIB | Lembaga atau asosiasi |
 | `peran` | WAJIB | Misalnya `ahli hukum`, `pemeriksa naskah` |
 | `tanggal` | WAJIB | Tanggal verifikasi selesai |
-| `cakupan` | WAJIB | `seluruh` atau daftar bagian yang diperiksa |
+| `cakupan` | WAJIB | `seluruh` atau daftar komponen naskah yang diperiksa |
 | `hash_badan` | WAJIB | Hash SHA-256 badan teks yang diperiksa (Bagian 11.3) |
 | `catatan` | BOLEH | Catatan, misalnya salah ketik pada sumber |
 | `tanda_tangan` | BOLEH | Rujukan berkas tanda tangan digital, apabila sudah diterapkan |
@@ -612,7 +633,7 @@ ekspresi:
   jenis_teks: asli
   bahasa: ind
   tanggal: 2022-10-17
-  bagian: [batang-tubuh, penjelasan]
+  komponen: [batang-tubuh, penjelasan]
 sumber:
   jenis: Salinan resmi Kementerian Sekretariat Negara
   diperoleh_dari: JDIH Kementerian Keuangan
@@ -1043,4 +1064,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). |

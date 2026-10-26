@@ -5,7 +5,7 @@
 | Nomor | 0007 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | Bagian 2.2; isian `ekspresi.bagian` |
 | Jenis perubahan | redaksional; perubahan tidak kompatibel bila `ekspresi.bagian` diganti nama |
@@ -68,3 +68,12 @@ PATCH untuk butir 1–3; MINOR (tidak kompatibel, MAYOR masih 0) untuk butir 4.
 Butir 4 dapat ditunda bila jumlah berkas transkripsi yang sudah ada besar; catatan butir 3 sudah menghilangkan sebagian besar keraguan.
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima seluruhnya**, termasuk butir 4.
+
+- Butir 1: istilah ditambahkan ke Bagian 2.2, kecuali "sidik jari" yang sudah dijelaskan di tempat pemakaiannya (Bagian 10.4).
+  Istilah teknik penyusunan peraturan didefinisikan menurut letaknya dalam naskah, disertai catatan bahwa artinya mengikuti Lampiran II UU 12/2011; definisi tersebut tidak mengutip Lampiran II.
+- Butir 2 dan 3 diterapkan sesuai rumusan.
+- Butir 4: `ekspresi.bagian` diganti `ekspresi.komponen`, karena belum ada berkas transkripsi berstatus `verified`; isian `cakupan` pada entri verifikasi kini menyebut "komponen naskah".
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
