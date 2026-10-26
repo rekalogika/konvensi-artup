@@ -5,7 +5,7 @@
 | Nomor | 0011 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | [F-11], [F-12], [F-13] |
 | Jenis perubahan | perubahan tidak kompatibel |
@@ -64,3 +64,11 @@ Prinsip yang sama perlu diterapkan pada [F-12] dan [F-13]: karakter yang tidak t
 MINOR (tidak kompatibel; MAYOR masih 0).
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima**, dengan satu penyesuaian.
+
+- [F-11], [F-12], dan [F-13] diterapkan sesuai rumusan baru, kecuali kalimat kedua [F-11].
+- Larangan escape yang tidak diwajibkan dijadikan satu aturan umum, [F-15], yang berlaku untuk [F-11] sampai [F-13] sekaligus; kalimat kedua [F-11] tidak lagi diperlukan.
+- L-08 diperluas untuk memeriksa [F-11] sampai [F-13] dan [F-15].
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
