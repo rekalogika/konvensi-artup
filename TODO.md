@@ -27,7 +27,8 @@ Butir yang menyangkut fakta hukum tidak boleh diisi dari ingatan; cocokkan denga
 - [ ] Periksa apakah UU 13/2022 mengubah Pasal 73 UU 12/2011, dan cari contoh naskah UU yang sah tanpa tanda tangan Presiden untuk Lampiran A atau contoh uji.
 - [ ] Contoh peraturan yang Penjelasan atau Lampirannya diterbitkan sebagai berkas terpisah (usulan 0012).
 - [ ] Contoh tabel dan rumus di batang tubuh, misalnya Pasal 17 UU Pajak Penghasilan (usulan 0009).
-- [ ] Daftar jenis peraturan dalam Pasal 8 ayat (1) UU 12/2011 (usulan 0013).
+- [x] Daftar jenis peraturan dalam Pasal 8 ayat (1) UU 12/2011 (usulan 0013).
+- [ ] Kode jenis untuk peraturan bersama (misalnya peraturan bersama Kepala Desa, peraturan bersama menteri) pada [I-1].
 - [x] Perubahan UU 12/2011 untuk Lampiran C (UU 15/2019, UU 13/2022, UU 1/2026) dan versi spesifikasi GFM 0.29-gfm (usulan 0015).
 - [ ] Contoh lampiran nyata yang memuat BAB dan subjudul bertingkat, sebagai dasar rumusan heading Lampiran (usulan 0008).
 

@@ -5,7 +5,7 @@
 | Nomor | 0013 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | [I-1], [I-2], [I-8], [I-9], Bagian 1.2 |
 | Jenis perubahan | penambahan; mungkin tidak kompatibel (butir 2) |
@@ -51,3 +51,21 @@ Kode pembentuk WAJIB mengikuti nomenklatur pembentuk pada tanggal penetapan pera
 MINOR.
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima**, butir 2 dengan pilihan (b).
+
+Verifikasi fakta:
+
+- Pasal 8 ayat (1) UU 12/2011 menyebut peraturan yang ditetapkan oleh MPR, DPR, DPD, Mahkamah Agung, Mahkamah Konstitusi, Badan Pemeriksa Keuangan, Komisi Yudisial, Bank Indonesia, Menteri, badan, lembaga, atau komisi yang setingkat, DPRD Provinsi, Gubernur, DPRD Kabupaten/Kota, Bupati/Walikota, dan Kepala Desa atau yang setingkat ([Wikisource](https://id.wikisource.org/wiki/Undang-Undang_Republik_Indonesia_Nomor_12_Tahun_2011)).
+- Pasal 69 ayat (1) UU 6/2014 mengenal Peraturan Desa, peraturan bersama Kepala Desa, dan peraturan Kepala Desa ([Wikisource](https://id.wikisource.org/wiki/Undang-Undang_Republik_Indonesia_Nomor_6_Tahun_2014)).
+
+Penerapan:
+
+- Butir 1: ditambahkan `perdprd-prov`, `perdprd-kabkota`, `perdes`, dan `perkades`; `perlem` diperjelas dengan menyebut lembaga dalam Pasal 8 ayat (1).
+  Peraturan bersama (misalnya peraturan bersama Kepala Desa atau peraturan bersama menteri) belum diberi kode dan dicatat di TODO.md.
+- Butir 2 pilihan (b): `perkada` diganti `pergub`, `perbup`, dan `perwali`; pengenal Perda tidak berubah.
+- Butir 3 diterapkan sesuai rumusan.
+- Butir 4: fragmen Buku, Bagian, dan Paragraf ditambahkan.
+  Tambahan: bila peraturan memiliki Buku, fragmen BAB, Bagian, dan Paragraf diawali fragmen Bukunya, karena penomoran BAB dapat dimulai ulang pada setiap Buku.
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
