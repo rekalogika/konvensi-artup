@@ -5,7 +5,7 @@
 | Nomor | 0009 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | [F-9], [F-10], [S-21], [S-22], [S-23], [C-1] butir 13 |
 | Jenis perubahan | penambahan |
@@ -44,3 +44,12 @@ Tidak ada berkas yang sesuai menjadi tidak sesuai; penambahan ini memungkinkan b
 MINOR (penambahan yang kompatibel).
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima**.
+
+- Bagian 6.10 dibuat; [S-21] sampai [S-23] dipindahkan ke sana dengan kode tetap, ditambah kalimat bahwa subbagian ini berlaku di seluruh badan teks.
+- Rujukan di [F-9], [F-10], dan [C-1] butir 8 dan 13 disesuaikan.
+- [S-26] ditambahkan sesuai rumusan.
+- Contoh tabel di batang tubuh yang disebut dalam latar belakang belum diverifikasi, tetapi aturan ini tidak bergantung padanya (TODO.md).
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
