@@ -14,7 +14,7 @@ Skill ini **tidak** menyunting `konvensi/konvensi-artup.md`.
    Mulai dari `main` yang mutakhir (`git switch main && git pull --ff-only`).
    Lihat `usulan/` dan ambil nomor empat digit terbesar ditambah satu (mulai dari `0001`).
    Periksa juga pull request yang masih terbuka (`gh pr list --state open`) agar nomor tidak bentrok dengan usulan yang belum di-merge.
-   Buat branch `usulan/NNNN-judul-singkat`.
+   Buat branch `usulan/NNNN-judul-singkat`, kecuali bila skill ini dipakai dari dalam skill `tinjau-konsistensi`: usulan dibuat di branch `tinjauan/YYYY-MM` yang sedang berjalan, tanpa branch dan pull request tersendiri.
    Nama berkas: `usulan/NNNN-judul-singkat.md`, judul singkat huruf kecil dengan tanda hubung.
 2. **Salin `usulan/TEMPLAT.md`** dan isi seluruh bagiannya.
    Status awal: `diajukan`.

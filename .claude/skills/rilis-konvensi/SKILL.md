@@ -9,7 +9,7 @@ Rilis bersifat permanen ([R-3]).
 Tag `v*` di GitHub dilindungi: setelah dibuat, tag tidak dapat dipindahkan atau dihapus, sehingga kesalahan pada tag tidak dapat diperbaiki.
 Minta konfirmasi Ananda atas nomor versi dan tanggal sebelum langkah 3, dan sekali lagi sebelum membuat tag.
 
-Rilis berlangsung dalam dua tahap: **pull request rilis** (langkah 1–9), lalu **tag** setelah Ananda me-merge (langkah 10–12).
+Rilis berlangsung dalam dua tahap: **pull request rilis** (langkah 1–9), lalu **tag** setelah Ananda me-merge (langkah 10–13).
 
 ## Tahap 1: pull request rilis
 
@@ -51,16 +51,31 @@ Rilis berlangsung dalam dua tahap: **pull request rilis** (langkah 1–9), lalu 
 
 ## Tahap 2: tag (setelah Ananda me-merge)
 
-10. **Mutakhirkan dan verifikasi**:
+Squash merge membuat commit baru di `main`, dan pull request lain dapat di-merge sesudahnya.
+Karena itu tag WAJIB dibuat pada commit squash pull request rilis yang diambil secara eksplisit, **bukan** pada `HEAD` `main`.
+Pemeriksaan hash di `HEAD` tidak cukup, karena salinan beku tidak berubah oleh commit sesudahnya.
+
+10. **Ambil commit squash rilis**:
     ```sh
     git switch main && git pull --ff-only
-    .venv/bin/python alat/periksa_konvensi.py --rilis
-    sha256sum rilis/konvensi-artup-X.Y.Z.md
+    SHA=$(gh pr view <nomor-PR-rilis> --json state,mergeCommit --jq 'select(.state == "MERGED") | .mergeCommit.oid')
+    test -n "$SHA" && git merge-base --is-ancestor "$SHA" origin/main && git log -1 --format='%H %s' "$SHA"
     ```
-    Hash WAJIB sama dengan baris di `rilis/RILIS.md`.
-    Squash merge membuat commit baru di `main`, jadi tag dibuat di commit tersebut, bukan di commit branch.
-11. **Buat tag** (setelah konfirmasi): `git tag -a vX.Y.Z -m "Konvensi Artup X.Y.Z"` di `HEAD` `main`.
-12. **Dorong tag** (setelah konfirmasi): `git push origin vX.Y.Z`.
+    Pull request WAJIB berstatus `MERGED`, `SHA` WAJIB tidak kosong dan berada di `origin/main`, dan subjek commit-nya WAJIB `Rilis Konvensi Artup X.Y.Z`.
+11. **Verifikasi isi pada commit tersebut**, bukan pada pohon kerja:
+    ```sh
+    git show "$SHA:rilis/konvensi-artup-X.Y.Z.md" | sha256sum
+    git show "$SHA:rilis/RILIS.md" | grep -F '| X.Y.Z |'
+    git diff --quiet "$SHA" -- rilis/konvensi-artup-X.Y.Z.md && echo "salinan beku tidak berubah sejak rilis"
+    git show "$SHA:konvensi/konvensi-artup.md" | cmp - <(git show "$SHA:rilis/konvensi-artup-X.Y.Z.md")
+    ```
+    Hash WAJIB sama dengan baris versi tersebut di `RILIS.md` pada commit itu, dan dokumen kerja pada commit itu WAJIB identik dengan salinan beku.
+12. **Buat tag** (setelah konfirmasi) dengan SHA eksplisit, lalu periksa:
+    ```sh
+    git tag -a vX.Y.Z "$SHA" -m "Konvensi Artup X.Y.Z"
+    test "$(git rev-parse 'vX.Y.Z^{commit}')" = "$SHA"
+    ```
+13. **Dorong tag** (setelah konfirmasi): `git push origin vX.Y.Z`.
 
 ## Setelah rilis
 
