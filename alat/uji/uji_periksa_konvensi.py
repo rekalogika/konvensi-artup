@@ -10,8 +10,11 @@ dan di bawah arahan Ananda Putra, 2026-10-26. Ditulis baru untuk proyek ini;
 tidak ada kode yang disalin dari sumber lain.
 """
 
+import io
 import sys
+import tempfile
 import unittest
+from contextlib import redirect_stdout
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -149,6 +152,16 @@ class UjiPemeriksa(unittest.TestCase):
         teks = CONTOH_SESUAI.replace("WAJIB berupa LF.", "WAJIB berupa LF. CR TIDAK BOLEH ada.")
         self.assertEqual(kode(periksa(teks, gaya=True)), ["gaya"])
         self.assertEqual(periksa(CONTOH_SESUAI, gaya=True), [])
+
+    def test_hanya_format(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            jalur = Path(tmp) / "bebas.md"
+            jalur.write_bytes(b"# Tanpa frontmatter\n\nBaris akhir \n")
+            self.assertEqual(kode(pk.periksa_berkas(jalur, hanya_format=True)), ["F-5"])
+            self.assertIn("frontmatter", kode(pk.periksa_berkas(jalur)))
+            with redirect_stdout(io.StringIO()) as keluaran:
+                self.assertEqual(pk.main(["--hanya-format", str(jalur)]), 1)
+            self.assertRegex(keluaran.getvalue(), r"^.+bebas\.md:3: \[F-5\] ")
 
 
 if __name__ == "__main__":

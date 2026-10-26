@@ -451,8 +451,14 @@ class Pemeriksa:
         return self.temuan
 
 
-def periksa_berkas(jalur: Path, nama: str | None = None, gaya: bool = False) -> list[Temuan]:
-    return Pemeriksa(nama or str(jalur), gaya=gaya).periksa(jalur.read_bytes())
+def periksa_berkas(jalur: Path, nama: str | None = None, gaya: bool = False,
+                   hanya_format: bool = False) -> list[Temuan]:
+    pemeriksa = Pemeriksa(nama or str(jalur), gaya=gaya)
+    data = jalur.read_bytes()
+    if hanya_format:
+        pemeriksa.periksa_byte(data)
+        return pemeriksa.temuan
+    return pemeriksa.periksa(data)
 
 
 def periksa_rilis(folder: Path) -> list[Temuan]:
@@ -493,14 +499,19 @@ def main(argv: list[str] | None = None) -> int:
                         help="tambahkan heuristik gaya: satu kalimat per baris")
     parser.add_argument("--rilis", action="store_true",
                         help="cocokkan rilis/RILIS.md dengan salinan beku dan hashnya")
+    parser.add_argument("--hanya-format", action="store_true",
+                        help="hanya periksa format byte Bagian 4.1 [F-1] s.d. [F-7]; "
+                             "untuk berkas Markdown selain dokumen konvensi")
     args = parser.parse_args(argv)
+    if args.hanya_format and not args.berkas:
+        parser.error("--hanya-format memerlukan daftar berkas")
 
     berkas = args.berkas or [DOKUMEN_KERJA]
     temuan: list[Temuan] = []
     for jalur in berkas:
         try:
             nama = str(jalur.relative_to(Path.cwd())) if jalur.is_absolute() and jalur.is_relative_to(Path.cwd()) else str(jalur)
-            temuan += periksa_berkas(jalur, nama, gaya=args.gaya)
+            temuan += periksa_berkas(jalur, nama, gaya=args.gaya, hanya_format=args.hanya_format)
         except OSError as e:
             print(f"{jalur}: tidak dapat dibaca: {e.strerror}", file=sys.stderr)
             return 2

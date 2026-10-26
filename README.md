@@ -1,5 +1,7 @@
 # Konvensi Artup
 
+[![Periksa konvensi](https://github.com/rekalogika/konvensi-artup/actions/workflows/periksa.yml/badge.svg)](https://github.com/rekalogika/konvensi-artup/actions/workflows/periksa.yml)
+
 Konvensi Artup adalah dokumen konvensi untuk mentranskripsikan peraturan perundang-undangan Indonesia (UU, PP, Perpres, Permen, Perda, dan lainnya) dari naskah sumber, umumnya PDF salinan resmi, ke berkas Markdown.
 
 Tujuannya adalah berkas transkripsi yang:
@@ -58,7 +60,8 @@ python3 -m venv .venv
 .venv/bin/python alat/periksa_konvensi.py konvensi/konvensi-artup.md
 ```
 
-Pemeriksa mencetak temuan dengan format `berkas:baris: pesan` dan keluar dengan kode bukan nol apabila ada temuan.
+Pemeriksa mencetak temuan dengan format `berkas:baris: [kode] pesan` dan keluar dengan kode bukan nol apabila ada temuan.
+Pemeriksaan yang sama dijalankan otomatis oleh GitHub Actions pada setiap pull request.
 
 ## Di luar repositori ini
 
