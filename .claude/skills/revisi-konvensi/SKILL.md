@@ -13,6 +13,8 @@ description: Menerapkan perubahan yang SUDAH disetujui Ananda ke dokumen kerja k
 
 ## Langkah
 
+0. **Buat branch** `revisi/NNNN-judul-singkat` dari `main` yang mutakhir.
+   Satu branch dan satu pull request untuk satu usulan.
 1. **Baca konteks.**
    Baca bagian yang diubah dan bagian yang merujuknya.
    Cari semua rujukan kode yang terdampak: `grep -nE '\bS-1[0-9]\b' konvensi/konvensi-artup.md`.
@@ -43,8 +45,10 @@ description: Menerapkan perubahan yang SUDAH disetujui Ananda ke dokumen kerja k
    Jalankan `.venv/bin/python alat/periksa_konvensi.py` dan perbaiki sampai bersih.
 8. **Tutup usulan.**
    Ubah status usulan menjadi `diterapkan` dan isi versi penerapannya di bagian Keputusan.
-9. **Commit.**
-   Satu commit per usulan, misalnya `Terapkan usulan 0003: gabungan label penjelasan [S-16]`.
+9. **Commit dan pull request.**
+   Commit di branch, lalu, bila diminta, dorong branch dan buka pull request berjudul misalnya `Terapkan usulan 0003: rujukan ke versi draf`.
+   Deskripsi pull request memuat: kode aturan yang berubah, jenis versi, baris riwayat perubahan yang ditambahkan, dan hasil pemeriksa.
+   Judul dan deskripsi itu menjadi pesan commit squash di `main`.
 
 ## Jangan
 

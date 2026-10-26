@@ -38,12 +38,17 @@ Daftar rilis dan nilai hash setiap versi final dicatat di [rilis/RILIS.md](rilis
 
 ## Mengusulkan perubahan
 
-1. Salin [usulan/TEMPLAT.md](usulan/TEMPLAT.md) menjadi `usulan/NNNN-judul-singkat.md` dengan nomor urut berikutnya.
-2. Isi latar belakang, aturan yang terdampak, rumusan lama dan baru, dampak terhadap berkas transkripsi yang sudah ada, dan kompatibilitas versi.
-3. Usulan dibahas dan diputuskan oleh penyusun.
-   Usulan yang diterima diterapkan pada dokumen kerja dan dicatat dalam riwayat perubahan (Lampiran D).
+Setiap perubahan masuk melalui pull request di https://github.com/rekalogika/konvensi-artup.
+
+1. Fork repositori ini, atau buat branch bila Anda memiliki akses tulis.
+2. Salin [usulan/TEMPLAT.md](usulan/TEMPLAT.md) menjadi `usulan/NNNN-judul-singkat.md` dengan nomor urut berikutnya.
+3. Isi latar belakang, aturan yang terdampak, rumusan lama dan baru, dampak terhadap berkas transkripsi yang sudah ada, dan kompatibilitas versi.
+4. Buka pull request berjudul `Usulan NNNN: judul singkat`.
+   Usulan dibahas di pull request tersebut dan diputuskan oleh penyusun.
+5. Usulan yang diterima diterapkan pada dokumen kerja dalam pull request tersendiri dan dicatat dalam riwayat perubahan (Lampiran D).
 
 Usulan dari pihak luar, misalnya ahli hukum atau asosiasi, sangat diharapkan dan mengikuti alur yang sama.
+Bila tidak terbiasa dengan pull request, masukan juga dapat disampaikan melalui *issue* GitHub; penyusun akan menuliskannya sebagai usulan.
 
 ## Memeriksa dokumen
 

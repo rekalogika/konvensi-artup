@@ -12,7 +12,7 @@ description: Meninjau dokumen Konvensi Artup secara menyeluruh untuk mencari kod
    Pemeriksa sudah menangani format Bagian 4.1, frontmatter, kode ganda, rujukan kode dan bagian, daftar isi, dan blok kode; jangan mengulang pemeriksaan itu secara manual.
 2. **Baca seluruh dokumen** dari awal sampai akhir, lalu periksa daftar di bawah.
 3. **Laporkan** temuan, dikelompokkan menurut daftar periksa, masing-masing dengan nomor baris, kode aturan, penjelasan singkat, dan usulan penanganan.
-4. **Tangani.**
+4. **Tangani** di branch `tinjauan/YYYY-MM`, yang diajukan sebagai satu pull request untuk seluruh putaran tinjauan.
    - Format murni: perbaiki langsung dan beritahukan.
    - Normatif: tulis sebagai usulan di `usulan/` (skill `usulan-revisi`); satu usulan per masalah atau per kelompok masalah yang saling terkait.
    - Fakta hukum yang meragukan: catat di `TODO.md`.
