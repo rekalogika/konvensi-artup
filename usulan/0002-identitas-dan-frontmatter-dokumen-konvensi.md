@@ -5,7 +5,7 @@
 | Nomor | 0002 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | Frontmatter dokumen, tabel identitas, [R-3], [R-5] |
 | Jenis perubahan | redaksional / penambahan |
@@ -75,3 +75,13 @@ Selama belum ada rilis final, keduanya dapat masuk ke versi 0.1.0.
   Bila dipilih, [R-5] perlu menjelaskan bahwa awalan `konvensi/` adalah ruang nama seri dan tidak dipakai dalam rujukan berkas transkripsi.
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima**, dengan satu perubahan rumusan.
+
+- Butir 1 dan [R-7] diterapkan apa adanya.
+- [R-8] dirumuskan ulang: "Dokumen konvensi TIDAK BOLEH memuat informasi tentang versi yang menggantikannya. Hubungan antarversi konvensi ditentukan dari daftar rilis konvensi menurut [R-3]."
+  Rumusan semula mewajibkan relasi "digantikan oleh" dicatat di daftar rilis, padahal baris daftar rilis tidak diubah setelah ditambahkan; relasi antarversi cukup dibaca dari urutan barisnya.
+- Alternatif ruang nama `konvensi/` ditolak; penomoran seri dokumen bergaya RFC dirancang tersendiri (TODO.md).
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
+Alat pemeriksa kini juga memeriksa bahwa `id` sama dengan pengenal teknis pada rujukan singkat di tabel identitas.
