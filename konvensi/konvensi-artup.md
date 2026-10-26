@@ -733,13 +733,20 @@ Bentuk kedua WAJIB dipakai untuk jenis yang dapat dibentuk oleh lebih dari satu 
 | `pp` | Peraturan Pemerintah | Tidak ada |
 | `perpres` | Peraturan Presiden | Tidak ada |
 | `permen` | Peraturan Menteri | Kode kementerian |
-| `perlem` | Peraturan badan, lembaga, atau komisi | Kode lembaga |
+| `perlem` | Peraturan lembaga negara, badan, lembaga, atau komisi menurut Pasal 8 ayat (1) UU 12/2011, misalnya MPR, DPR, DPD, Mahkamah Agung, Mahkamah Konstitusi, Badan Pemeriksa Keuangan, Komisi Yudisial, dan Bank Indonesia | Kode lembaga |
 | `perda-prov` | Peraturan Daerah Provinsi | Kode wilayah |
 | `perda-kabkota` | Peraturan Daerah Kabupaten/Kota | Kode wilayah |
-| `perkada` | Peraturan Gubernur, Bupati, atau Wali Kota | Kode wilayah |
+| `perdprd-prov` | Peraturan DPRD Provinsi | Kode wilayah |
+| `perdprd-kabkota` | Peraturan DPRD Kabupaten/Kota | Kode wilayah |
+| `pergub` | Peraturan Gubernur | Kode wilayah |
+| `perbup` | Peraturan Bupati | Kode wilayah |
+| `perwali` | Peraturan Wali Kota | Kode wilayah |
+| `perdes` | Peraturan Desa | Kode wilayah |
+| `perkades` | Peraturan Kepala Desa | Kode wilayah |
 
 [I-2] Kode kementerian dan kode lembaga WAJIB diambil dari daftar kode yang dikelola bersama register.
 Kode wilayah WAJIB memakai kode wilayah administrasi pemerintahan yang ditetapkan Kementerian Dalam Negeri, dengan titik diganti tanda hubung.
+Kode pembentuk WAJIB mengikuti nomenklatur pembentuk pada tanggal penetapan peraturan dan TIDAK BOLEH diubah karena perubahan nomenklatur di kemudian hari.
 
 [I-3] Segmen `nomor` WAJIB dinormalisasi: huruf kecil, dan setiap rangkaian karakter selain `a`–`z` dan `0`–`9` diganti satu tanda hubung, tanpa tanda hubung di awal atau akhir.
 Contoh: nomor "12/PMK.03/2020" menjadi `12-pmk-03-2020`.
@@ -780,7 +787,10 @@ Fragmen dihitung dari struktur badan teks dan TIDAK BOLEH ditulis sebagai jangka
 
 | Unsur | Pola fragmen | Contoh |
 |---|---|---|
+| Buku | `buku-{urutan}` | `#buku-2` |
 | BAB | `bab-{romawi}` | `#bab-ii` |
+| Bagian | `bab-{romawi}-bagian-{urutan}` | `#bab-ii-bagian-1` |
+| Paragraf | `bab-{romawi}-bagian-{urutan}-paragraf-{nomor}` | `#bab-ii-bagian-1-paragraf-2` |
 | Pasal | `pasal-{nomor}` | `#pasal-28a` |
 | Ayat | `pasal-{nomor}-ayat-{nomor}` | `#pasal-5-ayat-2` |
 | Rincian | `…-huruf-{huruf}`, `…-angka-{angka}` | `#pasal-2-ayat-1-huruf-b-angka-1` |
@@ -793,6 +803,8 @@ Fragmen dihitung dari struktur badan teks dan TIDAK BOLEH ditulis sebagai jangka
 [I-9] Seluruh fragmen WAJIB berhuruf kecil, termasuk angka Romawi.
 Nomor Pasal bersifat unik dalam satu peraturan, sehingga rujukan Pasal tidak memerlukan BAB.
 Rincian bertingkat `a)` dan `1)` dirujuk dengan kata yang sama (`huruf`, `angka`) secara berurutan menurut tingkatnya.
+Segmen `urutan` adalah bilangan dari kata bilangan bertingkat, misalnya "Buku Kedua" menjadi `buku-2` dan "Bagian Kesatu" menjadi `bagian-1`.
+Apabila peraturan memiliki Buku, fragmen BAB, Bagian, dan Paragraf WAJIB diawali fragmen Bukunya, misalnya `#buku-2-bab-i`, karena penomoran BAB dapat dimulai ulang pada setiap Buku.
 
 Contoh rujukan lengkap: `uu/2022/27/ind@2022-10-17#pasal-46-ayat-1-huruf-a`.
 
@@ -1093,4 +1105,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di Lampiran C (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di Lampiran C (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). |
