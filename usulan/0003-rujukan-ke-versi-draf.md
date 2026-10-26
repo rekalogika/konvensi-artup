@@ -5,7 +5,7 @@
 | Nomor | 0003 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | [R-1], [R-3], [R-4], L-06 |
 | Jenis perubahan | penambahan |
@@ -56,5 +56,10 @@ Selama MAYOR bernilai 0, perubahan ini diperbolehkan ([R-2]).
 
 ## Keputusan
 
-Perlu keputusan Ananda.
-Usulan ini juga menentukan proses di AGENTS.md ("Versi dokumen kerja"): selama 0.1.0 belum dirilis, revisi ditampung tanpa menaikkan versi.
+2026-10-26, Ananda Putra: **diterima**, rumusan utama (bukan alternatif).
+Revisi berikutnya ditampung di draf 0.1.0, dan 0.1.0 dirilis setelah usulan penting diterapkan.
+Pada tanggal keputusan belum ada berkas transkripsi berstatus `verified`, sehingga butir pertama "Dampak terhadap Berkas Transkripsi" tidak berlaku.
+
+Diterapkan pada draf 0.1.0, tanpa menaikkan versi karena 0.1.0 belum dirilis (AGENTS.md, "Versi dokumen kerja").
+Kode aturan menjadi [R-6], bukan [R-8] sebagaimana ditulis sementara di atas, karena kode baru memakai nomor terbesar dalam kelompok ditambah satu.
+L-06 diubah sesuai rumusan baru, dengan kolom Ketentuan `R-1, R-6`.

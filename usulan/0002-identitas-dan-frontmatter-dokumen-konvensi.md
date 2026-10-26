@@ -48,14 +48,15 @@ digantikan_oleh: null
 
 1. Frontmatter: ganti `id` menjadi `transkripsi-peraturan` dan hapus `digantikan_oleh`.
    Tabel identitas mengikuti.
-2. Tambahkan subbagian baru di akhir Bagian 13 (Bagian 13.1 bila Bagian 13 dipecah menjadi subbagian; nomor ditetapkan saat penerapan):
+2. Tambahkan subbagian baru di akhir Bagian 13 (Bagian 13.1 bila Bagian 13 dipecah menjadi subbagian; nomor ditetapkan saat penerapan).
+   Kode aturan bersifat sementara; semula [R-6] dan [R-7], digeser karena [R-6] telah dipakai oleh usulan 0003:
 
 ```markdown
-[R-6] Frontmatter dokumen konvensi WAJIB memuat isian `id`, `nama`, `judul`, `versi`, `status`, dan `tanggal`, dan BOLEH memuat `bahasa`, `penyusun`, dan `menggantikan`.
+[R-7] Frontmatter dokumen konvensi WAJIB memuat isian `id`, `nama`, `judul`, `versi`, `status`, dan `tanggal`, dan BOLEH memuat `bahasa`, `penyusun`, dan `menggantikan`.
 Nilai `id` WAJIB sama dengan pengenal teknis menurut [R-5].
 Nilai `status` WAJIB berupa `draf` atau `final`.
 
-[R-7] Relasi "digantikan oleh" antarversi konvensi WAJIB dicatat dalam daftar rilis konvensi, bukan di dalam dokumen konvensi.
+[R-8] Relasi "digantikan oleh" antarversi konvensi WAJIB dicatat dalam daftar rilis konvensi, bukan di dalam dokumen konvensi.
 ```
 
 ## Dampak terhadap Berkas Transkripsi
@@ -65,7 +66,7 @@ Berkas transkripsi tetap merujuk `transkripsi-peraturan/MAYOR.MINOR`.
 
 ## Kompatibilitas Versi
 
-PATCH untuk perubahan frontmatter; MINOR bila [R-6] dan [R-7] dianggap penambahan ketentuan.
+PATCH untuk perubahan frontmatter; MINOR bila [R-7] dan [R-8] dianggap penambahan ketentuan.
 Selama belum ada rilis final, keduanya dapat masuk ke versi 0.1.0.
 
 ## Alternatif yang Dipertimbangkan

@@ -829,7 +829,7 @@ Pemeriksaan bertanda "verified" hanya wajib lolos sebelum status `verified`.
 | L-03 | Teks dalam bentuk NFC | F-3 |
 | L-04 | Tidak ada tab, spasi di akhir baris, atau baris kosong berganda; diakhiri satu LF | F-4 s.d. F-7 |
 | L-05 | Frontmatter YAML valid dan memuat seluruh isian WAJIB dengan tipe yang benar | M-1 s.d. M-5 |
-| L-06 | Versi konvensi dikenal | Bagian 13 |
+| L-06 | Versi konvensi tercantum dalam daftar rilis konvensi (verified) | R-1, R-6 |
 | L-07 | Hanya konstruksi Markdown yang diizinkan | F-9, F-10 |
 | L-08 | Tidak ada baris berawalan angka diikuti `.` atau `)` tanpa escape | F-11 |
 | L-09 | Tidak ada blok kode akibat indentasi | F-14 |
@@ -860,6 +860,9 @@ Nilai hash setiap versi final WAJIB dicatat dalam daftar rilis konvensi yang dik
 
 [R-5] "Konvensi Artup" adalah nama dokumen ini, sedangkan `transkripsi-peraturan` adalah pengenal teknisnya.
 Berkas transkripsi WAJIB merujuk pengenal teknis, sehingga perubahan nama di kemudian hari tidak mengharuskan perubahan berkas yang telah di-hash.
+
+[R-6] Berkas transkripsi BOLEH merujuk versi konvensi yang masih draf selama penyusunan.
+Berkas transkripsi TIDAK BOLEH berstatus `verified` sebelum versi konvensi yang dirujuknya final dan tercantum dalam daftar rilis konvensi.
 
 ## 14. Lampiran A: Contoh Berkas Minimal
 
@@ -1010,4 +1013,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). |

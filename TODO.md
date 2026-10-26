@@ -5,9 +5,8 @@ Butir yang menyangkut fakta hukum tidak boleh diisi dari ingatan; cocokkan denga
 
 ## Keputusan yang ditunggu
 
-- [ ] Putuskan usulan 0001 sampai 0015 dari tinjauan konsistensi pertama (lihat `usulan/`).
-- [ ] Putuskan usulan 0003: apakah berkas transkripsi boleh merujuk versi draf, atau 0.1.0 segera dirilis final.
-      Keputusan ini juga menentukan aturan "Versi dokumen kerja" di AGENTS.md.
+- [ ] Putuskan usulan 0001 sampai 0015 dari tinjauan konsistensi pertama (lihat `usulan/`); 0003 sudah diputuskan.
+- [x] Putuskan usulan 0003: diterima 2026-10-26 sebagai [R-6]; revisi ditampung di draf 0.1.0, dan 0.1.0 dirilis setelah usulan penting diterapkan.
 - [ ] Putuskan apakah JSON Schema frontmatter berkas transkripsi menjadi lampiran normatif konvensi.
 - [ ] Putuskan perlunya contoh uji (berkas contoh yang sesuai dan yang melanggar) sebagai bagian dari konvensi.
 
