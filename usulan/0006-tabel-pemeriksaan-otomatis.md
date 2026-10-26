@@ -50,7 +50,7 @@ Tabel Bagian 12 ditambah kolom "Tingkat" (`galat` atau `peringatan`):
 
 | Kode | Perubahan |
 |---|---|
-| L-06 | Ketentuan: `R-1` (dan `R-8` bila usulan 0003 diterima) |
+| L-06 | Sudah diubah oleh usulan 0003 (Ketentuan `R-1, R-6`); tinggal kolom Tingkat |
 | L-11 | Tingkat: peringatan; Ketentuan: `P-1` |
 | L-12 | Tingkat: peringatan; Ketentuan: `P-1, S-14` |
 | L-17 | Ketentuan: `M-6` (usulan 0005) dan Bagian 11.2 |
