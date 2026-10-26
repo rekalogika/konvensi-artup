@@ -760,7 +760,7 @@ Status berkas transkripsi dicatat di register, bukan di berkas.
 
 | Status | Arti |
 |---|---|
-| `new transcription` | Transkripsi selesai dibuat dan lolos pemeriksaan format, belum diserahkan ke verifikator |
+| `new transcription` | Transkripsi selesai dibuat dan lolos pemeriksaan otomatis menurut [V-10], belum diserahkan ke verifikator |
 | `verification in progress` | Sedang diperiksa verifikator |
 | `revision required` | Verifikator menemukan ketidaksesuaian; berkas dikembalikan ke transkriptor |
 | `verified` | Seluruh verifikator yang disyaratkan menyatakan sesuai; nilai hash dicatat |
@@ -834,29 +834,38 @@ Perbaikan apa pun WAJIB diterbitkan sebagai versi transkripsi baru, dan versi la
 
 ## 12. Pemeriksaan Otomatis
 
-Pemeriksaan berikut SEBAIKNYA dijalankan dengan alat pemeriksa (*linter*) sebelum setiap perubahan status.
-Pemeriksaan bertanda "verified" hanya wajib lolos sebelum status `verified`.
+Pemeriksaan berikut dijalankan dengan alat pemeriksa (*linter*).
+Setiap pemeriksaan memiliki tingkat `galat` atau `peringatan`.
+Pemeriksaan bertanda "(verified)" hanya berlaku sejak berkas akan berstatus `verified`.
 
-| Kode | Pemeriksaan | Ketentuan |
-|---|---|---|
-| L-01 | UTF-8 valid tanpa BOM | F-1 |
-| L-02 | Tidak ada CR | F-2 |
-| L-03 | Teks dalam bentuk NFC | F-3 |
-| L-04 | Tidak ada tab, spasi di akhir baris, atau baris kosong berganda; diakhiri satu LF | F-4 s.d. F-7 |
-| L-05 | Frontmatter YAML valid dan memuat seluruh isian WAJIB dengan tipe yang benar | M-1 s.d. M-7 |
-| L-06 | Versi konvensi tercantum dalam daftar rilis konvensi (verified) | R-1, R-6 |
-| L-07 | Hanya konstruksi Markdown yang diizinkan | F-9, F-10 |
-| L-08 | Penanda daftar bernomor di awal teks di-escape, dan tidak ada escape selain yang diwajibkan | F-11 s.d. F-13, F-15 |
-| L-09 | Tidak ada blok kode akibat indentasi | F-14 |
-| L-10 | Setiap heading sesuai tabel pemetaan; heading `#####` hanya berisi label Pasal | S-1 s.d. S-4 |
-| L-11 | Nomor Pasal berurutan, dengan Pasal sisipan (misalnya 28A) diperbolehkan | S-1 |
-| L-12 | Daftar Pasal dalam penjelasan pasal demi pasal sama dengan daftar Pasal batang tubuh | S-14 |
-| L-13 | Kurung kurawal hanya muncul sebagai notasi konvensi yang sah | F-13, K-8 |
-| L-14 | Setiap `{berkas:…}` tercantum di `berkas_pendamping` dan hashnya cocok | K-6 |
-| L-15 | Nama berkas sesuai pengenal karya | I-5 |
-| L-16 | Tidak ada penanda keraguan (verified) | K-5 |
-| L-17 | `sumber.sha256` terisi dan cocok dengan berkas sumber yang diarsipkan (verified) | V-3 |
-| L-18 | Setiap `hash_badan` sama dengan hash badan teks hasil perhitungan (verified) | V-3 |
+[V-10] Berkas transkripsi WAJIB lolos seluruh pemeriksaan bertingkat `galat` yang tidak bertanda "(verified)" sebelum berstatus `new transcription`, dan WAJIB lolos seluruh pemeriksaan bertingkat `galat` sebelum berstatus `verified`.
+
+[V-11] Setiap temuan pemeriksaan bertingkat `peringatan` WAJIB diperiksa verifikator terhadap naskah sumber.
+Apabila teks yang menimbulkan temuan sesuai dengan naskah sumber, verifikator WAJIB mencatatnya dalam isian `catatan` pada entri verifikasi.
+
+| Kode | Pemeriksaan | Tingkat | Ketentuan |
+|---|---|---|---|
+| L-01 | UTF-8 valid tanpa BOM | galat | F-1 |
+| L-02 | Tidak ada CR | galat | F-2 |
+| L-03 | Teks dalam bentuk NFC | galat | F-3 |
+| L-04 | Tidak ada tab, spasi di akhir baris, atau baris kosong berganda; diakhiri satu LF | galat | F-4 s.d. F-7 |
+| L-05 | Frontmatter YAML valid dan memuat seluruh isian WAJIB dengan tipe yang benar | galat | M-1 s.d. M-7 |
+| L-06 | Versi konvensi tercantum dalam daftar rilis konvensi (verified) | galat | R-1, R-6 |
+| L-07 | Hanya konstruksi Markdown yang diizinkan | galat | F-9, F-10 |
+| L-08 | Penanda daftar bernomor di awal teks di-escape, dan tidak ada escape selain yang diwajibkan | galat | F-11 s.d. F-13, F-15 |
+| L-09 | Tidak ada blok kode akibat indentasi | galat | F-14 |
+| L-10 | Setiap heading sesuai tabel pemetaan; heading `#####` hanya berisi label Pasal | galat | S-1 s.d. S-4 |
+| L-11 | Nomor Pasal berurutan, dengan Pasal sisipan (misalnya 28A) diperbolehkan | peringatan | P-1 |
+| L-12 | Daftar Pasal dalam penjelasan pasal demi pasal sama dengan daftar Pasal batang tubuh | peringatan | P-1, S-14 |
+| L-13 | Kurung kurawal hanya muncul sebagai notasi konvensi yang sah | galat | F-13, K-8 |
+| L-14 | Setiap `{berkas:…}` tercantum di `berkas_pendamping` dan hashnya cocok | galat | K-6 |
+| L-15 | Nama berkas sesuai pengenal karya | galat | I-5 |
+| L-16 | Tidak ada penanda keraguan (verified) | galat | K-5 |
+| L-17 | `sumber.sha256` terisi dan cocok dengan berkas sumber yang diarsipkan (verified) | galat | M-6, Bagian 11.2 |
+| L-18 | Setiap `hash_badan` sama dengan hash badan teks hasil perhitungan (verified) | galat | V-3 |
+| L-19 | `ekspresi.id` sesuai dengan `karya.id`, `ekspresi.bahasa`, dan `ekspresi.tanggal` | galat | I-4 |
+| L-20 | Penanda keraguan tidak bersarang dan tidak melintasi batas paragraf | galat | K-4 |
+| L-21 | Nama setiap berkas pendamping diawali nama berkas transkripsinya | galat | I-7 |
 
 ## 13. Pengelolaan Versi Konvensi
 
@@ -1034,4 +1043,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). |

@@ -5,7 +5,7 @@
 | Nomor | 0006 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | Bagian 11.1, Bagian 12 (L-06, L-11, L-12, L-17) |
 | Jenis perubahan | redaksional / penambahan |
@@ -67,3 +67,14 @@ Kode baru L-19 dan seterusnya untuk butir C dipilih bersama saat penerapan; kode
 MINOR: [V-10] mengubah anjuran menjadi kewajiban.
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima**.
+
+- Paragraf pembuka Bagian 12 dirumuskan ulang tanpa SEBAIKNYA dan tanpa "wajib" berhuruf kecil; kewajiban lolos pemeriksaan kini ada di [V-10], dan penanganan peringatan di [V-11] (dipecah menjadi dua kalimat).
+- Kolom Tingkat ditambahkan; hanya L-11 dan L-12 bertingkat `peringatan`.
+- L-17 merujuk `M-6, Bagian 11.2`; frasa "berkas sumber yang diarsipkan" dibiarkan sampai usulan 0012 diterapkan.
+- Pemeriksaan baru dari butir C yang dipilih: L-19 ([I-4]), L-20 ([K-4]), dan L-21 ([I-7]).
+  Butir C lain ([F-12], [F-13], [M-3], [M-4], [S-6], [S-9], [S-10]) sudah tercakup oleh L-05 dan L-08, atau bergantung pada maksud transkriptor sehingga tidak dapat diperiksa mesin dengan andal.
+- Definisi `new transcription` di Bagian 11.1 disesuaikan dengan [V-10].
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
