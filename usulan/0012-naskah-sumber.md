@@ -5,7 +5,7 @@
 | Nomor | 0012 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | Bagian 9.3 (`sumber.*`), Bagian 11.2, L-17 |
 | Jenis perubahan | perubahan tidak kompatibel |
@@ -48,3 +48,14 @@ MINOR (tidak kompatibel; MAYOR masih 0).
 - Menggabungkan PDF sumber menjadi satu berkas sebelum di-hash: tidak dipilih karena hash tidak lagi sama dengan berkas yang dapat diunduh dari penyedia.
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima**, dengan satu tambahan.
+
+- `sumber` menjadi daftar; isian butirnya ditulis `sumber[].…` di tabel Bagian 9.3, dan arti notasi tersebut dijelaskan di bawah [M-6].
+- [V-12] (pengarsipan) diterapkan sesuai rumusan, di Bagian 11.5.
+- Tambahan: [M-8] mewajibkan gabungan `sumber[].komponen` sama dengan `ekspresi.komponen`, agar setiap komponen naskah jelas sumbernya.
+  Satu komponen boleh bersumber dari lebih dari satu berkas, misalnya Lampiran I dan Lampiran II yang diterbitkan terpisah.
+- Langkah 3 Bagian 11.2, isian Sumber pada register ([V-6]), contoh Bagian 9.5, dan L-17 disesuaikan.
+- Contoh peraturan dengan Penjelasan atau Lampiran terpisah masih perlu dicari (TODO.md), tetapi aturan ini tidak bergantung padanya.
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.

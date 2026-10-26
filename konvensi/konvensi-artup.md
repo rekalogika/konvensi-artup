@@ -533,7 +533,7 @@ Frontmatter disusun menurut tingkat identitas FRBR:
 | `konvensi` | Versi konvensi yang dipakai |
 | `karya` | Identitas peraturan sebagai karya hukum |
 | `ekspresi` | Identitas teks yang ditranskripsi |
-| `sumber` | Naskah sumber yang menjadi acuan |
+| `sumber` | Daftar naskah sumber yang menjadi acuan |
 | `transkripsi` | Identitas manifestasi: proses dan versi berkas ini |
 | `berkas_pendamping` | Berkas gambar dan sejenisnya beserta hashnya |
 | `verifikasi` | Entri verifikasi |
@@ -549,6 +549,8 @@ Nilai setiap isian WAJIB sesuai dengan kolom Tipe, dengan arti sebagai berikut:
 - tanggal: tanggal berformat `YYYY-MM-DD` menurut [M-4], ditulis tanpa tanda kutip;
 - objek: pemetaan YAML yang memuat isian sebagaimana disebut di kolom Keterangan;
 - daftar: urutan YAML yang butirnya sebagaimana disebut di kolom Keterangan.
+
+Nama isian berbentuk `a[].b` berarti isian `b` pada setiap butir daftar `a`.
 
 | Isian | Wajib | Tipe | Keterangan |
 |---|---|---|---|
@@ -581,19 +583,23 @@ Nilai setiap isian WAJIB sesuai dengan kolom Tipe, dengan arti sebagai berikut:
 | `ekspresi.bahasa` | WAJIB | string | Kode ISO 639-3, misalnya `ind` |
 | `ekspresi.tanggal` | WAJIB | tanggal | Untuk teks asli: tanggal pengundangan, atau tanggal penetapan bila tidak diundangkan |
 | `ekspresi.komponen` | WAJIB | daftar | Komponen naskah yang dimuat: `batang-tubuh`, `penjelasan`, `lampiran` |
-| `sumber.jenis` | WAJIB | string | Misalnya `Salinan resmi Kementerian Sekretariat Negara` |
-| `sumber.diperoleh_dari` | WAJIB | string | Nama situs atau instansi penyedia |
-| `sumber.url` | WAJIB | string | URL berkas sumber |
-| `sumber.berkas` | WAJIB | string | Nama berkas sumber |
-| `sumber.sha256` | WAJIB | string | Hash SHA-256 berkas sumber, heksadesimal huruf kecil |
-| `sumber.diakses` | WAJIB | tanggal | Tanggal berkas sumber diunduh |
-| `sumber.kode_salinan` | BOLEH | string | Kode yang tercetak pada salinan |
+| `sumber` | WAJIB | daftar | Satu butir untuk setiap berkas naskah sumber, dengan isian `sumber[].…` di bawah |
+| `sumber[].jenis` | WAJIB | string | Misalnya `Salinan resmi Kementerian Sekretariat Negara` |
+| `sumber[].diperoleh_dari` | WAJIB | string | Nama situs atau instansi penyedia |
+| `sumber[].url` | WAJIB | string | URL berkas sumber |
+| `sumber[].berkas` | WAJIB | string | Nama berkas sumber |
+| `sumber[].sha256` | WAJIB | string | Hash SHA-256 berkas sumber, heksadesimal huruf kecil |
+| `sumber[].diakses` | WAJIB | tanggal | Tanggal berkas sumber diunduh |
+| `sumber[].kode_salinan` | BOLEH | string | Kode yang tercetak pada salinan |
+| `sumber[].komponen` | WAJIB | daftar | Komponen naskah yang bersumber dari berkas ini: `batang-tubuh`, `penjelasan`, `lampiran` |
 | `transkripsi.versi` | WAJIB | string | Versi berkas transkripsi menurut Bagian 11.6 |
 | `transkripsi.metode` | WAJIB | string | Misalnya `ketik ganda`, `OCR dengan koreksi manual` |
 | `transkripsi.transkriptor` | WAJIB | daftar | Nama orang atau proses |
 | `transkripsi.tanggal` | WAJIB | tanggal | Tanggal transkripsi selesai |
 | `berkas_pendamping` | WAJIB | daftar | Setiap butir berisi `berkas` dan `sha256`; daftar kosong bila tidak ada |
 | `verifikasi` | WAJIB | daftar | Entri menurut Bagian 9.4; daftar kosong sebelum verifikasi |
+
+[M-8] Gabungan nilai `komponen` pada seluruh butir `sumber` WAJIB sama dengan nilai `ekspresi.komponen`.
 
 ### 9.4. Entri Verifikasi
 
@@ -649,13 +655,14 @@ ekspresi:
   tanggal: 2022-10-17
   komponen: [batang-tubuh, penjelasan]
 sumber:
-  jenis: Salinan resmi Kementerian Sekretariat Negara
-  diperoleh_dari: JDIH Kementerian Keuangan
-  url: "https://…"
-  berkas: "…pdf"
-  sha256: "…"
-  diakses: 2026-10-21
-  kode_salinan: "SK No 016999 A s.d. 155338 A"
+  - jenis: Salinan resmi Kementerian Sekretariat Negara
+    diperoleh_dari: JDIH Kementerian Keuangan
+    url: "https://…"
+    berkas: "…pdf"
+    sha256: "…"
+    diakses: 2026-10-21
+    kode_salinan: "SK No 016999 A s.d. 155338 A"
+    komponen: [batang-tubuh, penjelasan]
 transkripsi:
   versi: 1.0.0
   metode: OCR dengan koreksi manual
@@ -805,7 +812,7 @@ Status berkas transkripsi dicatat di register, bukan di berkas.
 
 1. Transkriptor membuat berkas dan menjalankan pemeriksaan otomatis (Bagian 12).
 2. Berkas diserahkan ke verifikator berstatus `verification in progress`.
-3. Verifikator membandingkan badan teks dengan naskah sumber yang hashnya tercantum di `sumber.sha256`, lalu menyelesaikan seluruh penanda keraguan.
+3. Verifikator membandingkan badan teks dengan setiap naskah sumber yang hashnya tercantum di `sumber`, lalu menyelesaikan seluruh penanda keraguan.
 4. Apabila ditemukan ketidaksesuaian, status menjadi `revision required` dan alur kembali ke langkah 1.
 5. Setelah badan teks dibekukan, setiap verifikator menambahkan entri verifikasi yang memuat `hash_badan`.
 6. Berkas final di-hash dan nilai hashnya dicatat di register dengan status `verified`.
@@ -851,13 +858,15 @@ Perbaikan apa pun WAJIB diterbitkan sebagai versi transkripsi baru, dan versi la
 | Versi konvensi | Misalnya `transkripsi-peraturan/0.1` |
 | Status | Menurut Bagian 11.1 |
 | Tanggal status | Tanggal status terakhir berubah |
-| Sumber | URL dan hash SHA-256 naskah sumber |
+| Sumber | URL dan hash SHA-256 setiap naskah sumber |
 | SHA-256 berkas | Diisi hanya untuk status `verified` dan `superseded` |
 | Digantikan oleh | Versi pengganti, untuk status `superseded` |
 | Status keberlakuan peraturan | Misalnya berlaku, diubah, dicabut |
 | Diubah oleh, dicabut oleh | Pengenal karya peraturan lain |
 
 [V-8] Register SEBAIKNYA disimpan sebagai berkas data terstruktur (misalnya CSV atau YAML) dalam repositori berversi, dan BOLEH ditampilkan sebagai tabel Markdown.
+
+[V-12] Setiap naskah sumber yang tercantum di `sumber` WAJIB diarsipkan oleh pengelola register sedemikian rupa sehingga dapat diambil kembali dan dicocokkan dengan nilai `sha256`-nya selama berkas transkripsi berstatus `verified` atau `superseded`.
 
 ### 11.6. Versi Berkas Transkripsi
 
@@ -896,7 +905,7 @@ Apabila teks yang menimbulkan temuan sesuai dengan naskah sumber, verifikator WA
 | L-14 | Setiap `{berkas:…}` tercantum di `berkas_pendamping` dan hashnya cocok | galat | K-6 |
 | L-15 | Nama berkas sesuai pengenal karya | galat | I-5 |
 | L-16 | Tidak ada penanda keraguan (verified) | galat | K-5 |
-| L-17 | `sumber.sha256` terisi dan cocok dengan berkas sumber yang diarsipkan (verified) | galat | M-6, Bagian 11.2 |
+| L-17 | Setiap `sumber[].sha256` cocok dengan naskah sumber yang diarsipkan (verified) | galat | M-6, V-12, Bagian 11.2 |
 | L-18 | Setiap `hash_badan` sama dengan hash badan teks hasil perhitungan (verified) | galat | V-3 |
 | L-19 | `ekspresi.id` sesuai dengan `karya.id`, `ekspresi.bahasa`, dan `ekspresi.tanggal` | galat | I-4 |
 | L-20 | Penanda keraguan tidak bersarang dan tidak melintasi batas paragraf | galat | K-4 |
@@ -1078,4 +1087,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). |
