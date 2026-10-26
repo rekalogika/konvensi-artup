@@ -1,0 +1,54 @@
+# Menjalankan pemeriksa dokumen Konvensi Artup dan ujinya pada setiap pull request ke main.
+# Nama job "Periksa konvensi" dipakai sebagai required status check di ruleset "Proteksi main";
+# jangan diganti tanpa memperbarui ruleset tersebut.
+
+name: Periksa konvensi
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  periksa:
+    name: Periksa konvensi
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: alat/requirements.txt
+
+      - name: Pasang dependensi
+        run: python -m pip install -r alat/requirements.txt
+
+      - name: Aktifkan anotasi temuan
+        run: echo "::add-matcher::.github/periksa-konvensi.json"
+
+      - name: Uji pemeriksa
+        run: python -m unittest discover -s alat/uji -p 'uji_*.py' -v
+
+      - name: Periksa dokumen kerja dan daftar rilis
+        run: python alat/periksa_konvensi.py --rilis
+
+      - name: Periksa format berkas Markdown lain
+        run: git ls-files -z '*.md' ':!konvensi/konvensi-artup.md' | xargs -0 -r python alat/periksa_konvensi.py --hanya-format
+
+      - name: Heuristik gaya (tidak memblokir)
+        continue-on-error: true
+        run: python alat/periksa_konvensi.py --gaya

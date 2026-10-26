@@ -27,6 +27,7 @@ Jika menemukan berkas transkripsi di repositori ini, misalnya `uu-2022-27.md`, j
 | `usulan/NNNN-judul-singkat.md` | Usulan revisi, satu berkas per usulan, bernomor urut empat digit |
 | `alat/periksa_konvensi.py` | Pemeriksa dokumen konvensi |
 | `alat/uji/` | Uji untuk pemeriksa itu sendiri |
+| `.github/workflows/periksa.yml` | GitHub Actions: menjalankan uji dan pemeriksa pada setiap pull request |
 | `TODO.md` | Pekerjaan konvensi yang belum selesai |
 | `.claude/skills/` | Skill untuk alur kerja di bawah; dapat dibaca agen lain sebagai prosedur |
 
@@ -100,6 +101,15 @@ Uji pemeriksa:
 .venv/bin/python -m unittest discover -s alat/uji -p 'uji_*.py'
 ```
 
+Format byte berkas Markdown lain (README, usulan, skill, dan seterusnya):
+
+```sh
+git ls-files -z '*.md' ':!konvensi/konvensi-artup.md' | xargs -0 -r .venv/bin/python alat/periksa_konvensi.py --hanya-format
+```
+
+Ketiga perintah di atas (tanpa `--gaya`) juga dijalankan GitHub Actions pada setiap pull request; jalankan secara lokal sebelum mendorong branch agar pemeriksaan tidak gagal di sana.
+`--gaya` juga dijalankan, tetapi temuannya tidak memblokir.
+
 ## Alur kerja
 
 Setiap perubahan masuk ke `main` melalui pull request (lihat "Git" di bawah).
@@ -127,6 +137,8 @@ Repositori: https://github.com/rekalogika/konvensi-artup (publik).
 - `main` hanya dapat diubah melalui pull request; push langsung, force push, dan penghapusan ditolak.
 - Pull request di-merge dengan **squash**, sehingga satu pull request menjadi satu commit di `main`, dan riwayat `main` selalu lurus.
 - Semua percakapan di pull request harus diselesaikan sebelum merge.
+- Pemeriksaan GitHub Actions "Periksa konvensi" harus lolos sebelum merge.
+  Nama job ini dipakai di ruleset; jangan menggantinya tanpa memperbarui ruleset.
 - Tag `v*` (tag rilis) tidak dapat diubah, dipindahkan, atau dihapus setelah dibuat.
 
 ### Branch
