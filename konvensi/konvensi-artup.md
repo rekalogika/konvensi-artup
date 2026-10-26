@@ -291,7 +291,7 @@ Kedua daftar dalam bagian ini bersifat tertutup.
 
 ### 6.1. Prinsip Pemetaan
 
-[S-1] Setiap jenis unsur struktur WAJIB selalu dipetakan ke tingkat heading yang sama, di mana pun ia muncul.
+[S-1] Di dalam batang tubuh dan Penjelasan, setiap jenis unsur struktur WAJIB selalu dipetakan ke tingkat heading yang sama.
 Tingkat heading BOLEH melompat, misalnya dari `##` langsung ke `#####` apabila BAB tidak memiliki Bagian.
 Konsistensi tingkat lebih diutamakan daripada kelaziman penulisan Markdown.
 
@@ -312,11 +312,14 @@ Konsistensi tingkat lebih diutamakan daripada kelaziman penulisan Markdown.
 [S-2] Teks heading WAJIB memuat label dan judul unsur persis seperti sumber, termasuk huruf kapitalnya.
 Apabila label dan judul tertulis pada baris terpisah di sumber, keduanya WAJIB digabung dengan notasi pemisah ` — ` (Bagian 8.1).
 Apabila judul tertulis dalam beberapa baris, baris-barisnya WAJIB digabung dengan satu spasi.
+Ketentuan pemisah ` — ` tidak berlaku untuk judul peraturan, judul Penjelasan, dan identitas Lampiran; baris-baris judul tersebut WAJIB digabung dengan satu spasi.
 
 [S-3] Heading Pasal WAJIB hanya berisi label Pasal.
 Pasal tidak memiliki judul dalam naskah Indonesia; teks apa pun selain label TIDAK BOLEH ditambahkan.
 
 [S-4] Heading `######` TIDAK BOLEH dipakai dalam versi ini.
+
+[S-25] Notasi konvensi menurut Bagian 8 BOLEH dipakai di dalam heading, termasuk heading Pasal ([S-3]).
 
 Catatan: Buku dipetakan ke `#` karena Markdown hanya menyediakan enam tingkat heading.
 Pembeda antara judul peraturan, Buku, Penjelasan, dan Lampiran adalah labelnya (Prinsip [P-5]).
@@ -395,11 +398,15 @@ Peraturan perubahan memuat Pasal berangka Romawi (Pasal I, Pasal II) yang berisi
 [S-17] Pasal berangka Romawi WAJIB dipetakan ke heading `#####` seperti Pasal lainnya.
 
 [S-18] Rumusan yang dikutip sebagai rumusan baru (misalnya setelah frasa "sehingga berbunyi sebagai berikut:") WAJIB ditulis sebagai kutipan `>`.
-Kutipan WAJIB disarangkan di bawah butir perintah perubahannya dengan indentasi dua spasi.
+Apabila perintah perubahan ditulis sebagai butir rincian, kutipan WAJIB disarangkan di bawah butir tersebut dengan indentasi dua spasi.
+Apabila perintah perubahan ditulis sebagai paragraf, kutipan WAJIB ditulis tanpa indentasi setelah paragraf tersebut.
 
 [S-19] Label unsur struktur di dalam kutipan, misalnya "BAB IIA" atau "Pasal 5", TIDAK BOLEH ditulis sebagai heading.
 Label tersebut ditulis sebagai paragraf biasa di dalam kutipan.
 Ayat dan rincian di dalam kutipan mengikuti Bagian 6.4 dan Bagian 6.5.
+
+[S-24] Dalam penjelasan pasal demi pasal peraturan perubahan, Pasal berangka Romawi WAJIB ditulis sebagai heading `#####`.
+Label lain, termasuk label angka perubahan (misalnya "Angka 1") dan label Pasal yang diubah, WAJIB ditulis sebagai paragraf tersendiri menurut [S-15], tidak sebagai heading.
 
 Contoh:
 
@@ -875,7 +882,7 @@ Apabila teks yang menimbulkan temuan sesuai dengan naskah sumber, verifikator WA
 | L-07 | Hanya konstruksi Markdown yang diizinkan | galat | F-9, F-10 |
 | L-08 | Penanda daftar bernomor di awal teks di-escape, dan tidak ada escape selain yang diwajibkan | galat | F-11 s.d. F-13, F-15 |
 | L-09 | Tidak ada blok kode akibat indentasi | galat | F-14 |
-| L-10 | Setiap heading sesuai tabel pemetaan; heading `#####` hanya berisi label Pasal | galat | S-1 s.d. S-4 |
+| L-10 | Setiap heading sesuai tabel pemetaan; heading `#####` hanya berisi label Pasal | galat | S-1 s.d. S-4, S-24, S-25 |
 | L-11 | Nomor Pasal berurutan, dengan Pasal sisipan (misalnya 28A) diperbolehkan | peringatan | P-1 |
 | L-12 | Daftar Pasal dalam penjelasan pasal demi pasal sama dengan daftar Pasal batang tubuh | peringatan | P-1, S-14 |
 | L-13 | Kurung kurawal hanya muncul sebagai notasi konvensi yang sah | galat | F-13, K-8 |
@@ -1064,4 +1071,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). |
