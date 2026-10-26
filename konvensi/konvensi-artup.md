@@ -335,9 +335,9 @@ Contoh:
 
 ### 6.6. Penutup
 
-[S-13] Penutup tidak diberi heading.
-Setiap blok penutup (misalnya tempat dan tanggal pengesahan, jabatan, keterangan "ttd", nama) ditulis sebagai paragraf terpisah.
-Baris-baris dalam satu blok, misalnya "Disahkan di Jakarta" dan "pada tanggal …", BOLEH ditulis pada baris berurutan dalam satu paragraf.
+[S-13] Penutup TIDAK BOLEH diberi heading.
+Setiap blok penutup (misalnya tempat dan tanggal pengesahan, jabatan, keterangan "ttd", nama) WAJIB ditulis sebagai paragraf terpisah.
+Baris-baris dalam satu blok WAJIB digabung dengan satu spasi menurut N-3, misalnya `Disahkan di Jakarta pada tanggal 17 Oktober 2022`.
 
 ### 6.7. Penjelasan
 
@@ -420,7 +420,7 @@ Gambar, diagram, formulir, peta, dan rumus yang tidak dapat ditulis secara linea
 | N-5 | Spasi sebelum titik dua, titik koma, koma, dan titik WAJIB dihapus. |
 | N-6 | Tanda petik lengkung (“ ” ‘ ’) WAJIB diganti tanda petik lurus (" '). |
 | N-7 | Ligatur tipografis (misalnya ﬁ, ﬂ) WAJIB diurai menjadi huruf biasa. |
-| N-8 | Spasi tak terputus (U+00A0), tanda hubung lunak (U+00AD), dan karakter lebar nol WAJIB dihapus atau diganti spasi biasa. |
+| N-8 | Spasi tak terputus (U+00A0) WAJIB diganti spasi biasa. Tanda hubung lunak (U+00AD) dan karakter lebar nol (U+200B, U+200C, U+200D, U+2060, U+FEFF) WAJIB dihapus. |
 | N-9 | Tanda pisah panjang dan pendek (— –) dipertahankan sebagaimana di sumber. |
 
 ### 7.1. Huruf Kapital dan Angka
@@ -927,8 +927,7 @@ Undang-Undang ini berasaskan:
 
 …
 
-Disahkan di Jakarta
-pada tanggal 17 Oktober 2022
+Disahkan di Jakarta pada tanggal 17 Oktober 2022
 
 PRESIDEN REPUBLIK INDONESIA,
 
@@ -1019,4 +1018,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). |
