@@ -5,7 +5,7 @@
 | Nomor | 0008 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | [S-1], [S-2], [S-3], [S-14], [S-18], [S-19], [S-20], L-10 |
 | Jenis perubahan | redaksional / penambahan |
@@ -62,3 +62,13 @@ Rumusan pasti untuk Lampiran sebaiknya disusun setelah melihat beberapa contoh l
 MINOR.
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima sebagian**.
+
+- Diterapkan: [S-1], [S-2], [S-18], [S-24], dan [S-25] sesuai rumusan, dengan penyesuaian redaksional pada [S-24] (dua kalimat, tanpa frasa "hanya … yang WAJIB").
+  L-10 kini juga merujuk [S-24] dan [S-25].
+- **Ditunda**: rumusan rinci heading di dalam Lampiran ([S-20]).
+  Rumusan itu akan disusun dari contoh lampiran nyata dan diajukan sebagai usulan baru (TODO.md).
+  Sementara itu, [S-20] berlaku apa adanya, dan [S-1] tidak lagi berlaku di dalam Lampiran.
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
