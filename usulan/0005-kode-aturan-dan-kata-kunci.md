@@ -5,7 +5,7 @@
 | Nomor | 0005 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | Bagian 2.1, 4.1, 5, 7, 9.3, 9.4, 10.1, 11.1, 11.5; [S-2], [S-5], [S-8], [S-13], [N-11], [K-1], [K-5], [I-8] |
 | Jenis perubahan | redaksional / penambahan |
@@ -97,3 +97,17 @@ A, C, dan kode baru untuk ketentuan yang sudah ada: PATCH.
 [M-6] (kalimat ketiga), [M-7], dan [V-9]: MINOR.
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima seluruhnya**, termasuk kalimat ketiga [M-6] (isian di luar tabel TIDAK BOLEH dipakai).
+
+Penyesuaian saat penerapan:
+
+- Kode untuk ketentuan `.gitattributes` menjadi [F-16], karena [F-15] telah dipakai oleh usulan 0011.
+  Kode lain sesuai usulan: [C-5], [I-10], [V-8], [M-6], [M-7], [V-9].
+- Arti tipe pada tabel Bagian 9.3 didefinisikan di [M-6]; tanggal ditulis tanpa tanda kutip, dan string yang dapat terbaca sebagai bilangan, tanggal, atau nilai logika wajib diberi tanda kutip.
+- [M-7] juga menutup daftar isian entri verifikasi, sejalan dengan [M-6].
+- [S-5] dan [S-8] dirumuskan ulang agar mencakup daftar ([S-6], [S-7], Bagian 6.5), bukan hanya paragraf.
+- [S-13] tidak diubah di sini karena sudah dirumuskan ulang oleh usulan 0004.
+- Paragraf pembuka Bagian 12 ditangani oleh usulan 0006.
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
