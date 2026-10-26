@@ -209,16 +209,19 @@ Ekstensi lain TIDAK BOLEH diandalkan.
 
 ### 4.3. Escape
 
-[F-11] Baris yang diawali angka diikuti titik atau kurung tutup (misalnya `1.` atau `1)`) WAJIB di-escape menjadi `1\.` atau `1\)`, termasuk di dalam butir daftar dan kutipan.
+[F-11] Teks yang diawali satu sampai sembilan digit yang diikuti titik atau kurung tutup, lalu spasi atau akhir baris (misalnya `1.` atau `1)`), WAJIB di-escape menjadi `1\.` atau `1\)`, termasuk di dalam butir daftar dan kutipan.
 Tanpa escape, penampil Markdown menafsirkannya sebagai daftar bernomor dan dapat menomori ulang.
 
-[F-12] Karakter berikut di awal baris teks WAJIB di-escape bila tidak dimaksudkan sebagai markup: `#`, `>`, `-`, `+`, `*`.
+[F-12] Karakter berikut di awal baris teks WAJIB di-escape bila tidak dimaksudkan sebagai markup: `#`, `>`, `-`, `+`, `*`, `=`, `~`.
 
-[F-13] Karakter `*`, `_`, `` ` ``, `[`, `]`, `<`, `{`, dan `}` di mana pun dalam teks sumber WAJIB di-escape dengan garis miring terbalik.
+[F-13] Karakter `\`, `*`, `_`, `` ` ``, `[`, `]`, `<`, `&`, `{`, dan `}` di mana pun dalam teks sumber WAJIB di-escape dengan garis miring terbalik.
+Karakter `|` di dalam sel tabel GFM WAJIB di-escape dengan garis miring terbalik.
 Kurung kurawal dicadangkan untuk notasi konvensi (Bagian 8).
 
 [F-14] Indentasi TIDAK BOLEH dipakai kecuali untuk penyarangan daftar dan kutipan menurut Bagian 6.5 dan Bagian 6.8.
 Indentasi empat spasi atau lebih di luar konteks tersebut dapat ditafsirkan sebagai blok kode.
+
+[F-15] Garis miring terbalik TIDAK BOLEH dipakai sebagai escape selain menurut [F-11], [F-12], dan [F-13], sehingga setiap teks hanya memiliki satu bentuk.
 
 ## 5. Cakupan Isi: Unsur yang Ditranskripsi dan Dikecualikan
 
@@ -830,7 +833,7 @@ Pemeriksaan bertanda "verified" hanya wajib lolos sebelum status `verified`.
 | L-05 | Frontmatter YAML valid dan memuat seluruh isian WAJIB dengan tipe yang benar | M-1 s.d. M-5 |
 | L-06 | Versi konvensi tercantum dalam daftar rilis konvensi (verified) | R-1, R-6 |
 | L-07 | Hanya konstruksi Markdown yang diizinkan | F-9, F-10 |
-| L-08 | Tidak ada baris berawalan angka diikuti `.` atau `)` tanpa escape | F-11 |
+| L-08 | Penanda daftar bernomor di awal teks di-escape, dan tidak ada escape selain yang diwajibkan | F-11 s.d. F-13, F-15 |
 | L-09 | Tidak ada blok kode akibat indentasi | F-14 |
 | L-10 | Setiap heading sesuai tabel pemetaan; heading `#####` hanya berisi label Pasal | S-1 s.d. S-4 |
 | L-11 | Nomor Pasal berurutan, dengan Pasal sisipan (misalnya 28A) diperbolehkan | S-1 |
@@ -1018,4 +1021,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). |
