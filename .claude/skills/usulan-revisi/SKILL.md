@@ -10,8 +10,11 @@ Skill ini **tidak** menyunting `konvensi/konvensi-artup.md`.
 
 ## Langkah
 
-1. **Tentukan nomor.**
+1. **Tentukan nomor dan buat branch.**
+   Mulai dari `main` yang mutakhir (`git switch main && git pull --ff-only`).
    Lihat `usulan/` dan ambil nomor empat digit terbesar ditambah satu (mulai dari `0001`).
+   Periksa juga pull request yang masih terbuka (`gh pr list --state open`) agar nomor tidak bentrok dengan usulan yang belum di-merge.
+   Buat branch `usulan/NNNN-judul-singkat`, kecuali bila skill ini dipakai dari dalam skill `tinjau-konsistensi`: usulan dibuat di branch `tinjauan/YYYY-MM` yang sedang berjalan, tanpa branch dan pull request tersendiri.
    Nama berkas: `usulan/NNNN-judul-singkat.md`, judul singkat huruf kecil dengan tanda hubung.
 2. **Salin `usulan/TEMPLAT.md`** dan isi seluruh bagiannya.
    Status awal: `diajukan`.
@@ -47,5 +50,17 @@ Masalah yang saling terkait boleh digabung dengan menjelaskan kaitannya.
 
 ## Setelah selesai
 
-Laporkan kepada Ananda: nomor dan judul usulan, aturan terdampak, dan usulan jenis versi.
-Commit berkas usulan dengan pesan, misalnya `Usulan 0003: ...`, bila diminta.
+1. Commit berkas usulan di branch, dengan pesan misalnya `Usulan 0016: tabel di dalam ayat`.
+2. Laporkan kepada Ananda: nomor dan judul usulan, aturan terdampak, dan usulan jenis versi.
+3. Bila diminta, dorong branch dan buka pull request:
+   ```sh
+   git push -u origin usulan/NNNN-judul-singkat
+   gh pr create --base main --title "Usulan NNNN: judul singkat" --body-file <berkas-deskripsi>
+   ```
+   Deskripsi pull request merangkum masalah, aturan terdampak, dan jenis versi, lalu menautkan berkas usulan.
+
+Diskusi berlangsung di pull request.
+Setelah Ananda memutuskan, isi bagian Keputusan dan ubah status menjadi `diterima` atau `ditolak` di branch yang sama, sebelum pull request di-merge.
+Usulan yang ditolak tetap di-merge agar arsipnya lengkap.
+
+Untuk usulan yang sudah ada di `main` dengan status `diajukan`, keputusannya dicatat di branch `revisi/NNNN-…` (bila diterima dan langsung diterapkan) atau di branch `usulan/NNNN-…` (bila ditolak atau ditunda).

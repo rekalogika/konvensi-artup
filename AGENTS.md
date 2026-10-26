@@ -102,11 +102,13 @@ Uji pemeriksa:
 
 ## Alur kerja
 
-1. **Usulan**: tulis di `usulan/NNNN-judul-singkat.md` menurut templat (skill `usulan-revisi`).
-2. **Diskusi dan persetujuan**: Ananda memutuskan; status usulan diubah menjadi `diterima` atau `ditolak`.
-3. **Penerapan**: sunting dokumen kerja, perbarui rujukan silang, daftar isi, riwayat perubahan, dan versi (skill `revisi-konvensi`).
-4. **Pemeriksaan**: jalankan pemeriksa; tinjau konsistensi bila perubahannya luas (skill `tinjau-konsistensi`).
-5. **Rilis** (bila diputuskan): ubah status, bekukan salinan ke `rilis/`, hitung SHA-256, catat di `rilis/RILIS.md`, buat tag git (skill `rilis-konvensi`).
+Setiap perubahan masuk ke `main` melalui pull request (lihat "Git" di bawah).
+
+1. **Usulan**: tulis di `usulan/NNNN-judul-singkat.md` menurut templat (skill `usulan-revisi`) dan ajukan sebagai pull request.
+2. **Diskusi dan persetujuan**: diskusi berlangsung di pull request usulan; Ananda memutuskan, dan status usulan diubah menjadi `diterima` atau `ditolak`.
+3. **Penerapan**: dalam pull request tersendiri, sunting dokumen kerja, perbarui rujukan silang, daftar isi, riwayat perubahan, dan versi (skill `revisi-konvensi`).
+4. **Pemeriksaan**: jalankan pemeriksa sebelum membuka pull request; tinjau konsistensi bila perubahannya luas (skill `tinjau-konsistensi`).
+5. **Rilis** (bila diputuskan): dalam pull request rilis, ubah status, bekukan salinan ke `rilis/`, hitung SHA-256, dan catat di `rilis/RILIS.md`; setelah di-merge, buat tag git di `main` (skill `rilis-konvensi`).
    Langkah ini tidak dapat dibatalkan dan memerlukan persetujuan eksplisit.
 
 ### Versi dokumen kerja
@@ -118,6 +120,37 @@ Dokumen kerja selalu membawa nomor versi rilis berikutnya yang direncanakan.
 
 ## Git
 
-- Pesan commit dalam bahasa Indonesia, kalimat pertama ringkas, diikuti rincian bila perlu.
-- Satu commit untuk satu perubahan yang utuh, misalnya satu usulan yang diterapkan.
-- Jangan `push`, membuat tag, atau menulis ulang riwayat tanpa diminta.
+Repositori: https://github.com/rekalogika/konvensi-artup (publik).
+
+### Proteksi di GitHub
+
+- `main` hanya dapat diubah melalui pull request; push langsung, force push, dan penghapusan ditolak.
+- Pull request di-merge dengan **squash**, sehingga satu pull request menjadi satu commit di `main`, dan riwayat `main` selalu lurus.
+- Semua percakapan di pull request harus diselesaikan sebelum merge.
+- Tag `v*` (tag rilis) tidak dapat diubah, dipindahkan, atau dihapus setelah dibuat.
+
+### Branch
+
+Buat branch dari `main` yang mutakhir (`git switch main && git pull --ff-only`), satu branch untuk satu perubahan yang utuh:
+
+| Awalan | Isi | Contoh |
+|---|---|---|
+| `usulan/` | Satu berkas usulan baru, atau pencatatan keputusan atas usulan | `usulan/0016-tabel-dalam-ayat` |
+| `revisi/` | Penerapan satu usulan yang diterima pada dokumen kerja | `revisi/0003-rujukan-versi-draf` |
+| `rilis/` | Rilis satu versi final | `rilis/0.1.0` |
+| `tinjauan/` | Hasil satu putaran tinjauan konsistensi (beberapa usulan sekaligus) | `tinjauan/2026-11` |
+| `alat/` | Perubahan alat pemeriksa dan ujinya | `alat/pemeriksaan-kata-kunci` |
+| `proyek/` | Berkas proyek lain: AGENTS.md, skill, README, TODO.md | `proyek/alur-pull-request` |
+
+### Commit dan pull request
+
+- Pesan commit dan judul pull request dalam bahasa Indonesia, ringkas, diawali kata kerja atau nomor usulan, misalnya `Terapkan usulan 0003: rujukan ke versi draf`.
+- Judul dan deskripsi pull request menjadi pesan commit squash di `main`, jadi tulislah sebagai catatan perubahan yang utuh.
+- Deskripsi pull request memuat: ringkasan, aturan dan usulan terdampak, jenis versi (PATCH, MINOR, MAYOR) bila normatif, dan hasil pemeriksa.
+- Commit di dalam branch boleh beberapa; yang tersisa di `main` hanya commit squash.
+
+### Batas tindakan agen
+
+- Jangan push ke `main`, membuat atau mendorong tag, me-merge pull request, atau menulis ulang riwayat yang sudah di-push tanpa diminta.
+- Mendorong branch kerja dan membuka pull request hanya bila diminta, misalnya "ajukan sebagai PR".
+- Me-merge pull request adalah keputusan Ananda.

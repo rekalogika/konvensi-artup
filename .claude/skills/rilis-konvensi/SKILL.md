@@ -1,24 +1,28 @@
 ---
 name: rilis-konvensi
-description: Merilis versi final Konvensi Artup, yaitu mengubah status dokumen menjadi final, membekukan salinan ke rilis/, menghitung SHA-256, mencatatnya di rilis/RILIS.md, dan membuat tag git. Pakai hanya bila Ananda secara eksplisit meminta merilis versi tertentu. Langkah ini tidak dapat dibatalkan; versi final tidak pernah diubah lagi.
+description: Merilis versi final Konvensi Artup, yaitu mengubah status dokumen menjadi final, membekukan salinan ke rilis/, menghitung SHA-256, mencatatnya di rilis/RILIS.md melalui pull request rilis, lalu membuat tag git di main setelah di-merge. Pakai hanya bila Ananda secara eksplisit meminta merilis versi tertentu. Langkah ini tidak dapat dibatalkan; versi final tidak pernah diubah lagi.
 ---
 
 # Rilis konvensi
 
 Rilis bersifat permanen ([R-3]).
-Minta konfirmasi Ananda atas nomor versi dan tanggal sebelum langkah 4, dan sekali lagi sebelum membuat tag.
+Tag `v*` di GitHub dilindungi: setelah dibuat, tag tidak dapat dipindahkan atau dihapus, sehingga kesalahan pada tag tidak dapat diperbaiki.
+Minta konfirmasi Ananda atas nomor versi dan tanggal sebelum langkah 3, dan sekali lagi sebelum membuat tag.
 
-## Langkah
+Rilis berlangsung dalam dua tahap: **pull request rilis** (langkah 1–9), lalu **tag** setelah Ananda me-merge (langkah 10–13).
+
+## Tahap 1: pull request rilis
 
 1. **Prasyarat.**
+   - Mulai dari `main` yang mutakhir (`git switch main && git pull --ff-only`) dan buat branch `rilis/X.Y.Z`.
    - Pohon kerja git bersih (`git status`).
    - `.venv/bin/python alat/periksa_konvensi.py --gaya` bersih, atau sisa temuan `--gaya` sudah diterima Ananda.
    - `.venv/bin/python alat/periksa_konvensi.py --rilis` bersih.
-   - Tidak ada usulan berstatus `diterima` yang belum `diterapkan`.
+   - Tidak ada usulan berstatus `diterima` yang belum `diterapkan`, dan tidak ada pull request `revisi/` yang masih terbuka untuk versi ini (`gh pr list --state open`).
    - Tinjau `TODO.md`: butir yang memblokir rilis sudah selesai atau secara sadar ditunda.
    - Disarankan: satu putaran skill `tinjau-konsistensi`.
 2. **Tentukan versi** `X.Y.Z` dari frontmatter.
-   Versi tersebut WAJIB belum ada di `rilis/RILIS.md` dan berkas `rilis/konvensi-artup-X.Y.Z.md` belum ada.
+   Versi tersebut WAJIB belum ada di `rilis/RILIS.md`, berkas `rilis/konvensi-artup-X.Y.Z.md` belum ada, dan tag `vX.Y.Z` belum ada (`git ls-remote --tags origin vX.Y.Z`).
 3. **Finalkan dokumen kerja** `konvensi/konvensi-artup.md`:
    - frontmatter: `status: final`, `tanggal:` tanggal rilis;
    - tabel identitas: Versi, Status `Final`, Tanggal, dan rujukan singkat `transkripsi-peraturan/X.Y`;
@@ -41,9 +45,37 @@ Minta konfirmasi Ananda atas nomor versi dan tanggal sebelum langkah 4, dan seka
    ```
    Hash tidak pernah dituliskan di dalam salinan beku itu sendiri.
 8. **Verifikasi**: `.venv/bin/python alat/periksa_konvensi.py --rilis`.
-9. **Commit**: `Rilis Konvensi Artup X.Y.Z`.
-10. **Tag** (setelah konfirmasi): `git tag -a vX.Y.Z -m "Konvensi Artup X.Y.Z"`.
-    Jangan `push` kecuali diminta.
+9. **Commit dan pull request**: commit `Rilis Konvensi Artup X.Y.Z` di branch, lalu (bila diminta) dorong branch dan buka pull request dengan judul yang sama.
+   Deskripsi memuat nilai SHA-256 dan ringkasan perubahan sejak versi sebelumnya.
+   Tanggal di dokumen adalah tanggal rilis; bila merge tertunda, tanggal tidak perlu diubah.
+
+## Tahap 2: tag (setelah Ananda me-merge)
+
+Squash merge membuat commit baru di `main`, dan pull request lain dapat di-merge sesudahnya.
+Karena itu tag WAJIB dibuat pada commit squash pull request rilis yang diambil secara eksplisit, **bukan** pada `HEAD` `main`.
+Pemeriksaan hash di `HEAD` tidak cukup, karena salinan beku tidak berubah oleh commit sesudahnya.
+
+10. **Ambil commit squash rilis**:
+    ```sh
+    git switch main && git pull --ff-only
+    SHA=$(gh pr view <nomor-PR-rilis> --json state,mergeCommit --jq 'select(.state == "MERGED") | .mergeCommit.oid')
+    test -n "$SHA" && git merge-base --is-ancestor "$SHA" origin/main && git log -1 --format='%H %s' "$SHA"
+    ```
+    Pull request WAJIB berstatus `MERGED`, `SHA` WAJIB tidak kosong dan berada di `origin/main`, dan subjek commit-nya WAJIB `Rilis Konvensi Artup X.Y.Z`.
+11. **Verifikasi isi pada commit tersebut**, bukan pada pohon kerja:
+    ```sh
+    git show "$SHA:rilis/konvensi-artup-X.Y.Z.md" | sha256sum
+    git show "$SHA:rilis/RILIS.md" | grep -F '| X.Y.Z |'
+    git diff --quiet "$SHA" -- rilis/konvensi-artup-X.Y.Z.md && echo "salinan beku tidak berubah sejak rilis"
+    git show "$SHA:konvensi/konvensi-artup.md" | cmp - <(git show "$SHA:rilis/konvensi-artup-X.Y.Z.md")
+    ```
+    Hash WAJIB sama dengan baris versi tersebut di `RILIS.md` pada commit itu, dan dokumen kerja pada commit itu WAJIB identik dengan salinan beku.
+12. **Buat tag** (setelah konfirmasi) dengan SHA eksplisit, lalu periksa:
+    ```sh
+    git tag -a vX.Y.Z "$SHA" -m "Konvensi Artup X.Y.Z"
+    test "$(git rev-parse 'vX.Y.Z^{commit}')" = "$SHA"
+    ```
+13. **Dorong tag** (setelah konfirmasi): `git push origin vX.Y.Z`.
 
 ## Setelah rilis
 
