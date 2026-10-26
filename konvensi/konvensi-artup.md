@@ -185,7 +185,7 @@ Bentuk lain (HTML, PDF, XML) BOLEH dihasilkan darinya, tetapi yang diverifikasi 
 - [F-6] Berkas WAJIB diakhiri tepat satu karakter LF.
 - [F-7] Baris kosong berturut-turut TIDAK BOLEH lebih dari satu.
 
-Repositori yang menyimpan berkas transkripsi SEBAIKNYA mencegah pengubahan akhir baris secara otomatis, misalnya dengan entri `*.md -text` dalam berkas `.gitattributes`.
+[F-16] Repositori yang menyimpan berkas transkripsi SEBAIKNYA mencegah pengubahan akhir baris secara otomatis, misalnya dengan entri `*.md -text` dalam berkas `.gitattributes`.
 
 ### 4.2. Dialek Markdown
 
@@ -226,7 +226,8 @@ Indentasi empat spasi atau lebih di luar konteks tersebut dapat ditafsirkan seba
 ## 5. Cakupan Isi: Unsur yang Ditranskripsi dan Dikecualikan
 
 Kedua daftar dalam bagian ini bersifat tertutup.
-Unsur yang tidak tercantum dalam salah satu daftar WAJIB dilaporkan dan diputuskan dalam revisi konvensi.
+
+[C-5] Unsur yang tidak tercantum dalam salah satu daftar WAJIB dilaporkan dan diputuskan dalam revisi konvensi.
 
 ### 5.1. Unsur yang Ditranskripsi
 
@@ -289,7 +290,7 @@ Konsistensi tingkat lebih diutamakan daripada kelaziman penulisan Markdown.
 
 [S-2] Teks heading WAJIB memuat label dan judul unsur persis seperti sumber, termasuk huruf kapitalnya.
 Apabila label dan judul tertulis pada baris terpisah di sumber, keduanya WAJIB digabung dengan notasi pemisah ` — ` (Bagian 8.1).
-Apabila judul tertulis dalam beberapa baris, baris-barisnya digabung dengan satu spasi.
+Apabila judul tertulis dalam beberapa baris, baris-barisnya WAJIB digabung dengan satu spasi.
 
 [S-3] Heading Pasal WAJIB hanya berisi label Pasal.
 Pasal tidak memiliki judul dalam naskah Indonesia; teks apa pun selain label TIDAK BOLEH ditambahkan.
@@ -301,8 +302,8 @@ Pembeda antara judul peraturan, Buku, Penjelasan, dan Lampiran adalah labelnya (
 
 ### 6.3. Pembukaan
 
-[S-5] Pembukaan tidak diberi heading.
-Unsur-unsurnya ditulis sebagai paragraf berurutan setelah judul peraturan.
+[S-5] Pembukaan TIDAK BOLEH diberi heading.
+Unsur-unsurnya WAJIB ditulis berurutan setelah judul peraturan, sebagai paragraf atau daftar menurut [S-6] dan [S-7].
 
 [S-6] Kata "Menimbang" dan "Mengingat" WAJIB ditulis sebagai awal paragraf diikuti titik dua tanpa spasi di depannya, misalnya `Menimbang:`.
 Apabila konsiderans atau dasar hukum terdiri atas beberapa rincian, kata tersebut berdiri sebagai paragraf sendiri dan rinciannya ditulis sebagai daftar menurut Bagian 6.5.
@@ -312,7 +313,7 @@ Apabila hanya terdiri atas satu rumusan tanpa label, rumusannya ditulis langsung
 
 ### 6.4. Pasal dan Ayat
 
-[S-8] Isi Pasal yang tidak terbagi atas ayat ditulis sebagai satu atau beberapa paragraf setelah heading Pasal.
+[S-8] Isi Pasal yang tidak terbagi atas ayat WAJIB ditulis sebagai satu atau beberapa paragraf setelah heading Pasal, beserta rinciannya menurut Bagian 6.5.
 
 [S-9] Setiap ayat WAJIB ditulis sebagai paragraf tersendiri yang diawali labelnya persis seperti sumber, misalnya `(1) …`.
 
@@ -415,16 +416,16 @@ Gambar, diagram, formulir, peta, dan rumus yang tidak dapat ditulis secara linea
 
 [N-1] Hanya normalisasi dalam bagian ini yang BOLEH dilakukan terhadap teks sumber.
 
-| Kode | Normalisasi |
-|---|---|
-| N-2 | Pemenggalan kata di akhir baris karena tata letak WAJIB disambung kembali. Tanda hubung yang merupakan bagian kata, misalnya "perundang-undangan", WAJIB dipertahankan. |
-| N-3 | Pergantian baris di dalam satu kalimat atau paragraf WAJIB diganti satu spasi. |
-| N-4 | Spasi berganda WAJIB diganti satu spasi. |
-| N-5 | Spasi sebelum titik dua, titik koma, koma, dan titik WAJIB dihapus. |
-| N-6 | Tanda petik lengkung (“ ” ‘ ’) WAJIB diganti tanda petik lurus (" '). |
-| N-7 | Ligatur tipografis (misalnya ﬁ, ﬂ) WAJIB diurai menjadi huruf biasa. |
-| N-8 | Spasi tak terputus (U+00A0) WAJIB diganti spasi biasa. Tanda hubung lunak (U+00AD) dan karakter lebar nol (U+200B, U+200C, U+200D, U+2060, U+FEFF) WAJIB dihapus. |
-| N-9 | Tanda pisah panjang dan pendek (— –) dipertahankan sebagaimana di sumber. |
+- [N-2] Pemenggalan kata di akhir baris karena tata letak WAJIB disambung kembali.
+  Tanda hubung yang merupakan bagian kata, misalnya "perundang-undangan", WAJIB dipertahankan.
+- [N-3] Pergantian baris di dalam satu kalimat atau paragraf WAJIB diganti satu spasi.
+- [N-4] Spasi berganda WAJIB diganti satu spasi.
+- [N-5] Spasi sebelum titik dua, titik koma, koma, dan titik WAJIB dihapus.
+- [N-6] Tanda petik lengkung (“ ” ‘ ’) WAJIB diganti tanda petik lurus (" ').
+- [N-7] Ligatur tipografis (misalnya ﬁ, ﬂ) WAJIB diurai menjadi huruf biasa.
+- [N-8] Spasi tak terputus (U+00A0) WAJIB diganti spasi biasa.
+  Tanda hubung lunak (U+00AD) dan karakter lebar nol (U+200B, U+200C, U+200D, U+2060, U+FEFF) WAJIB dihapus.
+- [N-9] Tanda pisah panjang dan pendek (— –) WAJIB dipertahankan sebagaimana di sumber.
 
 ### 7.1. Huruf Kapital dan Angka
 
@@ -432,7 +433,7 @@ Gambar, diagram, formulir, peta, dan rumus yang tidak dapat ditulis secara linea
 
 ### 7.2. Huruf Tebal dan Garis Bawah
 
-[N-11] Cetak tebal dan garis bawah di sumber tidak ditranskripsi sebagai markup.
+[N-11] Cetak tebal dan garis bawah di sumber TIDAK BOLEH ditranskripsi sebagai markup.
 
 ### 7.3. Huruf Miring
 
@@ -446,7 +447,7 @@ Kurung kurawal dicadangkan khusus untuk notasi konvensi.
 
 ### 8.1. Pemisah Label dan Judul
 
-[K-1] Notasi ` — ` (spasi, tanda pisah panjang U+2014, spasi) dalam heading memisahkan label unsur dan judulnya, misalnya `## BAB II — ASAS`.
+[K-1] Notasi ` — ` (spasi, tanda pisah panjang U+2014, spasi) WAJIB dipakai dalam heading untuk memisahkan label unsur dan judulnya menurut [S-2], misalnya `## BAB II — ASAS`.
 Notasi ini bukan teks sumber.
 
 ### 8.2. Penanda Keraguan
@@ -459,7 +460,7 @@ Contoh keadaan yang memerlukannya: kata yang tidak terbaca pada pindaian, kata y
 [K-4] Penanda keraguan TIDAK BOLEH bersarang dan TIDAK BOLEH melintasi batas paragraf.
 
 [K-5] Berkas yang masih memuat penanda keraguan TIDAK BOLEH berstatus `verified`.
-Verifikator menghapus penanda apabila teksnya benar, atau mengganti teksnya apabila salah.
+Verifikator WAJIB menghapus penanda apabila teksnya benar, atau mengganti teksnya apabila salah.
 
 ### 8.3. Rujukan Berkas Pendamping
 
@@ -503,6 +504,16 @@ Frontmatter disusun menurut tingkat identitas FRBR:
 | `verifikasi` | Entri verifikasi |
 
 ### 9.3. Daftar Isian
+
+[M-6] Frontmatter WAJIB memuat setiap isian yang bertanda WAJIB pada tabel di bawah, dan setiap isian bertanda "WAJIB bila ada" apabila informasinya terdapat dalam naskah sumber.
+Isian yang tidak tercantum pada tabel TIDAK BOLEH dipakai.
+Nilai setiap isian WAJIB sesuai dengan kolom Tipe, dengan arti sebagai berikut:
+
+- string: skalar YAML yang dibaca sebagai string; nilai yang dapat terbaca sebagai bilangan, tanggal, atau nilai logika WAJIB diberi tanda kutip, misalnya `nomor: "27"`;
+- bilangan: bilangan bulat YAML tanpa tanda kutip;
+- tanggal: tanggal berformat `YYYY-MM-DD` menurut [M-4], ditulis tanpa tanda kutip;
+- objek: pemetaan YAML yang memuat isian sebagaimana disebut di kolom Keterangan;
+- daftar: urutan YAML yang butirnya sebagaimana disebut di kolom Keterangan.
 
 | Isian | Wajib | Tipe | Keterangan |
 |---|---|---|---|
@@ -551,7 +562,7 @@ Frontmatter disusun menurut tingkat identitas FRBR:
 
 ### 9.4. Entri Verifikasi
 
-Setiap entri dalam `verifikasi` memuat:
+[M-7] Setiap entri dalam `verifikasi` WAJIB memuat isian yang bertanda WAJIB pada tabel berikut dan TIDAK BOLEH memuat isian yang tidak tercantum di dalamnya:
 
 | Isian | Wajib | Keterangan |
 |---|---|---|
@@ -654,7 +665,7 @@ Pemetaan ini informatif; penyelarasan akhir dengan unsur metadata dalam lampiran
 
 Skema pengenal diilhami templat URI ELI dan model FRBR.
 Pengenal bersifat menjelaskan dirinya sendiri, stabil, dan tidak bergantung pada lokasi penyimpanan.
-Apabila diterbitkan di web, pengenal BOLEH diawali URI dasar, misalnya `https://contoh.id/eli/`.
+[I-10] Apabila diterbitkan di web, pengenal BOLEH diawali URI dasar, misalnya `https://contoh.id/eli/`.
 
 ### 10.2. Pengenal Karya
 
@@ -718,7 +729,7 @@ Contoh: `uu-2022-27.md`, `permen-kemenkeu-2023-12.md`.
 
 ### 10.6. Rujukan Fragmen
 
-[I-8] Bagian dari suatu peraturan dirujuk dengan pengenal karya atau ekspresi diikuti `#` dan fragmen.
+[I-8] Rujukan ke bagian dari suatu peraturan WAJIB berbentuk pengenal karya atau ekspresi diikuti `#` dan fragmen.
 Fragmen dihitung dari struktur badan teks dan TIDAK BOLEH ditulis sebagai jangkar di dalam berkas.
 
 | Unsur | Pola fragmen | Contoh |
@@ -744,6 +755,8 @@ Contoh rujukan lengkap: `uu/2022/27/ind@2022-10-17#pasal-46-ayat-1-huruf-a`.
 ### 11.1. Status
 
 Status berkas transkripsi dicatat di register, bukan di berkas.
+
+[V-9] Status berkas transkripsi di register WAJIB berupa salah satu nilai pada tabel berikut.
 
 | Status | Arti |
 |---|---|
@@ -809,7 +822,7 @@ Perbaikan apa pun WAJIB diterbitkan sebagai versi transkripsi baru, dan versi la
 | Status keberlakuan peraturan | Misalnya berlaku, diubah, dicabut |
 | Diubah oleh, dicabut oleh | Pengenal karya peraturan lain |
 
-Register SEBAIKNYA disimpan sebagai berkas data terstruktur (misalnya CSV atau YAML) dalam repositori berversi, dan BOLEH ditampilkan sebagai tabel Markdown.
+[V-8] Register SEBAIKNYA disimpan sebagai berkas data terstruktur (misalnya CSV atau YAML) dalam repositori berversi, dan BOLEH ditampilkan sebagai tabel Markdown.
 
 ### 11.6. Versi Berkas Transkripsi
 
@@ -830,7 +843,7 @@ Pemeriksaan bertanda "verified" hanya wajib lolos sebelum status `verified`.
 | L-02 | Tidak ada CR | F-2 |
 | L-03 | Teks dalam bentuk NFC | F-3 |
 | L-04 | Tidak ada tab, spasi di akhir baris, atau baris kosong berganda; diakhiri satu LF | F-4 s.d. F-7 |
-| L-05 | Frontmatter YAML valid dan memuat seluruh isian WAJIB dengan tipe yang benar | M-1 s.d. M-5 |
+| L-05 | Frontmatter YAML valid dan memuat seluruh isian WAJIB dengan tipe yang benar | M-1 s.d. M-7 |
 | L-06 | Versi konvensi tercantum dalam daftar rilis konvensi (verified) | R-1, R-6 |
 | L-07 | Hanya konstruksi Markdown yang diizinkan | F-9, F-10 |
 | L-08 | Penanda daftar bernomor di awal teks di-escape, dan tidak ada escape selain yang diwajibkan | F-11 s.d. F-13, F-15 |
@@ -1021,4 +1034,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). |
