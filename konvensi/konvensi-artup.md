@@ -222,11 +222,11 @@ Ekstensi lain TIDAK BOLEH diandalkan.
 | Daftar berpoin `-` | Rincian dengan label asli (Bagian 6.5) |
 | Kutipan `>` | Teks yang dikutip dalam peraturan perubahan (Bagian 6.8) |
 | Huruf miring `*…*` | Teks yang dicetak miring di sumber (Bagian 7.3) |
-| Tabel GFM | Tabel sederhana dalam Lampiran (Bagian 6.9) |
-| HTML `<table>` terbatas | Tabel kompleks dalam Lampiran (Bagian 6.9) |
+| Tabel GFM | Tabel sederhana (Bagian 6.10) |
+| HTML `<table>` terbatas | Tabel kompleks (Bagian 6.10) |
 | Escape garis miring terbalik | Mencegah salah tafsir (Bagian 4.3) |
 
-[F-10] Konstruksi berikut TIDAK BOLEH dipakai di berkas transkripsi: heading Setext, huruf tebal, tautan, gambar Markdown, blok kode, kode sebaris, garis horizontal, catatan kaki, komentar HTML, dan HTML selain yang diizinkan pada Bagian 6.9.
+[F-10] Konstruksi berikut TIDAK BOLEH dipakai di berkas transkripsi: heading Setext, huruf tebal, tautan, gambar Markdown, blok kode, kode sebaris, garis horizontal, catatan kaki, komentar HTML, dan HTML selain yang diizinkan pada Bagian 6.10.
 
 ### 4.3. Escape
 
@@ -261,12 +261,12 @@ Kedua daftar dalam bagian ini bersifat tertutup.
 5. Dasar hukum ("Mengingat") beserta seluruh rinciannya.
 6. Frasa persetujuan bersama, apabila ada.
 7. Diktum ("MEMUTUSKAN:", "Menetapkan:") beserta nama peraturan yang ditetapkan.
-8. Seluruh batang tubuh: label dan judul Buku, BAB, Bagian, Paragraf, serta Pasal, ayat, dan rincian.
+8. Seluruh batang tubuh: label dan judul Buku, BAB, Bagian, Paragraf, serta Pasal, ayat, dan rincian, termasuk tabel, rumus, dan gambar di dalamnya (Bagian 6.10).
 9. Penutup: rumusan perintah pengundangan, tempat dan tanggal pengesahan atau penetapan, jabatan, keterangan "ttd" sebagaimana tertulis, dan nama pejabat.
 10. Tempat dan tanggal pengundangan, jabatan, keterangan "ttd", dan nama pejabat yang mengundangkan.
 11. Keterangan penempatan, misalnya "LEMBARAN NEGARA REPUBLIK INDONESIA TAHUN 2022 NOMOR 196".
 12. Penjelasan: judul, penjelasan umum, penjelasan pasal demi pasal, dan keterangan tambahan lembaran, misalnya "TAMBAHAN LEMBARAN NEGARA REPUBLIK INDONESIA NOMOR 6820".
-13. Lampiran: identitas lampiran, seluruh isi termasuk tabel, rumus, dan gambar (Bagian 6.9), serta penutup lampiran beserta jabatan dan nama pejabat.
+13. Lampiran: identitas lampiran, seluruh isi termasuk tabel, rumus, dan gambar (Bagian 6.9 dan Bagian 6.10), serta penutup lampiran beserta jabatan dan nama pejabat.
 
 ### 5.2. Unsur yang Dikecualikan
 
@@ -431,6 +431,11 @@ Beberapa ketentuan dalam Undang-Undang Nomor … diubah sebagai berikut:
 
 [S-20] Setiap Lampiran WAJIB diawali heading `#` berisi baris-baris identitas lampiran yang digabung dengan spasi, misalnya `# LAMPIRAN I PERATURAN PEMERINTAH REPUBLIK INDONESIA NOMOR … TAHUN … TENTANG …`.
 Heading di dalam Lampiran mengikuti label yang tertulis, dengan tingkat `##` sampai `####` menurut hierarkinya.
+Tabel, rumus, dan gambar di dalam Lampiran mengikuti Bagian 6.10.
+
+### 6.10. Tabel, Rumus, dan Gambar
+
+Ketentuan dalam subbagian ini berlaku di seluruh badan teks: batang tubuh, Penjelasan, dan Lampiran.
 
 [S-21] Tabel tanpa sel gabungan WAJIB ditulis sebagai tabel GFM.
 
@@ -439,6 +444,8 @@ Elemen yang diizinkan hanya `table`, `thead`, `tbody`, `tr`, `th`, `td`, dan `br
 
 [S-23] Rumus SEBAIKNYA ditulis secara linear dengan karakter Unicode.
 Gambar, diagram, formulir, peta, dan rumus yang tidak dapat ditulis secara linear WAJIB disimpan sebagai berkas pendamping dan dirujuk dengan notasi `{berkas:…}` (Bagian 8.3).
+
+[S-26] Tabel yang terletak di dalam rincian WAJIB disarangkan dengan indentasi butir rinciannya.
 
 ## 7. Normalisasi Teks
 
@@ -1071,4 +1078,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). |
