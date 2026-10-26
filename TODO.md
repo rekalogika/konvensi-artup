@@ -21,13 +21,13 @@ Butir yang menyangkut fakta hukum tidak boleh diisi dari ingatan; cocokkan denga
 
 ## Fakta yang perlu diverifikasi (dari tinjauan pertama)
 
-- [ ] Cocokkan contoh Bagian 6.5 dan 6.7 dengan naskah UU 27/2022 (Pasal 2 ayat (1) dan penjelasan Pasal 10), serta data UU 27/2022 di Bagian 9.5 dan Lampiran A (tanggal, LN 2022/196, TLN 6820, penandatangan) (usulan 0015).
+- [x] Cocokkan contoh Bagian 6.5 dan 6.7 serta data UU 27/2022 (usulan 0015); contoh 6.7 diganti contoh rekaan karena Penjelasan Pasal 10 belum dapat diverifikasi.
 - [ ] Nomor register Perda (Noreg): dasar hukum dan letaknya dalam naskah (usulan 0010).
 - [ ] Kalimat pengesahan UU yang tidak ditandatangani Presiden: pasal dan ayat UU 12/2011 serta contoh naskah, misalnya UU 2/2018 (usulan 0010).
 - [ ] Contoh peraturan yang Penjelasan atau Lampirannya diterbitkan sebagai berkas terpisah (usulan 0012).
 - [ ] Contoh tabel dan rumus di batang tubuh, misalnya Pasal 17 UU Pajak Penghasilan (usulan 0009).
 - [ ] Daftar jenis peraturan dalam Pasal 8 ayat (1) UU 12/2011 (usulan 0013).
-- [ ] Perubahan UU 12/2011 untuk Lampiran C (UU 15/2019 dan UU 13/2022) dan versi spesifikasi GFM (usulan 0015).
+- [x] Perubahan UU 12/2011 untuk Lampiran C (UU 15/2019, UU 13/2022, UU 1/2026) dan versi spesifikasi GFM 0.29-gfm (usulan 0015).
 - [ ] Contoh lampiran nyata yang memuat BAB dan subjudul bertingkat, sebagai dasar rumusan heading Lampiran (usulan 0008).
 
 ## Alat

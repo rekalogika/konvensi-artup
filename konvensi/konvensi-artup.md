@@ -92,7 +92,7 @@ Verifikasi menurut konvensi ini menyatakan kesesuaian isi berkas terhadap naskah
 | Aspek | Acuan | Sifat |
 |---|---|---|
 | Struktur naskah | Lampiran II UU 12/2011 beserta perubahannya | Normatif: konvensi mengikuti struktur yang ditetapkan di sana |
-| Isian metadata | Permenkumham 8/2019 dan format integrasi Portal JDIHN | Diselaraskan: nama isian dipetakan (Bagian 9.6) |
+| Isian metadata | Permenkumham 8/2019 dan format integrasi Portal JDIHN | Dipetakan secara informatif (Bagian 9.6); penyelarasan dengan Permenkumham 8/2019 belum dilakukan |
 | Skema pengenal | European Legislation Identifier (ELI) | Diilhami: pola, bukan implementasi resmi |
 | Model karya, ekspresi, manifestasi | FRBR sebagaimana dipakai Akoma Ntoso | Diilhami: pemisahan tingkat identitas |
 | Gaya dokumen ini | RFC 7322, BCP 14, ISO/IEC Directives Part 2 | Diilhami |
@@ -350,15 +350,15 @@ Tanda `-` adalah markup; label rincian adalah teks sumber.
 
 [S-12] Kalimat yang menyambung setelah daftar rincian, yang di sumber tidak lagi menjorok sebagai bagian rincian terakhir, WAJIB ditulis sebagai paragraf baru setelah daftar.
 
-Contoh:
+Contoh (Pasal 2 ayat (1) UU 27/2022):
 
 ```markdown
-(1) Undang-Undang ini berlaku untuk Setiap Orang yang melakukan perbuatan hukum:
+(1) Undang-Undang ini berlaku untuk Setiap Orang, Badan Publik, dan Organisasi Internasional yang melakukan perbuatan hukum sebagaimana diatur dalam Undang-Undang ini:
 
 - a. yang berada di wilayah hukum Negara Republik Indonesia; dan
 - b. di luar wilayah hukum Negara Republik Indonesia, yang memiliki akibat hukum:
   - 1\. di wilayah hukum Negara Republik Indonesia; dan/atau
-  - 2\. bagi Subjek Data Pribadi warga negara Indonesia.
+  - 2\. bagi Subjek Data Pribadi warga negara Indonesia di luar wilayah hukum Negara Republik Indonesia.
 ```
 
 ### 6.6. Penutup
@@ -377,14 +377,14 @@ Bagian utama Penjelasan memakai heading `##`, dan Pasal dalam penjelasan pasal d
 [S-16] Setiap label WAJIB ditulis sebagai entri tersendiri.
 Transkriptor TIDAK BOLEH menggabungkan beberapa label menjadi satu entri, misalnya "Huruf a, b, c — Cukup jelas.", kecuali penggabungan itu memang tertulis demikian di sumber.
 
-Contoh:
+Contoh (rekaan; tanda `…` menggantikan teks):
 
 ```markdown
 ##### Pasal 10
 
 Ayat (1)
 
-Yang dimaksud dengan "pemrofilan" adalah kegiatan mengidentifikasi seseorang …
+Yang dimaksud dengan "…" adalah …
 
 Ayat (2)
 
@@ -811,7 +811,7 @@ Status berkas transkripsi dicatat di register, bukan di berkas.
 ### 11.2. Alur
 
 1. Transkriptor membuat berkas dan menjalankan pemeriksaan otomatis (Bagian 12).
-2. Berkas diserahkan ke verifikator berstatus `verification in progress`.
+2. Berkas diserahkan ke verifikator dan statusnya menjadi `verification in progress`.
 3. Verifikator membandingkan badan teks dengan setiap naskah sumber yang hashnya tercantum di `sumber`, lalu menyelesaikan seluruh penanda keraguan.
 4. Apabila ditemukan ketidaksesuaian, status menjadi `revision required` dan alur kembali ke langkah 1.
 5. Setelah badan teks dibekukan, setiap verifikator menambahkan entri verifikasi yang memuat `hash_badan`.
@@ -1064,9 +1064,9 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 ### 16.1. Referensi Normatif
 
-- Undang-Undang Nomor 12 Tahun 2011 tentang Pembentukan Peraturan Perundang-undangan beserta perubahannya, khususnya Lampiran II tentang Teknik Penyusunan Peraturan Perundang-undangan.
+- Undang-Undang Nomor 12 Tahun 2011 tentang Pembentukan Peraturan Perundang-undangan beserta perubahannya, yaitu Undang-Undang Nomor 15 Tahun 2019, Undang-Undang Nomor 13 Tahun 2022, dan Undang-Undang Nomor 1 Tahun 2026 tentang Penyesuaian Pidana (sepanjang mengubah Pasal 15), khususnya Lampiran II tentang Teknik Penyusunan Peraturan Perundang-undangan.
 - CommonMark Spec, versi 0.31.2.
-- GitHub Flavored Markdown Spec, ekstensi tabel.
+- GitHub Flavored Markdown Spec, versi 0.29-gfm (2019-04-06), ekstensi tabel.
 - YAML Ain't Markup Language (YAML) versi 1.2.
 - The Unicode Standard, Unicode Standard Annex #15: Unicode Normalization Forms.
 - FIPS 180-4, Secure Hash Standard (SHA-256).
@@ -1084,10 +1084,9 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 - RFC 7322, RFC Style Guide.
 - BCP 14 (RFC 2119 dan RFC 8174), kata kunci untuk menyatakan tingkat persyaratan.
 - ISO/IEC Directives, Part 2: Principles and rules for the structure and drafting of ISO and IEC documents.
-- ISO 14721, Open Archival Information System (OAIS).
 
 ## 17. Lampiran D: Riwayat Perubahan
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di Lampiran C (usulan 0015). |
