@@ -140,7 +140,7 @@ Kode tersebut dipakai untuk merujuk ketentuan dalam laporan verifikasi dan hasil
 | Dasar hukum | Unsur pembukaan yang diawali kata "Mengingat". |
 | Diktum | Unsur pembukaan yang memuat "MEMUTUSKAN:" dan "Menetapkan:" beserta nama peraturan yang ditetapkan. |
 | Batang tubuh | Bagian naskah antara pembukaan dan penutup yang memuat Pasal-Pasal beserta pengelompokannya dalam Buku, BAB, Bagian, dan Paragraf. |
-| Penutup | Bagian naskah setelah batang tubuh yang memuat unsur [C-1] butir 9 sampai 11. |
+| Penutup | Bagian naskah setelah batang tubuh yang memuat unsur [C-1] butir 9 sampai 11 dan butir 14. |
 | Unsur struktur | Satuan susunan naskah: Buku, BAB, Bagian, Paragraf, Pasal, ayat, dan rincian. |
 | Rincian | Unsur bertanda huruf atau angka di dalam Pasal atau ayat, misalnya `a.`, `1.`, `a)`, `1)`. |
 | Label | Penanda unsur sebagaimana tertulis di naskah, misalnya "Pasal 5", "(2)", "a.", atau "Huruf a" dalam penjelasan pasal demi pasal. |
@@ -249,6 +249,7 @@ Indentasi empat spasi atau lebih di luar konteks tersebut dapat ditafsirkan seba
 Kedua daftar dalam bagian ini bersifat tertutup.
 
 [C-5] Unsur yang tidak tercantum dalam salah satu daftar WAJIB dilaporkan dan diputuskan dalam revisi konvensi.
+Selama unsur tersebut belum diputuskan, unsur itu SEBAIKNYA ditranskripsi, dan berkas yang memuatnya TIDAK BOLEH berstatus `verified`.
 
 ### 5.1. Unsur yang Ditranskripsi
 
@@ -262,11 +263,12 @@ Kedua daftar dalam bagian ini bersifat tertutup.
 6. Frasa persetujuan bersama, apabila ada.
 7. Diktum ("MEMUTUSKAN:", "Menetapkan:") beserta nama peraturan yang ditetapkan.
 8. Seluruh batang tubuh: label dan judul Buku, BAB, Bagian, Paragraf, serta Pasal, ayat, dan rincian, termasuk tabel, rumus, dan gambar di dalamnya (Bagian 6.10).
-9. Penutup: rumusan perintah pengundangan, tempat dan tanggal pengesahan atau penetapan, jabatan, keterangan "ttd" sebagaimana tertulis, dan nama pejabat.
+9. Penutup: rumusan perintah pengundangan, tempat dan tanggal pengesahan atau penetapan, jabatan, keterangan "ttd" sebagaimana tertulis, dan nama pejabat, atau kalimat pengesahan apabila Undang-Undang sah tanpa tanda tangan Presiden (Pasal 73 UU 12/2011).
 10. Tempat dan tanggal pengundangan, jabatan, keterangan "ttd", dan nama pejabat yang mengundangkan.
 11. Keterangan penempatan, misalnya "LEMBARAN NEGARA REPUBLIK INDONESIA TAHUN 2022 NOMOR 196".
 12. Penjelasan: judul, penjelasan umum, penjelasan pasal demi pasal, dan keterangan tambahan lembaran, misalnya "TAMBAHAN LEMBARAN NEGARA REPUBLIK INDONESIA NOMOR 6820".
 13. Lampiran: identitas lampiran, seluruh isi termasuk tabel, rumus, dan gambar (Bagian 6.9 dan Bagian 6.10), serta penutup lampiran beserta jabatan dan nama pejabat.
+14. Nomor register peraturan daerah, misalnya "NOREG PERATURAN DAERAH KABUPATEN …".
 
 ### 5.2. Unsur yang Dikecualikan
 
@@ -280,6 +282,8 @@ Kedua daftar dalam bagian ini bersifat tertutup.
 6. Cap, stempel, tanda tangan grafis, paraf, dan tanda air.
 7. Keterangan dan kode tanda tangan elektronik, kode QR, dan kode batang yang ditambahkan pada salinan.
 8. Anotasi atau coretan yang bukan bagian dari naskah yang diundangkan.
+9. Tulisan "SALINAN" yang menandai berkas sebagai salinan.
+10. Teks yang ditambahkan oleh penyedia salinan, misalnya alamat situs, keterangan unduhan, atau tanda penyedia.
 
 [C-3] Informasi yang berguna dari unsur yang dikecualikan, misalnya kode salinan pada kaki halaman, BOLEH dicatat dalam metadata sumber (Bagian 9.3).
 
@@ -568,7 +572,7 @@ Nama isian berbentuk `a[].b` berarti isian `b` pada setiap butir daftar `a`.
 | `karya.teu_badan` | BOLEH | string | Tajuk Entri Utama badan menurut pedoman JDIHN |
 | `karya.tempat_penetapan` | WAJIB | string | Tempat pengesahan atau penetapan |
 | `karya.tanggal_penetapan` | WAJIB | tanggal | Tanggal pengesahan atau penetapan |
-| `karya.penandatangan` | WAJIB | objek | `jabatan` dan `nama` pejabat yang mengesahkan atau menetapkan |
+| `karya.penandatangan` | WAJIB bila ada | objek | `jabatan` dan `nama` pejabat yang mengesahkan atau menetapkan; tidak ada bila Undang-Undang sah tanpa tanda tangan Presiden |
 | `karya.tanggal_pengundangan` | WAJIB bila ada | tanggal | Tanggal pengundangan |
 | `karya.pengundang` | WAJIB bila ada | objek | `jabatan` dan `nama` pejabat yang mengundangkan |
 | `karya.penempatan` | WAJIB bila ada | objek | `media` (misalnya `Lembaran Negara Republik Indonesia`), `tahun`, `nomor` |
@@ -1089,4 +1093,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di Lampiran C (usulan 0015). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di Lampiran C (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). |

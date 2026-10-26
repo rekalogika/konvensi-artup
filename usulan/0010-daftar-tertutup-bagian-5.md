@@ -5,7 +5,7 @@
 | Nomor | 0010 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | [C-1], [C-2], Bagian 5 (paragraf pembuka), `karya.penandatangan` |
 | Jenis perubahan | penambahan |
@@ -72,3 +72,22 @@ Berkas Perda yang tidak memuat Noreg, atau yang memuat tulisan "SALINAN", menjad
 MINOR.
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima**, dengan alternatif untuk butir 5.
+
+Verifikasi fakta:
+
+- Kalimat pengesahan: menurut [teks UU 12/2011 di Wikisource](https://id.wikisource.org/wiki/Undang-Undang_Republik_Indonesia_Nomor_12_Tahun_2011), Pasal 73 menetapkan bahwa RUU yang tidak ditandatangani Presiden dalam 30 hari sah menjadi Undang-Undang, dengan kalimat pengesahan "Undang-Undang ini dinyatakan sah berdasarkan ketentuan Pasal 20 ayat (5) Undang-Undang Dasar Negara Republik Indonesia Tahun 1945" yang dibubuhkan pada halaman terakhir.
+  Rumusan konvensi hanya merujuk "Pasal 73 UU 12/2011" tanpa nomor ayat, karena perubahan pasal tersebut oleh UU 13/2022 belum diperiksa.
+  Contoh naskah (UU 2/2018) tidak diperiksa dan tidak diperlukan oleh rumusan.
+- Noreg: [Perda Kabupaten Pohuwato Nomor 2 Tahun 2022](https://pasal.id/peraturan/perda/perda-kab-pohuwato-no-2-tahun-2022) memuat baris "NOREG PERATURAN DAERAH KABUPATEN POHUWATO PROVINSI GORONTALO …" tepat setelah baris Lembaran Daerah; dasar penempatannya adalah Lampiran III Permendagri 80/2015 sebagaimana diubah Permendagri 120/2018 ([JDIH BPK](https://peraturan.bpk.go.id/Details/164459/permendagri-no-80-tahun-2015)).
+
+Penerapan:
+
+- [C-1] butir 9 ditambah kalimat pengesahan; butir 14 (Noreg) ditambahkan di akhir daftar agar nomor butir yang ada tidak bergeser; definisi "Penutup" di Bagian 2.2 ikut menyebut butir 14.
+- `karya.penandatangan` menjadi "WAJIB bila ada".
+- [C-2] butir 9 dan 10 ditambahkan sesuai rumusan.
+- Butir 5: dipilih alternatif tanpa penanda keraguan, agar arti penanda keraguan tetap "teks belum pasti".
+  [C-5] ditambah kalimat: unsur yang belum diputuskan SEBAIKNYA ditranskripsi, dan berkasnya TIDAK BOLEH berstatus `verified`.
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
