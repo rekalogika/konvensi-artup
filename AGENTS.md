@@ -45,7 +45,7 @@ Jika menemukan berkas transkripsi di repositori ini, misalnya `uu-2022-27.md`, j
    Kode baru memakai nomor terbesar dalam kelompoknya ditambah satu.
 4. **Setiap perubahan normatif wajib tercatat di riwayat perubahan** (Lampiran D dokumen konvensi) dan mengikuti aturan versi Bagian 13 (semver, [R-1] sampai [R-3]).
 5. **Dokumen konvensi wajib memenuhi aturan format Bagian 4.1:** UTF-8 tanpa BOM, LF, NFC, tanpa tab, tanpa spasi di akhir baris, diakhiri tepat satu LF, tanpa baris kosong berganda.
-   Larangan konstruksi Markdown pada Bagian 4.2 dan escape pada Bagian 4.3 ditujukan untuk berkas transkripsi; dokumen konvensi memakai blok kode, huruf tebal, dan kode sebaris (lihat usulan 0001 tentang rumusan Bagian 1.5).
+   Larangan konstruksi Markdown pada Bagian 4.2 dan escape pada Bagian 4.3 ditujukan untuk berkas transkripsi; dokumen konvensi memakai blok kode, huruf tebal, dan kode sebaris (Bagian 1.5).
 6. **Jangan mengarang fakta hukum.**
    Ini mencakup nomor dan judul peraturan, isi pasal, tanggal, nama pejabat, nama isian JDIHN, unsur metadata Permenkumham 8/2019, dan nama elemen Akoma Ntoso.
    Jika belum terverifikasi terhadap sumber primer, tandai dengan jelas di teks usulan (misalnya "belum diverifikasi") dan catat di `TODO.md`.
