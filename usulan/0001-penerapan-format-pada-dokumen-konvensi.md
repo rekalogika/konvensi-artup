@@ -5,7 +5,7 @@
 | Nomor | 0001 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | Bagian 1.5, [F-9] sampai [F-14] |
 | Jenis perubahan | redaksional |
@@ -54,3 +54,6 @@ PATCH: tidak ada berkas transkripsi yang berubah status kesesuaiannya.
 - Menghapus Bagian 1.5: tidak dipilih karena aturan format byte tetap berguna untuk hash rilis ([R-3]).
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima** dengan rumusan baru apa adanya.
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi, karena 0.1.0 belum dirilis.

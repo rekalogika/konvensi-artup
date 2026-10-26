@@ -100,8 +100,8 @@ Verifikasi menurut konvensi ini menyatakan kesesuaian isi berkas terhadap naskah
 
 ### 1.5. Penerapan pada Dokumen Ini
 
-Dokumen konvensi ini sendiri ditulis dalam Markdown dan tunduk pada aturan format berkas di Bagian 4.
-Aturan pada Bagian 5 sampai Bagian 8 berlaku untuk berkas transkripsi, bukan untuk dokumen ini.
+Dokumen konvensi ini sendiri ditulis dalam Markdown dan tunduk pada aturan pengodean dan baris di Bagian 4.1.
+Aturan lain dalam konvensi ini, termasuk Bagian 4.2 dan Bagian 4.3, berlaku untuk berkas transkripsi, bukan untuk dokumen ini.
 
 ## 2. Kata Kunci Normatif dan Istilah
 
@@ -1013,4 +1013,4 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). |
