@@ -178,7 +178,8 @@ Bentuk lain (HTML, PDF, XML) BOLEH dihasilkan darinya, tetapi yang diverifikasi 
 ### 4.1. Pengodean dan Baris
 
 - [F-1] Berkas WAJIB berupa teks UTF-8 tanpa BOM.
-- [F-2] Akhir baris WAJIB berupa LF (U+000A). CR (U+000D) TIDAK BOLEH ada.
+- [F-2] Akhir baris WAJIB berupa LF (U+000A).
+  CR (U+000D) TIDAK BOLEH ada.
 - [F-3] Seluruh teks WAJIB dalam bentuk normalisasi Unicode NFC.
 - [F-4] Karakter tab TIDAK BOLEH ada.
 - [F-5] Baris TIDAK BOLEH diakhiri spasi.
