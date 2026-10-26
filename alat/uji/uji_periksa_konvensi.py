@@ -4,6 +4,10 @@ Contoh dibangun di dalam kode, bukan disimpan sebagai berkas, agar penyunting
 teks tidak membetulkan pelanggaran yang sengaja dibuat (spasi di akhir baris, CR, tab).
 
 Jalankan: .venv/bin/python -m unittest discover -s alat/uji -p 'uji_*.py'
+
+Penulis: Claude (Claude Opus 5.5, model AI buatan Anthropic), atas permintaan
+dan di bawah arahan Ananda Putra, 2026-10-26. Ditulis baru untuk proyek ini;
+tidak ada kode yang disalin dari sumber lain.
 """
 
 import sys

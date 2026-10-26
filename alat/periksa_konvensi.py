@@ -12,6 +12,15 @@ Memeriksa dokumen konvensi (bukan berkas transkripsi) terhadap:
 
 Keluaran per baris berformat ``berkas:baris: [kode] pesan``.
 Kode keluar: 0 bila bersih, 1 bila ada temuan, 2 bila berkas tidak dapat dibaca.
+
+Penulis: Claude (Claude Opus 5.5, model AI buatan Anthropic), atas permintaan
+dan di bawah arahan Ananda Putra, 2026-10-26.
+
+Sumber: ditulis baru untuk proyek ini; tidak ada kode yang disalin dari skrip
+atau proyek lain. Satu-satunya pustaka luar adalah PyYAML (pyyaml.org), dipakai
+sebagai dependensi biasa. Aturan yang diperiksa diambil dari dokumen Konvensi
+Artup sendiri; pengenalan heading ATX dan blok kode berpagar mengikuti
+CommonMark Spec 0.31.2 (spec.commonmark.org), Bagian 4.2 dan 4.5.
 """
 
 from __future__ import annotations
