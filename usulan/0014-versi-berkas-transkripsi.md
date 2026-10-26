@@ -5,7 +5,7 @@
 | Nomor | 0014 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi pertama |
 | Tanggal | 2026-10-26 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | [V-5], [V-7], Bagian 9.5, [I-5] |
 | Jenis perubahan | penambahan |
@@ -45,3 +45,8 @@ Berkas yang sedang dalam verifikasi mengikuti urutan baru.
 MINOR.
 
 ## Keputusan
+
+2026-10-26, diputuskan oleh Claude atas kuasa Ananda Putra: **diterima** dengan rumusan baru apa adanya.
+Contoh frontmatter Bagian 9.5, yang memuat `versi: 1.0.0` bersama entri verifikasi, sudah sesuai dengan urutan baru dan tidak diubah.
+
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
