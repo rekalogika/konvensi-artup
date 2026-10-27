@@ -15,9 +15,9 @@ Tujuannya adalah berkas transkripsi yang:
 
 | Versi | Status | Berkas |
 |---|---|---|
-| 0.1.0 | Draf | [konvensi/konvensi-artup.md](konvensi/konvensi-artup.md) |
+| 0.1.0 | Final | [rilis/konvensi-artup-0.1.0.md](rilis/konvensi-artup-0.1.0.md) |
 
-Belum ada versi final.
+Dokumen kerja berikutnya disunting di [konvensi/konvensi-artup.md](konvensi/konvensi-artup.md).
 Daftar rilis dan nilai hash setiap versi final dicatat di [rilis/RILIS.md](rilis/RILIS.md).
 
 ## Isi repositori
