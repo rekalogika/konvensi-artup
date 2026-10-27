@@ -83,6 +83,52 @@ def kode(temuan: list[pk.Temuan]) -> list[str]:
     return [t.kode for t in temuan]
 
 
+class UjiSkema(unittest.TestCase):
+    """Keselarasan tabel isian Bagian 9.3 dan 9.4 dengan JSON Schema di lampiran, diuji pada dokumen kerja."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.dok = pk.DOKUMEN_KERJA.read_text(encoding="utf-8")
+
+    def temuan_skema(self, teks: str) -> list[str]:
+        return [t.pesan for t in periksa(teks) if t.kode == "skema"]
+
+    def ubah(self, lama: str, baru: str) -> list[str]:
+        self.assertEqual(self.dok.count(lama), 1, lama)
+        return self.temuan_skema(self.dok.replace(lama, baru))
+
+    def test_dokumen_kerja_selaras(self):
+        self.assertEqual(self.temuan_skema(self.dok), [])
+
+    def test_sifat_wajib_berbeda(self):
+        t = self.ubah("| `karya.singkatan` | BOLEH |", "| `karya.singkatan` | WAJIB |")
+        self.assertEqual(len(t), 1)
+        self.assertIn("sifat wajib isian `karya.singkatan`", t[0])
+        t = self.ubah("| `hash_badan` | WAJIB |", "| `hash_badan` | BOLEH |")
+        self.assertIn("`verifikasi[].hash_badan`", t[0])
+
+    def test_tipe_berbeda(self):
+        t = self.ubah("| `karya.tahun` | WAJIB | bilangan |", "| `karya.tahun` | WAJIB | string |")
+        self.assertEqual(t, ["tipe isian `karya.tahun` (string) berbeda dengan JSON Schema"])
+        t = self.ubah("| `sumber[].diakses` | WAJIB | tanggal |", "| `sumber[].diakses` | WAJIB | string |")
+        self.assertEqual(t, ["tipe isian `sumber[].diakses` (string) berbeda dengan JSON Schema"])
+        t = self.ubah("| `transkripsi.metode` | WAJIB | string |", "| `transkripsi.metode` | WAJIB | tanggal |")
+        self.assertEqual(len(t), 1)
+
+    def test_isian_hanya_di_salah_satu(self):
+        t = self.ubah("| `karya.pemrakarsa` | BOLEH | string | Instansi pemrakarsa |\n", "")
+        self.assertEqual(t, ["isian `karya.pemrakarsa` ada di JSON Schema tetapi tidak ada di tabel"])
+        t = self.ubah("| `karya.pemrakarsa` | BOLEH | string | Instansi pemrakarsa |\n",
+                      "| `karya.pemrakarsa` | BOLEH | string | Instansi pemrakarsa |\n| `karya.baru` | BOLEH | string | x |\n")
+        self.assertEqual(t, ["isian `karya.baru` tidak ada di JSON Schema"])
+
+    def test_skema_rusak(self):
+        t = self.ubah('  "$schema": "https://json-schema.org/draft/2020-12/schema",', '  "$schema": "https://json-schema.org/draft/2020-12/schema"')
+        self.assertTrue(t and t[0].startswith("JSON tidak valid"))
+        t = self.ubah('"pattern": "^[0-9a-f]{64}$"', '"pattern": 64')
+        self.assertTrue(t and t[0].startswith("bukan JSON Schema Draft 2020-12 yang valid"))
+
+
 class UjiPemeriksa(unittest.TestCase):
     def test_contoh_sesuai_bersih(self):
         self.assertEqual(periksa(CONTOH_SESUAI), [])

@@ -28,7 +28,7 @@ Rilis berlangsung dalam dua tahap: **pull request rilis** (langkah 1–9), lalu 
    - tabel identitas: Versi, Status `Final`, Tanggal, dan rujukan singkat `transkripsi-peraturan/X.Y`;
    - "Status Dokumen Ini": ganti menjadi
      "Dokumen ini berstatus **final**." dan "Isinya tidak akan diubah lagi; setiap perubahan diterbitkan sebagai versi baru (lihat Bagian 13)."
-   - Lampiran D: pastikan baris versi `X.Y.Z` lengkap dan bertanggal rilis.
+   - Lampiran Riwayat Perubahan: pastikan baris versi `X.Y.Z` lengkap dan bertanggal rilis.
 4. **Periksa ulang** dengan pemeriksa sampai bersih.
 5. **Bekukan salinan** dengan menyalin byte demi byte, tanpa penyuntingan:
    ```sh

@@ -58,8 +58,9 @@ Versi final tidak akan diubah lagi; setiap perubahan setelahnya diterbitkan seba
 13. Pengelolaan Versi Konvensi
 14. Lampiran A: Contoh Berkas Minimal
 15. Lampiran B: Pemetaan ke Akoma Ntoso (Informatif)
-16. Lampiran C: Referensi
-17. Lampiran D: Riwayat Perubahan
+16. Lampiran C: JSON Schema Frontmatter (Normatif)
+17. Lampiran D: Referensi
+18. Lampiran E: Riwayat Perubahan
 
 ## 1. Pendahuluan
 
@@ -528,6 +529,10 @@ Nomor peraturan WAJIB ditulis sebagai string.
 
 [M-5] Baris yang hanya berisi `---` TIDAK BOLEH muncul di dalam frontmatter.
 
+[M-9] Frontmatter, setelah diurai menurut skema inti (*core schema*) YAML 1.2, WAJIB valid terhadap JSON Schema di Lampiran C.
+Ketentuan Bagian 9 yang tidak dapat dinyatakan dalam skema tetap berlaku di samping skema tersebut (Bagian 16.1).
+Apabila tabel Bagian 9.3 atau Bagian 9.4 berbeda dengan Lampiran C, Lampiran C yang berlaku, dan perbedaan itu WAJIB diperbaiki dalam versi konvensi berikutnya.
+
 ### 9.2. Kelompok Isian
 
 Frontmatter disusun menurut tingkat identitas FRBR:
@@ -621,6 +626,8 @@ Nama isian berbentuk `a[].b` berarti isian `b` pada setiap butir daftar `a`.
 | `tanda_tangan` | BOLEH | Rujukan berkas tanda tangan digital, apabila sudah diterapkan |
 
 ### 9.5. Contoh Frontmatter
+
+Contoh ini memakai tanda `…` sebagai pengganti beberapa nilai, sehingga belum valid terhadap skema di Lampiran C.
 
 ```yaml
 ---
@@ -912,7 +919,7 @@ Apabila teks yang menimbulkan temuan sesuai dengan naskah sumber, verifikator WA
 | L-02 | Tidak ada CR | galat | F-2 |
 | L-03 | Teks dalam bentuk NFC | galat | F-3 |
 | L-04 | Tidak ada tab, spasi di akhir baris, atau baris kosong berganda; diakhiri satu LF | galat | F-4 s.d. F-7 |
-| L-05 | Frontmatter YAML valid dan memuat seluruh isian WAJIB dengan tipe yang benar | galat | M-1 s.d. M-7 |
+| L-05 | Frontmatter YAML valid dan memuat seluruh isian WAJIB dengan tipe yang benar | galat | M-1 s.d. M-7, M-9 |
 | L-06 | Versi konvensi tercantum dalam daftar rilis konvensi (verified) | galat | R-1, R-6 |
 | L-07 | Hanya konstruksi Markdown yang diizinkan | galat | F-9, F-10 |
 | L-08 | Penanda daftar bernomor di awal teks di-escape, dan tidak ada escape selain yang diwajibkan | galat | F-11 s.d. F-13, F-15 |
@@ -929,6 +936,7 @@ Apabila teks yang menimbulkan temuan sesuai dengan naskah sumber, verifikator WA
 | L-19 | `ekspresi.id` sesuai dengan `karya.id`, `ekspresi.bahasa`, dan `ekspresi.tanggal` | galat | I-4 |
 | L-20 | Penanda keraguan tidak bersarang dan tidak melintasi batas paragraf | galat | K-4 |
 | L-21 | Nama setiap berkas pendamping diawali nama berkas transkripsinya | galat | I-7 |
+| L-22 | Gabungan `sumber[].komponen` sama dengan `ekspresi.komponen` | galat | M-8 |
 
 ## 13. Pengelolaan Versi Konvensi
 
@@ -1076,9 +1084,396 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 | Ekspresi | `uu/2022/27/ind@2022-10-17` | `/akn/id/act/uu/2022-10-17/27/ind@2022-10-17` |
 | Manifestasi | `uu-2022-27.md` versi 1.0.0 | `/akn/id/act/uu/2022-10-17/27/ind@2022-10-17.akn` |
 
-## 16. Lampiran C: Referensi
+## 16. Lampiran C: JSON Schema Frontmatter (Normatif)
 
-### 16.1. Referensi Normatif
+Lampiran ini normatif ([M-9]).
+Skema ditulis menurut JSON Schema Draft 2020-12.
+
+### 16.1. Cara Pemakaian
+
+Frontmatter diurai menurut skema inti (*core schema*) YAML 1.2, lalu hasilnya divalidasi terhadap skema pada Bagian 16.2.
+Menurut skema inti tersebut, tanggal tanpa tanda kutip dibaca sebagai string; pengurai YAML 1.1 yang membacanya sebagai objek tanggal perlu mengubahnya menjadi string `YYYY-MM-DD` sebelum validasi.
+
+Skema tidak dapat menyatakan seluruh ketentuan Bagian 9 dan Bagian 10.
+Ketentuan berikut tetap berlaku dan diperiksa di luar skema: isian bertanda "WAJIB bila ada" dan cara penulisan tanda kutip ([M-6]), gabungan komponen ([M-8]), serta kesesuaian pengenal ekspresi dengan pengenal karya ([I-4]).
+
+### 16.2. Skema
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Frontmatter berkas transkripsi (transkripsi-peraturan/0.1)",
+  "type": "object",
+  "required": [
+    "konvensi",
+    "karya",
+    "ekspresi",
+    "sumber",
+    "transkripsi",
+    "berkas_pendamping",
+    "verifikasi"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "konvensi": {
+      "type": "string",
+      "pattern": "^transkripsi-peraturan/[0-9]+\\.[0-9]+$"
+    },
+    "karya": {
+      "type": "object",
+      "required": [
+        "id",
+        "jenis",
+        "singkatan_jenis",
+        "nomor",
+        "tahun",
+        "judul",
+        "judul_lengkap",
+        "pembentuk",
+        "tempat_penetapan",
+        "tanggal_penetapan"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id_karya"
+        },
+        "jenis": {
+          "$ref": "#/$defs/teks"
+        },
+        "singkatan_jenis": {
+          "$ref": "#/$defs/teks"
+        },
+        "nomor": {
+          "$ref": "#/$defs/teks"
+        },
+        "tahun": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "judul": {
+          "$ref": "#/$defs/teks"
+        },
+        "judul_lengkap": {
+          "$ref": "#/$defs/teks"
+        },
+        "singkatan": {
+          "$ref": "#/$defs/teks"
+        },
+        "pembentuk": {
+          "$ref": "#/$defs/teks"
+        },
+        "pemrakarsa": {
+          "$ref": "#/$defs/teks"
+        },
+        "teu_badan": {
+          "$ref": "#/$defs/teks"
+        },
+        "tempat_penetapan": {
+          "$ref": "#/$defs/teks"
+        },
+        "tanggal_penetapan": {
+          "$ref": "#/$defs/tanggal"
+        },
+        "penandatangan": {
+          "$ref": "#/$defs/pejabat"
+        },
+        "tanggal_pengundangan": {
+          "$ref": "#/$defs/tanggal"
+        },
+        "pengundang": {
+          "$ref": "#/$defs/pejabat"
+        },
+        "penempatan": {
+          "type": "object",
+          "required": [
+            "media",
+            "tahun",
+            "nomor"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "media": {
+              "$ref": "#/$defs/teks"
+            },
+            "tahun": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "nomor": {
+              "$ref": "#/$defs/teks"
+            }
+          }
+        },
+        "tambahan_penempatan": {
+          "type": "object",
+          "required": [
+            "media",
+            "nomor"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "media": {
+              "$ref": "#/$defs/teks"
+            },
+            "nomor": {
+              "$ref": "#/$defs/teks"
+            }
+          }
+        },
+        "mulai_berlaku": {
+          "$ref": "#/$defs/teks"
+        },
+        "mengubah": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id_karya"
+          }
+        },
+        "mencabut": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id_karya"
+          }
+        },
+        "bidang_hukum": {
+          "$ref": "#/$defs/teks"
+        },
+        "subjek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/teks"
+          }
+        }
+      }
+    },
+    "ekspresi": {
+      "type": "object",
+      "required": [
+        "id",
+        "jenis_teks",
+        "bahasa",
+        "tanggal",
+        "komponen"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(uud/[0-9]{4}|(tap-mpr|uu|perppu|pp|perpres)/[0-9]{4}/[a-z0-9]+(-[a-z0-9]+)*|(permen|perlem|perda-prov|perda-kabkota|perdprd-prov|perdprd-kabkota|pergub|perbup|perwali|perdes|perkades)/[a-z0-9]+(-[a-z0-9]+)*/[0-9]{4}/[a-z0-9]+(-[a-z0-9]+)*)/[a-z]{3}@[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+        },
+        "jenis_teks": {
+          "type": "string",
+          "const": "asli"
+        },
+        "bahasa": {
+          "type": "string",
+          "pattern": "^[a-z]{3}$"
+        },
+        "tanggal": {
+          "$ref": "#/$defs/tanggal"
+        },
+        "komponen": {
+          "$ref": "#/$defs/komponen"
+        }
+      }
+    },
+    "sumber": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "jenis",
+          "diperoleh_dari",
+          "url",
+          "berkas",
+          "sha256",
+          "diakses",
+          "komponen"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "jenis": {
+            "$ref": "#/$defs/teks"
+          },
+          "diperoleh_dari": {
+            "$ref": "#/$defs/teks"
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^https?://\\S+$"
+          },
+          "berkas": {
+            "$ref": "#/$defs/teks"
+          },
+          "sha256": {
+            "$ref": "#/$defs/sha256"
+          },
+          "diakses": {
+            "$ref": "#/$defs/tanggal"
+          },
+          "kode_salinan": {
+            "$ref": "#/$defs/teks"
+          },
+          "komponen": {
+            "$ref": "#/$defs/komponen"
+          }
+        }
+      }
+    },
+    "transkripsi": {
+      "type": "object",
+      "required": [
+        "versi",
+        "metode",
+        "transkriptor",
+        "tanggal"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "versi": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "metode": {
+          "$ref": "#/$defs/teks"
+        },
+        "transkriptor": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/teks"
+          }
+        },
+        "tanggal": {
+          "$ref": "#/$defs/tanggal"
+        }
+      }
+    },
+    "berkas_pendamping": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "berkas",
+          "sha256"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "berkas": {
+            "$ref": "#/$defs/teks"
+          },
+          "sha256": {
+            "$ref": "#/$defs/sha256"
+          }
+        }
+      }
+    },
+    "verifikasi": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "nama",
+          "afiliasi",
+          "peran",
+          "tanggal",
+          "cakupan",
+          "hash_badan"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "nama": {
+            "$ref": "#/$defs/teks"
+          },
+          "afiliasi": {
+            "$ref": "#/$defs/teks"
+          },
+          "peran": {
+            "$ref": "#/$defs/teks"
+          },
+          "tanggal": {
+            "$ref": "#/$defs/tanggal"
+          },
+          "cakupan": {
+            "oneOf": [
+              {
+                "type": "string",
+                "const": "seluruh"
+              },
+              {
+                "$ref": "#/$defs/komponen"
+              }
+            ]
+          },
+          "hash_badan": {
+            "$ref": "#/$defs/sha256"
+          },
+          "catatan": {
+            "$ref": "#/$defs/teks"
+          },
+          "tanda_tangan": {
+            "$ref": "#/$defs/teks"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "teks": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tanggal": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "id_karya": {
+      "type": "string",
+      "pattern": "^(uud/[0-9]{4}|(tap-mpr|uu|perppu|pp|perpres)/[0-9]{4}/[a-z0-9]+(-[a-z0-9]+)*|(permen|perlem|perda-prov|perda-kabkota|perdprd-prov|perdprd-kabkota|pergub|perbup|perwali|perdes|perkades)/[a-z0-9]+(-[a-z0-9]+)*/[0-9]{4}/[a-z0-9]+(-[a-z0-9]+)*)$"
+    },
+    "pejabat": {
+      "type": "object",
+      "required": [
+        "jabatan",
+        "nama"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "jabatan": {
+          "$ref": "#/$defs/teks"
+        },
+        "nama": {
+          "$ref": "#/$defs/teks"
+        }
+      }
+    },
+    "komponen": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "batang-tubuh",
+          "penjelasan",
+          "lampiran"
+        ]
+      }
+    }
+  }
+}
+```
+
+## 17. Lampiran D: Referensi
+
+### 17.1. Referensi Normatif
 
 - Undang-Undang Nomor 12 Tahun 2011 tentang Pembentukan Peraturan Perundang-undangan beserta perubahannya, yaitu Undang-Undang Nomor 15 Tahun 2019, Undang-Undang Nomor 13 Tahun 2022, dan Undang-Undang Nomor 1 Tahun 2026 tentang Penyesuaian Pidana (sepanjang mengubah Pasal 15), khususnya Lampiran II tentang Teknik Penyusunan Peraturan Perundang-undangan.
 - CommonMark Spec, versi 0.31.2.
@@ -1089,7 +1484,7 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 - ISO 8601, format tanggal dan waktu.
 - ISO 639-3, kode bahasa.
 
-### 16.2. Referensi Informatif
+### 17.2. Referensi Informatif
 
 - Peraturan Presiden Nomor 33 Tahun 2012 tentang Jaringan Dokumentasi dan Informasi Hukum Nasional.
 - Peraturan Menteri Hukum dan Hak Asasi Manusia Nomor 8 Tahun 2019 tentang Standar Pengelolaan Dokumen dan Informasi Hukum.
@@ -1101,8 +1496,8 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 - BCP 14 (RFC 2119 dan RFC 8174), kata kunci untuk menyatakan tingkat persyaratan.
 - ISO/IEC Directives, Part 2: Principles and rules for the structure and drafting of ISO and IEC documents.
 
-## 17. Lampiran D: Riwayat Perubahan
+## 18. Lampiran E: Riwayat Perubahan
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di Lampiran C (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di lampiran Referensi (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). Menambah JSON Schema frontmatter sebagai Lampiran C yang normatif, [M-9], dan L-22; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran D dan E (usulan 0016). |
