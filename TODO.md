@@ -22,8 +22,8 @@ Butir yang menyangkut fakta hukum tidak boleh diisi dari ingatan; cocokkan denga
 
 - [x] Cocokkan contoh Bagian 6.5 dan 6.7 serta data UU 27/2022 (usulan 0015); contoh 6.7 diganti contoh rekaan karena Penjelasan Pasal 10 belum dapat diverifikasi.
 - [x] Nomor register Perda (Noreg): dasar hukum dan letaknya dalam naskah (usulan 0010).
-- [x] Kalimat pengesahan UU yang tidak ditandatangani Presiden: Pasal 73 UU 12/2011 (usulan 0010).
-- [ ] Periksa apakah UU 13/2022 mengubah Pasal 73 UU 12/2011, dan cari contoh naskah UU yang sah tanpa tanda tangan Presiden untuk Lampiran A atau contoh uji.
+- [x] Kalimat pengesahan UU yang tidak ditandatangani Presiden: Pasal 73 ayat (4) UU 12/2011 sebagaimana diubah dengan UU 13/2022 Pasal I angka 9 (usulan 0010, 0021).
+- [ ] Cari contoh naskah UU yang sah tanpa tanda tangan Presiden untuk Lampiran A atau contoh uji.
 - [ ] Contoh peraturan yang Penjelasan atau Lampirannya diterbitkan sebagai berkas terpisah (usulan 0012).
 - [ ] Contoh tabel dan rumus di batang tubuh, misalnya Pasal 17 UU Pajak Penghasilan (usulan 0009).
 - [x] Daftar jenis peraturan dalam Pasal 8 ayat (1) UU 12/2011 (usulan 0013).
