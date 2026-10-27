@@ -59,8 +59,9 @@ Versi final tidak akan diubah lagi; setiap perubahan setelahnya diterbitkan seba
 14. Lampiran A: Contoh Berkas Minimal
 15. Lampiran B: Pemetaan ke Akoma Ntoso (Informatif)
 16. Lampiran C: JSON Schema Frontmatter (Normatif)
-17. Lampiran D: Referensi
-18. Lampiran E: Riwayat Perubahan
+17. Lampiran D: Contoh Uji (Normatif)
+18. Lampiran E: Referensi
+19. Lampiran F: Riwayat Perubahan
 
 ## 1. Pendahuluan
 
@@ -913,6 +914,9 @@ Pemeriksaan bertanda "(verified)" hanya berlaku sejak berkas akan berstatus `ver
 [V-11] Setiap temuan pemeriksaan bertingkat `peringatan` WAJIB diperiksa verifikator terhadap naskah sumber.
 Apabila teks yang menimbulkan temuan sesuai dengan naskah sumber, verifikator WAJIB mencatatnya dalam isian `catatan` pada entri verifikasi.
 
+[V-14] Alat pemeriksa yang dipakai untuk [V-10] WAJIB tidak menimbulkan temuan pada berkas dasar di Lampiran D dan pada setiap kasus uji berhasil `sesuai`.
+Untuk setiap kasus uji lainnya, alat tersebut WAJIB menimbulkan sekurang-kurangnya satu temuan berkode yang tercantum pada isian `pemeriksaan` kasus itu.
+
 | Kode | Pemeriksaan | Tingkat | Ketentuan |
 |---|---|---|---|
 | L-01 | UTF-8 valid tanpa BOM | galat | F-1 |
@@ -937,6 +941,7 @@ Apabila teks yang menimbulkan temuan sesuai dengan naskah sumber, verifikator WA
 | L-20 | Penanda keraguan tidak bersarang dan tidak melintasi batas paragraf | galat | K-4 |
 | L-21 | Nama setiap berkas pendamping diawali nama berkas transkripsinya | galat | I-7 |
 | L-22 | Gabungan `sumber[].komponen` sama dengan `ekspresi.komponen` | galat | M-8 |
+| L-23 | Setiap paragraf dan butir daftar ditulis pada satu baris | galat | N-3, S-13 |
 
 ## 13. Pengelolaan Versi Konvensi
 
@@ -1471,9 +1476,421 @@ Ketentuan berikut tetap berlaku dan diperiksa di luar skema: isian bertanda "WAJ
 }
 ```
 
-## 17. Lampiran D: Referensi
+## 17. Lampiran D: Contoh Uji (Normatif)
 
-### 17.1. Referensi Normatif
+Lampiran ini normatif ([V-14]).
+Lampiran ini memuat satu berkas dasar yang sesuai dengan konvensi (Bagian 17.1) dan daftar kasus uji (Bagian 17.2).
+Isinya rekaan: peraturan, nama pejabat, tanggal, URL, dan nilai hash di dalamnya tidak merujuk naskah yang sebenarnya.
+
+### 17.1. Berkas Dasar
+
+Berkas dasar bernama `uu-2099-99.md`.
+Isinya adalah baris-baris di antara baris pembuka dan penutup blok kode berikut, masing-masing diakhiri LF.
+
+```markdown
+---
+konvensi: transkripsi-peraturan/0.1
+karya:
+  id: uu/2099/99
+  jenis: Undang-Undang
+  singkatan_jenis: UU
+  nomor: "99"
+  tahun: 2099
+  judul: Contoh Uji Konvensi Artup
+  judul_lengkap: Undang-Undang Republik Indonesia Nomor 99 Tahun 2099 tentang Contoh Uji Konvensi Artup
+  pembentuk: Presiden Republik Indonesia dengan persetujuan bersama Dewan Perwakilan Rakyat Republik Indonesia
+  tempat_penetapan: Jakarta
+  tanggal_penetapan: 2099-01-02
+  penandatangan:
+    jabatan: Presiden Republik Indonesia
+    nama: Nama Presiden
+  tanggal_pengundangan: 2099-01-03
+  pengundang:
+    jabatan: Menteri Sekretaris Negara Republik Indonesia
+    nama: Nama Menteri
+  penempatan:
+    media: Lembaran Negara Republik Indonesia
+    tahun: 2099
+    nomor: "1"
+  tambahan_penempatan:
+    media: Tambahan Lembaran Negara Republik Indonesia
+    nomor: "9999"
+  mulai_berlaku: pada tanggal diundangkan
+ekspresi:
+  id: uu/2099/99/ind@2099-01-03
+  jenis_teks: asli
+  bahasa: ind
+  tanggal: 2099-01-03
+  komponen: [batang-tubuh, penjelasan]
+sumber:
+  - jenis: Naskah rekaan untuk contoh uji
+    diperoleh_dari: Konvensi Artup
+    url: "https://example.org/uu-2099-99.pdf"
+    berkas: uu-2099-99.pdf
+    sha256: "0000000000000000000000000000000000000000000000000000000000000000"
+    diakses: 2099-01-04
+    komponen: [batang-tubuh, penjelasan]
+transkripsi:
+  versi: 0.1.0
+  metode: ketik ganda
+  transkriptor: [Transkriptor Contoh]
+  tanggal: 2099-01-05
+berkas_pendamping: []
+verifikasi: []
+---
+
+# UNDANG-UNDANG REPUBLIK INDONESIA NOMOR 99 TAHUN 2099 TENTANG CONTOH UJI KONVENSI ARTUP
+
+DENGAN RAHMAT TUHAN YANG MAHA ESA
+
+PRESIDEN REPUBLIK INDONESIA,
+
+Menimbang:
+
+- a. bahwa konvensi transkripsi memerlukan contoh uji yang dapat dibaca mesin;
+- b. bahwa berdasarkan pertimbangan sebagaimana dimaksud dalam huruf a, perlu membentuk Undang-Undang tentang Contoh Uji Konvensi Artup;
+
+Mengingat: Pasal 5 ayat (1) dan Pasal 20 Undang-Undang Dasar Negara Republik Indonesia Tahun 1945;
+
+Dengan Persetujuan Bersama
+
+DEWAN PERWAKILAN RAKYAT REPUBLIK INDONESIA
+
+dan
+
+PRESIDEN REPUBLIK INDONESIA
+
+MEMUTUSKAN:
+
+Menetapkan: UNDANG-UNDANG TENTANG CONTOH UJI KONVENSI ARTUP.
+
+## BAB I — KETENTUAN UMUM
+
+##### Pasal 1
+
+Dalam Undang-Undang ini yang dimaksud dengan:
+
+- 1\. Berkas Uji adalah berkas transkripsi yang dipakai untuk menguji alat pemeriksa.
+- 2\. Kasus Uji adalah perubahan atas Berkas Uji yang hasil pemeriksaannya telah ditentukan.
+
+## BAB II — PEMERIKSAAN
+
+### Bagian Kesatu — Umum
+
+##### Pasal 2
+
+(1) Setiap alat pemeriksa memeriksa Berkas Uji.
+
+(2) Pemeriksaan sebagaimana dimaksud pada ayat (1) meliputi:
+
+- a. format berkas;
+- b. frontmatter; dan
+- c. struktur naskah, yang terdiri atas:
+  - 1\. heading;
+  - 2\. rincian; dan
+  - 3\. notasi konvensi.
+
+### Bagian Kedua — Istilah Asing
+
+##### Pasal 3
+
+Istilah *linter* dalam Undang-Undang ini berarti alat pemeriksa otomatis.
+
+## BAB III — KETENTUAN PENUTUP
+
+##### Pasal 4
+
+Undang-Undang ini mulai berlaku pada tanggal diundangkan.
+
+Agar setiap orang mengetahuinya, memerintahkan pengundangan Undang-Undang ini dengan penempatannya dalam Lembaran Negara Republik Indonesia.
+
+Disahkan di Jakarta pada tanggal 2 Januari 2099
+
+PRESIDEN REPUBLIK INDONESIA,
+
+ttd
+
+NAMA PRESIDEN
+
+Diundangkan di Jakarta pada tanggal 3 Januari 2099
+
+MENTERI SEKRETARIS NEGARA REPUBLIK INDONESIA,
+
+ttd
+
+NAMA MENTERI
+
+LEMBARAN NEGARA REPUBLIK INDONESIA TAHUN 2099 NOMOR 1
+
+# PENJELASAN ATAS UNDANG-UNDANG REPUBLIK INDONESIA NOMOR 99 TAHUN 2099 TENTANG CONTOH UJI KONVENSI ARTUP
+
+## I. UMUM
+
+Undang-Undang ini disusun hanya sebagai contoh uji.
+
+## II. PASAL DEMI PASAL
+
+##### Pasal 1
+
+Cukup jelas.
+
+##### Pasal 2
+
+Ayat (1)
+
+Cukup jelas.
+
+Ayat (2)
+
+Huruf a
+
+Cukup jelas.
+
+Huruf b
+
+Cukup jelas.
+
+Huruf c
+
+Cukup jelas.
+
+##### Pasal 3
+
+Cukup jelas.
+
+##### Pasal 4
+
+Cukup jelas.
+
+TAMBAHAN LEMBARAN NEGARA REPUBLIK INDONESIA NOMOR 9999
+```
+
+### 17.2. Kasus Uji
+
+Setiap kasus diterapkan secara terpisah pada berkas dasar: teks `dari` muncul tepat satu kali dalam berkas dasar dan diganti dengan teks `menjadi`.
+Teks tersebut ditulis sebagai string YAML berkutip ganda, sehingga `\n`, `\r`, `\t`, dan `\uFEFF` berarti LF, CR, tab, dan BOM.
+
+Isian setiap kasus:
+
+- `hasil`: `sesuai` bila berkas hasil penggantian tidak boleh menimbulkan temuan, atau `galat` dan `peringatan` menurut tingkat pemeriksaan yang diharapkan;
+- `pemeriksaan`: kode pemeriksaan Bagian 12 yang diharapkan melaporkan kasus tersebut;
+- `aturan`: ketentuan yang diuji;
+- `keterangan`: penjelasan singkat, tidak normatif.
+
+```yaml
+- kode: U-01
+  hasil: sesuai
+  keterangan: Penanda keraguan di heading Pasal diperbolehkan pada berkas yang belum verified.
+  aturan: [S-25, K-2]
+  pemeriksaan: []
+  ganti:
+    dari: "##### Pasal 3\n\nIstilah"
+    menjadi: "##### Pasal {?3?}\n\nIstilah"
+- kode: U-02
+  hasil: sesuai
+  keterangan: Angka yang diikuti titik tanpa spasi bukan penanda daftar bernomor dan tidak di-escape.
+  aturan: [F-11, F-15]
+  pemeriksaan: []
+  ganti:
+    dari: "Undang-Undang ini disusun hanya sebagai contoh uji."
+    menjadi: "1.5 kali pemeriksaan disusun hanya sebagai contoh uji."
+- kode: U-03
+  hasil: sesuai
+  keterangan: Penanda keraguan di dalam paragraf.
+  aturan: [K-2]
+  pemeriksaan: []
+  ganti:
+    dari: "berarti alat pemeriksa otomatis."
+    menjadi: "berarti alat {?pemeriksa?} otomatis."
+- kode: U-11
+  hasil: galat
+  keterangan: Berkas diawali BOM.
+  aturan: [F-1]
+  pemeriksaan: [L-01]
+  ganti:
+    dari: "---\nkonvensi:"
+    menjadi: "\uFEFF---\nkonvensi:"
+- kode: U-12
+  hasil: galat
+  keterangan: Akhir baris CR LF.
+  aturan: [F-2]
+  pemeriksaan: [L-02]
+  ganti:
+    dari: "DENGAN RAHMAT TUHAN YANG MAHA ESA\n"
+    menjadi: "DENGAN RAHMAT TUHAN YANG MAHA ESA\r\n"
+- kode: U-13
+  hasil: galat
+  keterangan: Huruf beraksen dalam bentuk terurai (bukan NFC).
+  aturan: [F-3]
+  pemeriksaan: [L-03]
+  ganti:
+    dari: "Istilah *linter*"
+    menjadi: "Istilah *line\u0301ter*"
+- kode: U-14
+  hasil: galat
+  keterangan: Karakter tab.
+  aturan: [F-4]
+  pemeriksaan: [L-04]
+  ganti:
+    dari: "Dengan Persetujuan Bersama\n"
+    menjadi: "Dengan\tPersetujuan Bersama\n"
+- kode: U-15
+  hasil: galat
+  keterangan: Spasi di akhir baris.
+  aturan: [F-5]
+  pemeriksaan: [L-04]
+  ganti:
+    dari: "MEMUTUSKAN:\n"
+    menjadi: "MEMUTUSKAN: \n"
+- kode: U-16
+  hasil: galat
+  keterangan: Berkas tidak diakhiri LF.
+  aturan: [F-6]
+  pemeriksaan: [L-04]
+  ganti:
+    dari: "NOMOR 9999\n"
+    menjadi: "NOMOR 9999"
+- kode: U-17
+  hasil: galat
+  keterangan: Dua baris kosong berturut-turut.
+  aturan: [F-7]
+  pemeriksaan: [L-04]
+  ganti:
+    dari: "## I. UMUM\n\n"
+    menjadi: "## I. UMUM\n\n\n"
+- kode: U-18
+  hasil: galat
+  keterangan: Nomor peraturan ditulis sebagai bilangan.
+  aturan: [M-4, M-9]
+  pemeriksaan: [L-05]
+  ganti:
+    dari: "nomor: \"99\""
+    menjadi: "nomor: 99"
+- kode: U-19
+  hasil: galat
+  keterangan: Isian yang tidak tercantum di tabel, berisi informasi yang dapat berubah.
+  aturan: [M-2, M-6, M-9]
+  pemeriksaan: [L-05]
+  ganti:
+    dari: "  mulai_berlaku: pada tanggal diundangkan\n"
+    menjadi: "  mulai_berlaku: pada tanggal diundangkan\n  status: berlaku\n"
+- kode: U-20
+  hasil: galat
+  keterangan: Hash SHA-256 memuat huruf kapital.
+  aturan: [M-9]
+  pemeriksaan: [L-05]
+  ganti:
+    dari: "\"0000000000000000000000000000000000000000000000000000000000000000\""
+    menjadi: "\"000000000000000000000000000000000000000000000000000000000000000A\""
+- kode: U-21
+  hasil: galat
+  keterangan: Pengenal karya berhuruf kapital, sehingga juga tidak sesuai dengan pengenal ekspresi.
+  aturan: [I-1, I-4, M-9]
+  pemeriksaan: [L-05, L-19]
+  ganti:
+    dari: "  id: uu/2099/99\n"
+    menjadi: "  id: UU/2099/99\n"
+- kode: U-22
+  hasil: galat
+  keterangan: Pengenal ekspresi tidak sesuai dengan tanggal ekspresi.
+  aturan: [I-4]
+  pemeriksaan: [L-19]
+  ganti:
+    dari: "  id: uu/2099/99/ind@2099-01-03\n"
+    menjadi: "  id: uu/2099/99/ind@2099-01-02\n"
+- kode: U-23
+  hasil: galat
+  keterangan: Komponen naskah sumber tidak mencakup Penjelasan yang dimuat.
+  aturan: [M-8]
+  pemeriksaan: [L-22]
+  ganti:
+    dari: "    komponen: [batang-tubuh, penjelasan]\n"
+    menjadi: "    komponen: [batang-tubuh]\n"
+- kode: U-24
+  hasil: galat
+  keterangan: Penanda daftar bernomor tanpa escape.
+  aturan: [F-11]
+  pemeriksaan: [L-08]
+  ganti:
+    dari: "  - 1\\. heading;"
+    menjadi: "  - 1. heading;"
+- kode: U-25
+  hasil: galat
+  keterangan: Escape yang tidak diwajibkan.
+  aturan: [F-15]
+  pemeriksaan: [L-08]
+  ganti:
+    dari: "dalam Undang-Undang ini berarti"
+    menjadi: "dalam Undang\\-Undang ini berarti"
+- kode: U-26
+  hasil: galat
+  keterangan: Garis bawah dalam teks sumber tanpa escape.
+  aturan: [F-13]
+  pemeriksaan: [L-08]
+  ganti:
+    dari: "berarti alat pemeriksa otomatis."
+    menjadi: "berarti alat pemeriksa_otomatis."
+- kode: U-27
+  hasil: galat
+  keterangan: Huruf tebal.
+  aturan: [F-10, N-11]
+  pemeriksaan: [L-07]
+  ganti:
+    dari: "Undang-Undang ini disusun hanya sebagai contoh uji."
+    menjadi: "Undang-Undang ini disusun **hanya** sebagai contoh uji."
+- kode: U-28
+  hasil: galat
+  keterangan: Heading Pasal memuat judul buatan.
+  aturan: [S-3, P-4]
+  pemeriksaan: [L-10]
+  ganti:
+    dari: "##### Pasal 4\n\nUndang-Undang ini mulai"
+    menjadi: "##### Pasal 4 — Mulai Berlaku\n\nUndang-Undang ini mulai"
+- kode: U-29
+  hasil: galat
+  keterangan: Heading tingkat enam.
+  aturan: [S-1, S-4]
+  pemeriksaan: [L-10]
+  ganti:
+    dari: "### Bagian Kedua — Istilah Asing"
+    menjadi: "###### Bagian Kedua — Istilah Asing"
+- kode: U-30
+  hasil: galat
+  keterangan: Kurung kurawal yang bukan notasi konvensi.
+  aturan: [F-13, K-8]
+  pemeriksaan: [L-13]
+  ganti:
+    dari: "Cukup jelas.\n\nTAMBAHAN"
+    menjadi: "Cukup jelas. {catatan: rekaan}\n\nTAMBAHAN"
+- kode: U-31
+  hasil: galat
+  keterangan: Penanda keraguan bersarang.
+  aturan: [K-4]
+  pemeriksaan: [L-20]
+  ganti:
+    dari: "berarti alat pemeriksa otomatis."
+    menjadi: "berarti {?alat {?pemeriksa?} otomatis?}."
+- kode: U-32
+  hasil: galat
+  keterangan: Satu blok penutup ditulis pada dua baris.
+  aturan: [N-3, S-13]
+  pemeriksaan: [L-23]
+  ganti:
+    dari: "Disahkan di Jakarta pada tanggal 2 Januari 2099"
+    menjadi: "Disahkan di Jakarta\npada tanggal 2 Januari 2099"
+- kode: U-41
+  hasil: peringatan
+  keterangan: Nomor Pasal tidak berurutan; verifikator memastikan apakah demikian di naskah sumber.
+  aturan: [P-1]
+  pemeriksaan: [L-11, L-12]
+  ganti:
+    dari: "##### Pasal 4\n\nUndang-Undang ini mulai"
+    menjadi: "##### Pasal 5\n\nUndang-Undang ini mulai"
+```
+
+## 18. Lampiran E: Referensi
+
+### 18.1. Referensi Normatif
 
 - Undang-Undang Nomor 12 Tahun 2011 tentang Pembentukan Peraturan Perundang-undangan beserta perubahannya, yaitu Undang-Undang Nomor 15 Tahun 2019, Undang-Undang Nomor 13 Tahun 2022, dan Undang-Undang Nomor 1 Tahun 2026 tentang Penyesuaian Pidana (sepanjang mengubah Pasal 15), khususnya Lampiran II tentang Teknik Penyusunan Peraturan Perundang-undangan.
 - CommonMark Spec, versi 0.31.2.
@@ -1484,7 +1901,7 @@ Ketentuan berikut tetap berlaku dan diperiksa di luar skema: isian bertanda "WAJ
 - ISO 8601, format tanggal dan waktu.
 - ISO 639-3, kode bahasa.
 
-### 17.2. Referensi Informatif
+### 18.2. Referensi Informatif
 
 - Peraturan Presiden Nomor 33 Tahun 2012 tentang Jaringan Dokumentasi dan Informasi Hukum Nasional.
 - Peraturan Menteri Hukum dan Hak Asasi Manusia Nomor 8 Tahun 2019 tentang Standar Pengelolaan Dokumen dan Informasi Hukum.
@@ -1496,8 +1913,8 @@ Ketentuan berikut tetap berlaku dan diperiksa di luar skema: isian bertanda "WAJ
 - BCP 14 (RFC 2119 dan RFC 8174), kata kunci untuk menyatakan tingkat persyaratan.
 - ISO/IEC Directives, Part 2: Principles and rules for the structure and drafting of ISO and IEC documents.
 
-## 18. Lampiran E: Riwayat Perubahan
+## 19. Lampiran F: Riwayat Perubahan
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di lampiran Referensi (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). Menambah JSON Schema frontmatter sebagai Lampiran C yang normatif, [M-9], dan L-22; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran D dan E (usulan 0016). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di lampiran Referensi (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). Menambah JSON Schema frontmatter sebagai Lampiran C yang normatif, [M-9], dan L-22; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran D dan E (usulan 0016). Menambah contoh uji sebagai Lampiran D yang normatif, [V-14], dan L-23; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran E dan F (usulan 0017). |
