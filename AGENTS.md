@@ -89,7 +89,7 @@ Periksa dokumen kerja (tanpa argumen, pemeriksa memeriksa `konvensi/konvensi-art
 
 ```sh
 .venv/bin/python alat/periksa_konvensi.py
-.venv/bin/python alat/periksa_konvensi.py --gaya   # tambah heuristik satu kalimat per baris
+.venv/bin/python alat/periksa_konvensi.py --gaya   # tambah heuristik: satu kalimat per baris, kata kunci normatif dan kode aturan
 .venv/bin/python alat/periksa_konvensi.py --rilis  # cocokkan hash di rilis/RILIS.md
 ```
 

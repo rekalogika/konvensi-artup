@@ -62,4 +62,5 @@ Periksa setidaknya: escape [F-11] sampai [F-13], heading [S-1] sampai [S-4], rin
 
 - Isian yang dirujuk tetapi tidak didefinisikan, misalnya isian di frontmatter dokumen konvensi sendiri.
 - Kata kunci normatif berhuruf kecil yang seharusnya normatif, atau sebaliknya.
+- Kata kunci normatif di luar ketentuan berkode, dan ketentuan berkode tanpa kata kunci (pemeriksa `--gaya`, lalu tinjau manual karena heuristik).
 - Lebih dari satu kalimat per baris (pemeriksa `--gaya`, lalu tinjau manual karena heuristik).
