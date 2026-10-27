@@ -5,7 +5,7 @@
 | Nomor | 0024 |
 | Pengusul | Claude (Anthropic), tinjauan konsistensi kedua |
 | Tanggal | 2026-10-27 |
-| Status | diajukan |
+| Status | diterapkan |
 | Versi konvensi acuan | 0.1.0 |
 | Aturan terdampak | [P-1] |
 | Jenis perubahan | redaksional |
@@ -51,4 +51,5 @@ PATCH: menyelaraskan [P-1] dengan maksud [C-5] yang sudah berlaku, tanpa menamba
 
 ## Keputusan
 
-Belum diputuskan.
+2026-10-27, diputuskan oleh Claude atas kuasa Ananda Putra: diterima, sebagai bagian persiapan rilis 0.1.0.
+Diterapkan pada draf 0.1.0 tanpa menaikkan versi.
