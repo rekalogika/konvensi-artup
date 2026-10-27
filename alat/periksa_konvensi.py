@@ -13,6 +13,10 @@ Memeriksa dokumen konvensi (bukan berkas transkripsi) terhadap:
 - contoh uji di lampiran: berkas dasar lolos dan setiap kasus menghasilkan temuan yang ditetapkan,
   sejauh dapat dinilai alat ini (format byte, JSON Schema, [I-4], dan [M-8]).
 
+Dengan ``--gaya``, ditambah heuristik yang temuannya tidak memblokir pull request: satu kalimat per baris,
+kata kunci normatif di luar ketentuan berkode, dan ketentuan berkode tanpa kata kunci
+(kecuali kelompok P, yang berupa pernyataan prinsip).
+
 Keluaran per baris berformat ``berkas:baris: [kode] pesan``.
 Kode keluar: 0 bila bersih, 1 bila ada temuan, 2 bila berkas tidak dapat dibaca.
 
@@ -79,6 +83,11 @@ REF_TANGGAL = "#/$defs/tanggal"
 DAPAT_DINILAI = {"L-01", "L-02", "L-03", "L-04", "L-05", "L-19", "L-22"}
 PETA_FORMAT = {"F-1": "L-01", "F-2": "L-02", "F-3": "L-03", "F-4": "L-04", "F-5": "L-04", "F-6": "L-04", "F-7": "L-04"}
 HASIL_KASUS = ("sesuai", "galat", "peringatan")
+
+# Kata kunci normatif Bagian 2.1, dan kelompok kode yang ketentuannya berupa pernyataan.
+RE_KATA_KUNCI = re.compile(r"(?<![\w-])(?:WAJIB|TIDAK BOLEH|SEBAIKNYA(?: TIDAK)?|BOLEH)(?![\w-])")
+RE_KUTIPAN = re.compile(r"\"[^\"]*\"|“[^”]*”")
+KELOMPOK_TANPA_KATA_KUNCI = "PL"
 
 # Singkatan yang titiknya bukan akhir kalimat.
 RE_SINGKATAN = re.compile(r"\b(?:s\.d|dll|dsb|dst|dkk|No|hlm|mis|yth|a\.n|u\.p)\.$")
@@ -454,6 +463,60 @@ class Pemeriksa:
                 self.lapor(baris, "gaya", "lebih dari satu kalimat pada satu baris")
                 break
 
+    def periksa_kata_kunci(self, dok: Dokumen) -> None:
+        """Kata kunci normatif di luar ketentuan berkode, dan ketentuan berkode tanpa kata kunci (Bagian 2.1).
+
+        Ketentuan berkode mencakup paragraf atau butir daftar yang diawali kode, baris lanjutannya,
+        dan blok berikutnya bila baris sebelumnya diakhiri titik dua, misalnya daftar rincian.
+        Tabel, blok kode, kode sebaris, dan teks dalam tanda kutip tidak diperiksa.
+        """
+        aturan: tuple[int, str, bool, list[str]] | None = None  # (baris, kode, butir daftar, teks)
+        ikat = False  # baris sebelumnya bagian dari ketentuan dan diakhiri titik dua
+        daftar_terikat = False  # daftar yang sedang berjalan terikat ke ketentuan
+        paragraf_baru = True
+
+        def tutup() -> None:
+            if aturan is None:
+                return
+            baris, kode, _, teks = aturan
+            isi = " ".join(teks)
+            if kode[0] not in KELOMPOK_TANPA_KATA_KUNCI and not RE_DIHAPUS.match(isi) \
+                    and not RE_KATA_KUNCI.search(isi):
+                self.lapor(baris, "kata-kunci", f"ketentuan [{kode}] tidak memuat kata kunci normatif")
+
+        for i in range(dok.awal_badan, len(dok.baris)):
+            if dok.dalam_kode[i] or dok.baris[i].startswith("|"):
+                ikat = daftar_terikat = False
+                continue
+            teks = RE_KODE_SEBARIS.sub(lambda m: " " * len(m.group(0)), dok.baris[i])
+            if not teks.strip():
+                paragraf_baru = True
+                continue
+            if RE_HEADING.match(teks):
+                tutup()
+                aturan, ikat, daftar_terikat, paragraf_baru = None, False, False, True
+                continue
+            teks = RE_KUTIPAN.sub(" ", teks)
+            m = RE_DEFINISI.match(teks)
+            butir = teks.startswith("- ")
+            if m:
+                tutup()
+                aturan = (i + 1, f"{m.group(1)}-{m.group(2)}", butir, [teks[m.end():]])
+                daftar_terikat = False
+            elif aturan is not None:
+                if butir and (ikat or daftar_terikat):
+                    daftar_terikat = True
+                elif paragraf_baru and not ikat or butir and aturan[2]:
+                    tutup()
+                    aturan = None
+                if aturan is not None:
+                    aturan[3].append(teks)
+            if aturan is None and RE_KATA_KUNCI.search(teks):
+                self.lapor(i + 1, "kata-kunci", "kata kunci normatif di luar ketentuan berkode")
+            ikat = aturan is not None and teks.rstrip().endswith(":")
+            paragraf_baru = False
+        tutup()
+
     # -- JSON Schema frontmatter ------------------------------------------
 
     def ambil_tabel(self, dok: Dokumen, kepala: str) -> list[tuple[int, list[str]]] | None:
@@ -660,6 +723,7 @@ class Pemeriksa:
         self.periksa_contoh_uji(dok, heading, skema)
         if self.gaya:
             self.periksa_gaya(dok)
+            self.periksa_kata_kunci(dok)
         self.temuan.sort(key=lambda t: t.baris)
         return self.temuan
 
@@ -747,7 +811,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("berkas", nargs="*", type=Path,
                         help=f"dokumen yang diperiksa (bawaan: {DOKUMEN_KERJA.relative_to(AKAR)})")
     parser.add_argument("--gaya", action="store_true",
-                        help="tambahkan heuristik gaya: satu kalimat per baris")
+                        help="tambahkan heuristik gaya: satu kalimat per baris, kata kunci normatif "
+                             "di luar ketentuan berkode, dan ketentuan berkode tanpa kata kunci")
     parser.add_argument("--rilis", action="store_true",
                         help="cocokkan rilis/RILIS.md dengan salinan beku dan hashnya")
     parser.add_argument("--hanya-format", action="store_true",

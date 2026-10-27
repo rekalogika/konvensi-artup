@@ -56,7 +56,8 @@ Dokumen ini berstatus **draf**.
 - [F-1] Berkas WAJIB berupa UTF-8.
 - [F-2] Akhir baris WAJIB berupa LF.
 
-[F-3] Lihat [F-1] dan Bagian 1.1 serta Lampiran A.
+[F-3] Rujukan WAJIB menunjuk ketentuan yang ada.
+Lihat [F-1] dan Bagian 1.1 serta Lampiran A.
 
 | Kode | Pemeriksaan | Ketentuan |
 |---|---|---|
@@ -247,6 +248,43 @@ class UjiPemeriksa(unittest.TestCase):
         teks = CONTOH_SESUAI.replace("WAJIB berupa LF.", "WAJIB berupa LF. CR TIDAK BOLEH ada.")
         self.assertEqual(kode(periksa(teks, gaya=True)), ["gaya"])
         self.assertEqual(periksa(CONTOH_SESUAI, gaya=True), [])
+
+    def test_kata_kunci(self):
+        def temuan(teks: str) -> list[tuple[int, str]]:
+            return [(t.baris, t.pesan) for t in periksa(teks, gaya=True) if t.kode == "kata-kunci"]
+
+        def baris_ke(teks: str, potongan: str) -> int:
+            return teks.split("\n").index(potongan) + 1
+
+        # Kata kunci di paragraf tanpa kode; dalam tabel, kode sebaris, tanda kutip, dan blok kode tidak dihitung.
+        teks = CONTOH_SESUAI.replace("[F-3] Rujukan", "Lepas WAJIB dicatat.\n\n[F-3] Rujukan")
+        self.assertEqual(temuan(teks), [(baris_ke(teks, "Lepas WAJIB dicatat."), "kata kunci normatif di luar ketentuan berkode")])
+        for lepas in ("Istilah `WAJIB` dan \"BOLEH\" dikutip.", "| WAJIB | tabel |", "```\nWAJIB\n```"):
+            self.assertEqual(temuan(CONTOH_SESUAI.replace("[F-3] Rujukan", f"{lepas}\n\n[F-3] Rujukan")), [], lepas)
+
+        # Lanjutan ketentuan: baris dalam paragraf yang sama dan daftar sesudah titik dua.
+        lanjutan = ("[F-3] Rujukan berikut:\n\n- a. WAJIB menunjuk ketentuan;\n- b. BOLEH memakai rentang.\n"
+                    "Lihat [F-1] dan Bagian 1.1 serta Lampiran A.")
+        self.assertEqual(temuan(CONTOH_SESUAI.replace("[F-3] Rujukan WAJIB menunjuk ketentuan yang ada.\n"
+                                                      "Lihat [F-1] dan Bagian 1.1 serta Lampiran A.", lanjutan)), [])
+
+        # Paragraf sesudah blok kode tidak lagi termasuk ketentuan, walaupun ketentuannya diakhiri titik dua.
+        teks = CONTOH_SESUAI.replace("[F-3] Rujukan WAJIB menunjuk ketentuan yang ada.",
+                                     "[F-3] Rujukan WAJIB berbentuk:\n\n```text\nF-n\n```\n\nBentuk lain TIDAK BOLEH dipakai.")
+        self.assertEqual([b for b, _ in temuan(teks)], [baris_ke(teks, "Bentuk lain TIDAK BOLEH dipakai.")])
+
+        # Butir daftar tanpa kode sesudah butir berkode bukan bagian ketentuan.
+        teks = CONTOH_SESUAI.replace("- [F-2] Akhir baris WAJIB berupa LF.",
+                                     "- [F-2] Akhir baris WAJIB berupa LF.\n- Catatan: CR TIDAK BOLEH ada.")
+        self.assertEqual([b for b, _ in temuan(teks)], [baris_ke(teks, "- Catatan: CR TIDAK BOLEH ada.")])
+
+        # Ketentuan tanpa kata kunci; kelompok P dan aturan yang dihapus dikecualikan.
+        teks = CONTOH_SESUAI.replace("[F-2] Akhir baris WAJIB berupa LF.", "[F-2] Akhir baris berupa LF.")
+        self.assertEqual(temuan(teks), [(baris_ke(teks, "- [F-2] Akhir baris berupa LF."),
+                                         "ketentuan [F-2] tidak memuat kata kunci normatif")])
+        self.assertEqual(temuan(teks.replace("[F-2] Akhir baris berupa LF.", "[F-2] Dihapus dalam versi 0.2.0.")), [])
+        teks = CONTOH_SESUAI.replace("## 1. Format\n", "## 1. Format\n\n[P-1] Transkripsi setia pada isi.\n")
+        self.assertEqual(temuan(teks), [])
 
     def test_hanya_format(self):
         with tempfile.TemporaryDirectory() as tmp:
