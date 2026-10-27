@@ -11,13 +11,6 @@ Tujuannya adalah berkas transkripsi yang:
 - dapat diverifikasi pihak ketiga, misalnya ahli hukum atau asosiasi;
 - dapat dikunci dengan hash SHA-256 yang dicatat di register setelah diverifikasi.
 
-## Asal nama
-
-"Artup" adalah kata "putra" yang dibalik, dari nama penggagasnya, Ananda Putra.
-Nama ini bukan singkatan dan tidak memiliki kepanjangan.
-
-Berkas transkripsi tidak merujuk nama tersebut, melainkan pengenal teknis `transkripsi-peraturan/MAYOR.MINOR`, misalnya `transkripsi-peraturan/0.1`.
-
 ## Status
 
 | Versi | Status | Berkas |
@@ -70,5 +63,5 @@ Pekerjaan transkripsi peraturan, yaitu berkas transkripsi, PDF sumber, register 
 
 ## Penyusun
 
-Penggagas dan penyusun: Ananda Putra.
-Draf 0.1.0 ditulis bersama Claude, model AI buatan Anthropic.
+Penggagas dan penyusun: Ananda Putra @anandaputra.
+Draf 0.1.0 ditulis bersama [Claude Opus, model AI buatan Anthropic](https://www.claude.ai/).
