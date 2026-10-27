@@ -15,8 +15,8 @@ Butir yang menyangkut fakta hukum tidak boleh diisi dari ingatan; cocokkan denga
 - [x] Selaraskan isian metadata (Bagian 9) dengan unsur metadata dalam lampiran Permenkumham 8/2019 (usulan 0018).
 - [x] Verifikasi nama isian JDIHN di Bagian 9.6 (`singkatanJenis`, `noPeraturan`, `tempatTerbit`, `teuBadan`, `bidangHukum`, `tahun_pengundangan`, dan seterusnya) terhadap contoh feed resmi BPHN dalam paket ILDIS (usulan 0018).
 - [x] Validasi pemetaan Akoma Ntoso (Lampiran B) terhadap skema resmi Akoma Ntoso 1.0 (OASIS), termasuk pola IRI manifestasi (usulan 0019).
-- [ ] Susun daftar kode kementerian/lembaga untuk skema pengenal (Bagian 10.2, [I-2]), termasuk aturan untuk perubahan nomenklatur (usulan 0013).
-- [ ] Pastikan rujukan kode wilayah Kemendagri yang berlaku untuk [I-2].
+- [x] Kode kementerian/lembaga untuk skema pengenal ([I-2]): diganti aturan pembentukan kode dari judul peraturan, tanpa daftar (usulan 0020).
+- [x] Pastikan rujukan kode wilayah Kemendagri yang berlaku untuk [I-2]: Kepmendagri 300.2.2-2138/2025 jo. 300.2.2-2430/2025 (usulan 0020).
 
 ## Fakta yang perlu diverifikasi (dari tinjauan pertama)
 
