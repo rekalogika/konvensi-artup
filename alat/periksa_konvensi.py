@@ -8,7 +8,8 @@ Memeriksa dokumen konvensi (bukan berkas transkripsi) terhadap:
 - blok kode (fence) yang seimbang;
 - kode aturan yang tidak ganda dan tanpa lompatan penomoran;
 - rujukan kode aturan, "Bagian n.n", dan "Lampiran X" yang benar-benar ada;
-- daftar isi yang sesuai dengan heading.
+- daftar isi yang sesuai dengan heading;
+- JSON Schema frontmatter di lampiran yang valid dan selaras dengan tabel isian Bagian 9.3 dan 9.4.
 
 Keluaran per baris berformat ``berkas:baris: [kode] pesan``.
 Kode keluar: 0 bila bersih, 1 bila ada temuan, 2 bila berkas tidak dapat dibaca.
@@ -17,8 +18,8 @@ Penulis: Claude (Claude Opus 5.5, model AI buatan Anthropic), atas permintaan
 dan di bawah arahan Ananda Putra, 2026-10-26.
 
 Sumber: ditulis baru untuk proyek ini; tidak ada kode yang disalin dari skrip
-atau proyek lain. Satu-satunya pustaka luar adalah PyYAML (pyyaml.org), dipakai
-sebagai dependensi biasa. Aturan yang diperiksa diambil dari dokumen Konvensi
+atau proyek lain. Pustaka luar yang dipakai sebagai dependensi biasa adalah
+PyYAML (pyyaml.org) dan jsonschema (python-jsonschema.readthedocs.io). Aturan yang diperiksa diambil dari dokumen Konvensi
 Artup sendiri; pengenalan heading ATX dan blok kode berpagar mengikuti
 CommonMark Spec 0.31.2 (spec.commonmark.org), Bagian 4.2 dan 4.5.
 """
@@ -28,6 +29,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import hashlib
+import json
 import re
 import sys
 import unicodedata
@@ -35,6 +37,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 import yaml
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import SchemaError
 
 AKAR = Path(__file__).resolve().parent.parent
 DOKUMEN_KERJA = AKAR / "konvensi" / "konvensi-artup.md"
@@ -62,6 +66,12 @@ HURUF_ROMAWI = {"I", "V", "X"}
 
 ISIAN_FRONTMATTER_WAJIB = ("id", "nama", "judul", "versi", "status", "tanggal")
 NILAI_STATUS = ("draf", "final")
+
+# Tabel isian frontmatter berkas transkripsi (Bagian 9.3 dan 9.4) dan padanan tipenya di JSON Schema.
+KEPALA_TABEL_ISIAN = "| Isian | Wajib | Tipe | Keterangan |"
+KEPALA_TABEL_VERIFIKASI = "| Isian | Wajib | Keterangan |"
+TIPE_SKEMA = {"string": "string", "bilangan": "integer", "objek": "object", "daftar": "array"}
+REF_TANGGAL = "#/$defs/tanggal"
 
 # Singkatan yang titiknya bukan akhir kalimat.
 RE_SINGKATAN = re.compile(r"\b(?:s\.d|dll|dsb|dst|dkk|No|hlm|mis|yth|a\.n|u\.p)\.$")
@@ -432,6 +442,111 @@ class Pemeriksa:
                 self.lapor(baris, "gaya", "lebih dari satu kalimat pada satu baris")
                 break
 
+    # -- JSON Schema frontmatter ------------------------------------------
+
+    def ambil_tabel(self, dok: Dokumen, kepala: str) -> list[tuple[int, list[str]]] | None:
+        """Baris data tabel yang diawali kepala tertentu, sebagai (nomor baris, sel), atau None."""
+        for i in range(dok.awal_badan, len(dok.baris)):
+            if dok.baris[i] == kepala and not dok.dalam_kode[i]:
+                hasil = []
+                for j in range(i + 2, len(dok.baris)):
+                    if not dok.baris[j].startswith("|"):
+                        break
+                    hasil.append((j + 1, [s.strip() for s in dok.baris[j].strip().strip("|").split("|")]))
+                return hasil
+        return None
+
+    def ambil_skema(self, dok: Dokumen, mulai: int, akhir: int) -> dict | None:
+        """Blok ```json pertama di antara dua nomor baris, diurai dan diperiksa terhadap metaskema."""
+        for i in range(mulai, akhir - 1):
+            if dok.baris[i].strip() != "```json":
+                continue
+            isi = []
+            for j in range(i + 1, len(dok.baris)):
+                if RE_FENCE.match(dok.baris[j]):
+                    break
+                isi.append(dok.baris[j])
+            try:
+                skema = json.loads("\n".join(isi))
+            except json.JSONDecodeError as e:
+                self.lapor(i + 1 + e.lineno, "skema", f"JSON tidak valid: {e.msg}")
+                return None
+            try:
+                Draft202012Validator.check_schema(skema)
+            except SchemaError as e:
+                self.lapor(i + 1, "skema", f"bukan JSON Schema Draft 2020-12 yang valid: {e.message}")
+                return None
+            return skema
+        self.lapor(mulai, "skema", "lampiran JSON Schema tidak memuat blok ```json")
+        return None
+
+    @staticmethod
+    def urai_ref(simpul: dict, skema: dict) -> dict:
+        while isinstance(simpul, dict) and "$ref" in simpul:
+            simpul = skema["$defs"][simpul["$ref"].removeprefix("#/$defs/")]
+        return simpul
+
+    def simpul_jalur(self, skema: dict, jalur: str) -> tuple[dict, dict, dict] | None:
+        """(induk, simpul mentah, simpul terurai) untuk jalur seperti `sumber[].jenis`; `a[]` masuk ke items."""
+        induk, mentah, simpul = None, skema, skema
+        for seg in jalur.split(".") if jalur else []:
+            daftar = seg.endswith("[]")
+            induk = simpul
+            mentah = induk.get("properties", {}).get(seg.removesuffix("[]"))
+            if mentah is None:
+                return None
+            simpul = self.urai_ref(mentah, skema)
+            if daftar:
+                simpul = self.urai_ref(simpul.get("items", {}), skema)
+        return induk, mentah, simpul
+
+    def periksa_skema(self, dok: Dokumen, heading: list[tuple[int, int, str]]) -> None:
+        tabel_isian = self.ambil_tabel(dok, KEPALA_TABEL_ISIAN)
+        if tabel_isian is None:
+            return
+        idx = next((k for k, h in enumerate(heading) if h[1] == 2 and "JSON Schema" in h[2]), None)
+        if idx is None:
+            self.lapor(tabel_isian[0][0] - 2, "skema", "tabel isian frontmatter ada, tetapi lampiran JSON Schema tidak ada")
+            return
+        akhir = next((h[0] for h in heading[idx + 1:] if h[1] <= 2), len(dok.baris) + 1)
+        skema = self.ambil_skema(dok, heading[idx][0], akhir)
+        if skema is None:
+            return
+
+        baris_tabel = [(b, sel[0].strip("`"), sel[1], sel[2]) for b, sel in tabel_isian]
+        for b, sel in self.ambil_tabel(dok, KEPALA_TABEL_VERIFIKASI) or []:
+            baris_tabel.append((b, "verifikasi[]." + sel[0].strip("`"), sel[1], None))
+
+        jalur_tabel = {j for _, j, _, _ in baris_tabel}
+        for b, jalur, wajib, tipe in baris_tabel:
+            ketemu = self.simpul_jalur(skema, jalur)
+            if ketemu is None:
+                self.lapor(b, "skema", f"isian `{jalur}` tidak ada di JSON Schema")
+                continue
+            induk, mentah, simpul = ketemu
+            nama = jalur.rsplit(".", 1)[-1].removesuffix("[]")
+            if (wajib == "WAJIB") != (nama in induk.get("required", [])):
+                self.lapor(b, "skema", f"sifat wajib isian `{jalur}` ({wajib}) berbeda dengan `required` di JSON Schema")
+            if tipe is None:
+                continue
+            if tipe == "tanggal":
+                cocok = mentah.get("$ref") == REF_TANGGAL
+            else:
+                cocok = (tipe in TIPE_SKEMA and simpul.get("type") == TIPE_SKEMA[tipe]
+                         and mentah.get("$ref") != REF_TANGGAL)
+            if not cocok:
+                self.lapor(b, "skema", f"tipe isian `{jalur}` ({tipe}) berbeda dengan JSON Schema")
+
+        induk_tabel = {""} | {j.rsplit(".", 1)[0] for j in jalur_tabel if "." in j}
+        for induk in sorted(induk_tabel):
+            ketemu = self.simpul_jalur(skema, induk)
+            if ketemu is None:
+                continue
+            for nama in ketemu[2].get("properties", {}):
+                anak = f"{induk}.{nama}" if induk else nama
+                if anak not in jalur_tabel and not any(j.startswith((anak + ".", anak + "[].")) for j in jalur_tabel):
+                    self.lapor(tabel_isian[0][0] - 2, "skema", f"isian `{anak}` ada di JSON Schema tetapi tidak ada di tabel")
+
     # -- Jalankan ----------------------------------------------------------
 
     def periksa(self, data: bytes) -> list[Temuan]:
@@ -455,6 +570,7 @@ class Pemeriksa:
         self.periksa_daftar_isi(dok, heading)
         self.periksa_identitas(dok, bagian_utama)
         self.periksa_kode_aturan(dok, nomor_bagian, lampiran)
+        self.periksa_skema(dok, heading)
         if self.gaya:
             self.periksa_gaya(dok)
         self.temuan.sort(key=lambda t: t.baris)

@@ -7,7 +7,7 @@ Butir yang menyangkut fakta hukum tidak boleh diisi dari ingatan; cocokkan denga
 
 - [x] Putuskan usulan 0001 sampai 0015 dari tinjauan konsistensi pertama; semuanya diterapkan pada draf 0.1.0 (2026-10-26), dengan bagian yang ditunda dicatat di bawah.
 - [x] Putuskan usulan 0003: diterima 2026-10-26 sebagai [R-6]; revisi ditampung di draf 0.1.0, dan 0.1.0 dirilis setelah usulan penting diterapkan.
-- [ ] Putuskan apakah JSON Schema frontmatter berkas transkripsi menjadi lampiran normatif konvensi.
+- [x] Putuskan apakah JSON Schema frontmatter berkas transkripsi menjadi lampiran normatif konvensi: ya, Lampiran C (usulan 0016).
 - [ ] Putuskan perlunya contoh uji (berkas contoh yang sesuai dan yang melanggar) sebagai bagian dari konvensi.
 
 ## Penyelarasan dengan acuan
@@ -29,7 +29,7 @@ Butir yang menyangkut fakta hukum tidak boleh diisi dari ingatan; cocokkan denga
 - [ ] Contoh tabel dan rumus di batang tubuh, misalnya Pasal 17 UU Pajak Penghasilan (usulan 0009).
 - [x] Daftar jenis peraturan dalam Pasal 8 ayat (1) UU 12/2011 (usulan 0013).
 - [ ] Kode jenis untuk peraturan bersama (misalnya peraturan bersama Kepala Desa, peraturan bersama menteri) pada [I-1].
-- [x] Perubahan UU 12/2011 untuk Lampiran C (UU 15/2019, UU 13/2022, UU 1/2026) dan versi spesifikasi GFM 0.29-gfm (usulan 0015).
+- [x] Perubahan UU 12/2011 untuk lampiran Referensi (UU 15/2019, UU 13/2022, UU 1/2026) dan versi spesifikasi GFM 0.29-gfm (usulan 0015).
 - [ ] Contoh lampiran nyata yang memuat BAB dan subjudul bertingkat, sebagai dasar rumusan heading Lampiran (usulan 0008).
 
 ## Alat

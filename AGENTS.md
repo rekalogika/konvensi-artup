@@ -43,7 +43,7 @@ Jika menemukan berkas transkripsi di repositori ini, misalnya `uu-2022-27.md`, j
    Seluruh kode dalam draf 0.1.0 dianggap sudah terbit, karena draf sudah dapat beredar ke peninjau.
    Aturan yang dihapus tetap dipertahankan kodenya dan ditandai, misalnya `[F-12] Dihapus dalam versi 0.2.0.`, bukan dinomori ulang.
    Kode baru memakai nomor terbesar dalam kelompoknya ditambah satu.
-4. **Setiap perubahan normatif wajib tercatat di riwayat perubahan** (Lampiran D dokumen konvensi) dan mengikuti aturan versi Bagian 13 (semver, [R-1] sampai [R-3]).
+4. **Setiap perubahan normatif wajib tercatat di riwayat perubahan** (lampiran Riwayat Perubahan dokumen konvensi) dan mengikuti aturan versi Bagian 13 (semver, [R-1] sampai [R-3]).
 5. **Dokumen konvensi wajib memenuhi aturan format Bagian 4.1:** UTF-8 tanpa BOM, LF, NFC, tanpa tab, tanpa spasi di akhir baris, diakhiri tepat satu LF, tanpa baris kosong berganda.
    Larangan konstruksi Markdown pada Bagian 4.2 dan escape pada Bagian 4.3 ditujukan untuk berkas transkripsi; dokumen konvensi memakai blok kode, huruf tebal, dan kode sebaris (Bagian 1.5).
 6. **Jangan mengarang fakta hukum.**

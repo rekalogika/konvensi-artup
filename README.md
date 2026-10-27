@@ -47,7 +47,7 @@ Setiap perubahan masuk melalui pull request di https://github.com/rekalogika/kon
 3. Isi latar belakang, aturan yang terdampak, rumusan lama dan baru, dampak terhadap berkas transkripsi yang sudah ada, dan kompatibilitas versi.
 4. Buka pull request berjudul `Usulan NNNN: judul singkat`.
    Usulan dibahas di pull request tersebut dan diputuskan oleh penyusun.
-5. Usulan yang diterima diterapkan pada dokumen kerja dalam pull request tersendiri dan dicatat dalam riwayat perubahan (Lampiran D).
+5. Usulan yang diterima diterapkan pada dokumen kerja dalam pull request tersendiri dan dicatat dalam lampiran Riwayat Perubahan.
 
 Usulan dari pihak luar, misalnya ahli hukum atau asosiasi, sangat diharapkan dan mengikuti alur yang sama.
 Bila tidak terbiasa dengan pull request, masukan juga dapat disampaikan melalui *issue* GitHub; penyusun akan menuliskannya sebagai usulan.

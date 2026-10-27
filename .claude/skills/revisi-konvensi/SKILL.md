@@ -40,7 +40,7 @@ description: Menerapkan perubahan yang SUDAH disetujui Ananda ke dokumen kerja k
 5. **Daftar isi** bila heading tingkat dua berubah.
 6. **Identitas dan riwayat.**
    - Frontmatter `versi`, `tanggal` (hari ini), dan tabel identitas di awal dokumen.
-   - Lampiran D: satu baris per versi; isi kolom Perubahan dengan ringkasan yang menyebut kode aturan dan nomor usulan, misalnya `Mengubah [S-16] (usulan 0003).`
+   - Lampiran Riwayat Perubahan: satu baris per versi; isi kolom Perubahan dengan ringkasan yang menyebut kode aturan dan nomor usulan, misalnya `Mengubah [S-16] (usulan 0003).`
 7. **Periksa.**
    Jalankan `.venv/bin/python alat/periksa_konvensi.py` dan perbaiki sampai bersih.
 8. **Tutup usulan.**
