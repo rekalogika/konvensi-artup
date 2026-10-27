@@ -12,10 +12,6 @@ Butir yang sudah selesai dihapus dari daftar ini; jejaknya ada di `usulan/` dan 
 - [ ] Kode jenis untuk peraturan bersama (misalnya peraturan bersama Kepala Desa, peraturan bersama menteri) pada [I-1].
 - [ ] Contoh lampiran nyata yang memuat BAB dan subjudul bertingkat, sebagai dasar rumusan heading Lampiran (usulan 0008).
 
-## Alat
-
-- [ ] Pertimbangkan pemeriksaan kata kunci normatif tanpa kode aturan (usulan 0005) di `alat/periksa_konvensi.py`.
-
 ## Tahap berikutnya
 
 - [ ] Aturan tanda tangan digital dan timestamping bagi entri verifikasi dan register.
