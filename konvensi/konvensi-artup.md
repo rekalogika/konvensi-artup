@@ -94,7 +94,7 @@ Verifikasi menurut konvensi ini menyatakan kesesuaian isi berkas terhadap naskah
 | Aspek | Acuan | Sifat |
 |---|---|---|
 | Struktur naskah | Lampiran II UU 12/2011 beserta perubahannya | Normatif: konvensi mengikuti struktur yang ditetapkan di sana |
-| Isian metadata | Permenkumham 8/2019 dan format integrasi Portal JDIHN | Dipetakan secara informatif (Bagian 9.6); penyelarasan dengan Permenkumham 8/2019 belum dilakukan |
+| Isian metadata | Permenkumham 8/2019 dan format integrasi Portal JDIHN | Diselaraskan: setiap unsur metadata peraturan dipetakan (Bagian 9.6) |
 | Skema pengenal | European Legislation Identifier (ELI) | Diilhami: pola, bukan implementasi resmi |
 | Model karya, ekspresi, manifestasi | FRBR sebagaimana dipakai Akoma Ntoso | Diilhami: pemisahan tingkat identitas |
 | Gaya dokumen ini | RFC 7322, BCP 14, ISO/IEC Directives Part 2 | Diilhami |
@@ -575,7 +575,7 @@ Nama isian berbentuk `a[].b` berarti isian `b` pada setiap butir daftar `a`.
 | `karya.singkatan` | BOLEH | string | Nama populer, misalnya `UU PDP` |
 | `karya.pembentuk` | WAJIB | string | Lembaga atau jabatan pembentuk |
 | `karya.pemrakarsa` | BOLEH | string | Instansi pemrakarsa |
-| `karya.teu_badan` | BOLEH | string | Tajuk Entri Utama badan menurut pedoman JDIHN |
+| `karya.teu_badan` | BOLEH | string | Tajuk entri utama badan menurut lampiran Permenkumham 8/2019 (Bagian 9.6) |
 | `karya.tempat_penetapan` | WAJIB | string | Tempat pengesahan atau penetapan |
 | `karya.tanggal_penetapan` | WAJIB | tanggal | Tanggal pengesahan atau penetapan |
 | `karya.penandatangan` | WAJIB bila ada | objek | `jabatan` dan `nama` pejabat yang mengesahkan atau menetapkan; tidak ada bila Undang-Undang sah tanpa tanda tangan Presiden |
@@ -586,7 +586,7 @@ Nama isian berbentuk `a[].b` berarti isian `b` pada setiap butir daftar `a`.
 | `karya.mulai_berlaku` | BOLEH | string | Ketentuan saat mulai berlaku, berupa tanggal atau rumusan |
 | `karya.mengubah` | BOLEH | daftar | Pengenal karya yang diubah oleh peraturan ini |
 | `karya.mencabut` | BOLEH | daftar | Pengenal karya yang dicabut oleh peraturan ini |
-| `karya.bidang_hukum` | BOLEH | string | Menurut klasifikasi JDIHN |
+| `karya.bidang_hukum` | BOLEH | string | Menurut tajuk subjek bidang hukum BPHN (Bagian 9.6) |
 | `karya.subjek` | BOLEH | daftar | Kata kunci subjek |
 | `ekspresi.id` | WAJIB | string | Pengenal ekspresi (Bagian 10.3) |
 | `ekspresi.jenis_teks` | WAJIB | string | `asli` (versi 0.1 hanya mengenal nilai ini) |
@@ -691,27 +691,30 @@ verifikasi:
 ---
 ```
 
-### 9.6. Pemetaan ke Isian Portal JDIHN
+### 9.6. Penyelarasan dengan Permenkumham 8/2019 dan Portal JDIHN
 
-Tabel berikut memetakan isian frontmatter dan register ke nama isian dalam format integrasi Portal JDIHN.
-Pemetaan ini informatif; penyelarasan akhir dengan unsur metadata dalam lampiran Permenkumham 8/2019 dilakukan pada revisi konvensi berikutnya.
+Tabel berikut memetakan setiap unsur metadata peraturan dalam Lampiran Permenkumham 8/2019 (BAB III huruf A, Standar Metadata Peraturan) ke isian frontmatter atau register, dan ke nama isian dalam format integrasi Portal JDIHN.
+Pemetaan ini informatif dan dipakai untuk mengekspor metadata berkas transkripsi ke JDIH; ketentuan isian tetap Bagian 9.3.
 
-| Isian konvensi | Isian JDIHN | Catatan |
-|---|---|---|
-| `karya.jenis` | `jenis` | |
-| `karya.singkatan_jenis` | `singkatanJenis` | |
-| `karya.nomor` | `noPeraturan` | |
-| `karya.judul_lengkap` | `judul` | |
-| `karya.tanggal_penetapan` | `tanggal_penetapan` | |
-| `karya.tanggal_pengundangan` | `tanggal_pengundangan` | Tahunnya menjadi `tahun_pengundangan` |
-| `karya.tempat_penetapan` | `tempatTerbit` | |
-| `karya.penempatan`, `karya.tambahan_penempatan` | `sumber` | Digabung menurut pedoman penulisan sumber JDIHN |
-| `karya.teu_badan` | `teuBadan` | |
-| `karya.bidang_hukum` | `bidangHukum` | |
-| `karya.subjek` | `subjek` | |
-| `ekspresi.bahasa` | `bahasa` | Kode `ind` dikonversi menjadi nama bahasa |
-| Register: status keberlakuan | `status` | Tidak disimpan di frontmatter ([M-2]) |
-| — | `noPanggil`, `isbn`, `nomorIndukBuku`, `penerbit`, `deskripsiFisik` | Untuk monografi; tidak dipakai |
+| Unsur Permenkumham 8/2019 | Isian konvensi | Isian Portal JDIHN | Catatan |
+|---|---|---|---|
+| Tipe Dokumen | — | — | Selalu "Peraturan Perundang-undangan" untuk berkas transkripsi |
+| Judul | `karya.judul_lengkap` | `judul` | Jenis, nomor, tahun, dan nama peraturan |
+| T.E.U. Badan/Pengarang | `karya.teu_badan` | `teuBadan` | Ditulis menurut pedoman tajuk entri utama dalam lampiran Permenkumham 8/2019 |
+| Nomor Peraturan | `karya.nomor` | `noPeraturan` | |
+| Jenis/Bentuk Peraturan | `karya.jenis` | `jenis` | |
+| Singkatan Jenis/Bentuk Peraturan | `karya.singkatan_jenis` | `singkatanJenis` | |
+| Tempat Penetapan | `karya.tempat_penetapan` | `tempatTerbit` | |
+| Tanggal-Bulan-Tahun Penetapan/Pengundangan | `karya.tanggal_penetapan`, `karya.tanggal_pengundangan` | `tanggal_penetapan`, `tanggal_pengundangan`, `tahun_pengundangan` | Tahun pengundangan diambil dari tanggal pengundangan |
+| Sumber | `karya.penempatan`, `karya.tambahan_penempatan` | `sumber` | Ditulis sebagai singkatan sumber, tahun, nomor, dan jumlah halaman, misalnya `LN 2011 (82): 51 hlm.`; jumlah halaman tidak dicatat konvensi ini dan diambil dari naskah sumber |
+| Subjek | `karya.subjek` | `subjek` | Butir daftar digabung menjadi satu string |
+| Status | Register: status keberlakuan | `status` | Tidak disimpan di frontmatter ([M-2]) |
+| Bahasa | `ekspresi.bahasa` | `bahasa` | Kode `ind` dikonversi menjadi nama bahasa, misalnya `Indonesia` |
+| Lokasi | — | — | Instansi tempat fisik naskah disimpan; tidak berlaku untuk berkas transkripsi |
+| Bidang Hukum | `karya.bidang_hukum` | `bidangHukum` | Menurut tajuk subjek bidang hukum BPHN |
+| Lampiran | — | `abstrak`, `urlAbstrak`, `fileDownload`, `urlDownload` | Berkas yang dilampirkan pada entri JDIH, misalnya naskah sumber atau berkas transkripsi |
+| — | — | `noPanggil`, `penerbit`, `deskripsiFisik`, `isbn`, `nomorIndukBuku` | Untuk monografi; tidak dipakai |
+| — | — | `idData`, `last_updated`, `urlDetailPeraturan`, `operasi`, `display` | Isian teknis portal; tidak berasal dari frontmatter |
 
 ## 10. Skema Pengenal
 
@@ -1904,8 +1907,8 @@ Isian setiap kasus:
 ### 18.2. Referensi Informatif
 
 - Peraturan Presiden Nomor 33 Tahun 2012 tentang Jaringan Dokumentasi dan Informasi Hukum Nasional.
-- Peraturan Menteri Hukum dan Hak Asasi Manusia Nomor 8 Tahun 2019 tentang Standar Pengelolaan Dokumen dan Informasi Hukum.
-- Format integrasi data Portal JDIHN, Badan Pembinaan Hukum Nasional.
+- Peraturan Menteri Hukum dan Hak Asasi Manusia Nomor 8 Tahun 2019 tentang Standar Pengelolaan Dokumen dan Informasi Hukum (Berita Negara Republik Indonesia Tahun 2019 Nomor 692), khususnya Lampiran BAB III huruf A tentang Standar Metadata Peraturan.
+- Format integrasi data Portal JDIHN, Badan Pembinaan Hukum Nasional, sebagaimana dicontohkan dalam paket aplikasi ILDIS (https://github.com/bphndigitalservice/ildis, berkas `feed/dokumen.json`).
 - Council conclusions inviting the introduction of the European Legislation Identifier (ELI), Dewan Uni Eropa, 2012.
 - Akoma Ntoso Version 1.0, OASIS Standard, OASIS LegalDocML Technical Committee.
 - IFLA, Functional Requirements for Bibliographic Records (FRBR).
@@ -1917,4 +1920,4 @@ Isian setiap kasus:
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di lampiran Referensi (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). Menambah JSON Schema frontmatter sebagai Lampiran C yang normatif, [M-9], dan L-22; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran D dan E (usulan 0016). Menambah contoh uji sebagai Lampiran D yang normatif, [V-14], dan L-23; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran E dan F (usulan 0017). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di lampiran Referensi (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). Menambah JSON Schema frontmatter sebagai Lampiran C yang normatif, [M-9], dan L-22; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran D dan E (usulan 0016). Menambah contoh uji sebagai Lampiran D yang normatif, [V-14], dan L-23; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran E dan F (usulan 0017). Menyelaraskan Bagian 9.6 dengan unsur metadata Permenkumham 8/2019 dan isian Portal JDIHN (usulan 0018). |
