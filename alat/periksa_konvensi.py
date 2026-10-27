@@ -9,7 +9,9 @@ Memeriksa dokumen konvensi (bukan berkas transkripsi) terhadap:
 - kode aturan yang tidak ganda dan tanpa lompatan penomoran;
 - rujukan kode aturan, "Bagian n.n", dan "Lampiran X" yang benar-benar ada;
 - daftar isi yang sesuai dengan heading;
-- JSON Schema frontmatter di lampiran yang valid dan selaras dengan tabel isian Bagian 9.3 dan 9.4.
+- JSON Schema frontmatter di lampiran yang valid dan selaras dengan tabel isian Bagian 9.3 dan 9.4;
+- contoh uji di lampiran: berkas dasar lolos dan setiap kasus menghasilkan temuan yang ditetapkan,
+  sejauh dapat dinilai alat ini (format byte, JSON Schema, [I-4], dan [M-8]).
 
 Keluaran per baris berformat ``berkas:baris: [kode] pesan``.
 Kode keluar: 0 bila bersih, 1 bila ada temuan, 2 bila berkas tidak dapat dibaca.
@@ -73,6 +75,11 @@ KEPALA_TABEL_VERIFIKASI = "| Isian | Wajib | Keterangan |"
 TIPE_SKEMA = {"string": "string", "bilangan": "integer", "objek": "object", "daftar": "array"}
 REF_TANGGAL = "#/$defs/tanggal"
 
+# Pemeriksaan berkas transkripsi (Bagian 12) yang dapat dinilai alat ini pada contoh uji.
+DAPAT_DINILAI = {"L-01", "L-02", "L-03", "L-04", "L-05", "L-19", "L-22"}
+PETA_FORMAT = {"F-1": "L-01", "F-2": "L-02", "F-3": "L-03", "F-4": "L-04", "F-5": "L-04", "F-6": "L-04", "F-7": "L-04"}
+HASIL_KASUS = ("sesuai", "galat", "peringatan")
+
 # Singkatan yang titiknya bukan akhir kalimat.
 RE_SINGKATAN = re.compile(r"\b(?:s\.d|dll|dsb|dst|dkk|No|hlm|mis|yth|a\.n|u\.p)\.$")
 
@@ -102,6 +109,8 @@ class Pemeriksa:
         self.nama = nama
         self.gaya = gaya
         self.temuan: list[Temuan] = []
+        self.definisi: dict[str, int] = {}
+        self.tingkat: dict[str, str] = {}
 
     def lapor(self, baris: int, kode: str, pesan: str) -> None:
         self.temuan.append(Temuan(self.nama, baris, kode, pesan))
@@ -381,6 +390,8 @@ class Pemeriksa:
                 m2 = re.fullmatch(rf"([{AWALAN_KODE}])-(\d+)", sel[0])
                 if m2:
                     kode_def = sel[0]
+                    if "Tingkat" in kepala_tabel and len(sel) == len(kepala_tabel):
+                        self.tingkat[kode_def] = sel[kepala_tabel.index("Tingkat")]
                     awal_rujukan = teks.index(sel[0]) + len(sel[0])
                     if len(sel) > 1 and RE_DIHAPUS.match(sel[1]):
                         dihapus.add(kode_def)
@@ -409,6 +420,7 @@ class Pemeriksa:
                     if r.group(1) not in HURUF_ROMAWI and r.group(1) not in lampiran:
                         self.lapor(baris, "rujukan", f"merujuk Lampiran {r.group(1)} yang tidak ada")
 
+        self.definisi = definisi
         for baris, kode in rujukan:
             if kode not in definisi:
                 self.lapor(baris, "rujukan", f"merujuk kode {kode} yang tidak didefinisikan")
@@ -500,7 +512,7 @@ class Pemeriksa:
                 simpul = self.urai_ref(simpul.get("items", {}), skema)
         return induk, mentah, simpul
 
-    def periksa_skema(self, dok: Dokumen, heading: list[tuple[int, int, str]]) -> None:
+    def periksa_skema(self, dok: Dokumen, heading: list[tuple[int, int, str]]) -> dict | None:
         tabel_isian = self.ambil_tabel(dok, KEPALA_TABEL_ISIAN)
         if tabel_isian is None:
             return
@@ -511,7 +523,7 @@ class Pemeriksa:
         akhir = next((h[0] for h in heading[idx + 1:] if h[1] <= 2), len(dok.baris) + 1)
         skema = self.ambil_skema(dok, heading[idx][0], akhir)
         if skema is None:
-            return
+            return None
 
         baris_tabel = [(b, sel[0].strip("`"), sel[1], sel[2]) for b, sel in tabel_isian]
         for b, sel in self.ambil_tabel(dok, KEPALA_TABEL_VERIFIKASI) or []:
@@ -546,6 +558,80 @@ class Pemeriksa:
                 anak = f"{induk}.{nama}" if induk else nama
                 if anak not in jalur_tabel and not any(j.startswith((anak + ".", anak + "[].")) for j in jalur_tabel):
                     self.lapor(tabel_isian[0][0] - 2, "skema", f"isian `{anak}` ada di JSON Schema tetapi tidak ada di tabel")
+        return skema
+
+    # -- Contoh uji ---------------------------------------------------------
+
+    @staticmethod
+    def ambil_blok(dok: Dokumen, mulai: int, akhir: int, bahasa: str) -> tuple[int, str] | None:
+        """(nomor baris pembuka, isi diakhiri LF) blok kode berbahasa tertentu yang pertama di antara dua baris."""
+        for i in range(mulai, min(akhir, len(dok.baris))):
+            if dok.baris[i].strip() == "```" + bahasa:
+                isi = []
+                for j in range(i + 1, len(dok.baris)):
+                    if dok.baris[j].strip() == "```":
+                        break
+                    isi.append(dok.baris[j])
+                return i + 1, "\n".join(isi) + "\n"
+        return None
+
+    def periksa_contoh_uji(self, dok: Dokumen, heading: list[tuple[int, int, str]], skema: dict | None) -> None:
+        idx = next((k for k, h in enumerate(heading) if h[1] == 2 and "Contoh Uji" in h[2]), None)
+        if idx is None:
+            return
+        mulai = heading[idx][0]
+        akhir = next((h[0] for h in heading[idx + 1:] if h[1] <= 2), len(dok.baris) + 1)
+        dasar = self.ambil_blok(dok, mulai, akhir, "markdown")
+        kasus = self.ambil_blok(dok, mulai, akhir, "yaml")
+        if dasar is None or kasus is None:
+            self.lapor(mulai, "contoh-uji", "lampiran contoh uji tidak memuat blok ```markdown dan ```yaml")
+            return
+        if skema is None:
+            self.lapor(mulai, "contoh-uji", "contoh uji tidak dapat dinilai karena JSON Schema tidak tersedia")
+            return
+        b_dasar, teks_dasar = dasar
+        nilai = nilai_berkas_uji(teks_dasar.encode("utf-8"), skema)
+        if nilai:
+            self.lapor(b_dasar, "contoh-uji", f"berkas dasar menimbulkan temuan {', '.join(sorted(nilai))}")
+        b_kasus, teks_kasus = kasus
+        try:
+            daftar = yaml.safe_load(teks_kasus)
+        except yaml.YAMLError as e:
+            self.lapor(b_kasus, "contoh-uji", f"daftar kasus bukan YAML yang valid: {getattr(e, 'problem', e)}")
+            return
+        if not isinstance(daftar, list):
+            self.lapor(b_kasus, "contoh-uji", "daftar kasus bukan urutan YAML")
+            return
+        terlihat: set[str] = set()
+        for k in daftar:
+            kode = str(k.get("kode")) if isinstance(k, dict) else "?"
+            b = next((i + 1 for i in range(b_kasus, len(dok.baris)) if dok.baris[i] == f"- kode: {kode}"), b_kasus)
+            if not isinstance(k, dict) or not isinstance(k.get("ganti"), dict):
+                self.lapor(b, "contoh-uji", f"kasus {kode} tidak memuat isian `ganti`")
+                continue
+            if kode in terlihat:
+                self.lapor(b, "contoh-uji", f"kode kasus {kode} ganda")
+            terlihat.add(kode)
+            hasil, pemeriksaan, aturan = k.get("hasil"), k.get("pemeriksaan") or [], k.get("aturan") or []
+            if hasil not in HASIL_KASUS:
+                self.lapor(b, "contoh-uji", f"kasus {kode}: hasil `{hasil}` bukan salah satu dari {', '.join(HASIL_KASUS)}")
+            if (hasil == "sesuai") != (not pemeriksaan):
+                self.lapor(b, "contoh-uji", f"kasus {kode}: isian `pemeriksaan` tidak sesuai dengan hasil `{hasil}`")
+            for c in [*pemeriksaan, *aturan]:
+                if c not in self.definisi:
+                    self.lapor(b, "contoh-uji", f"kasus {kode} merujuk kode {c} yang tidak didefinisikan")
+                elif c in self.tingkat and self.tingkat[c] != hasil:
+                    self.lapor(b, "contoh-uji", f"kasus {kode}: tingkat {c} ({self.tingkat[c]}) berbeda dengan hasil `{hasil}`")
+            dari, menjadi = str(k["ganti"].get("dari", "")), str(k["ganti"].get("menjadi", ""))
+            jumlah = teks_dasar.count(dari) if dari else 0
+            if jumlah != 1:
+                self.lapor(b, "contoh-uji", f"kasus {kode}: teks `dari` muncul {jumlah} kali di berkas dasar, bukan tepat satu kali")
+                continue
+            didapat = nilai_berkas_uji(teks_dasar.replace(dari, menjadi).encode("utf-8"), skema)
+            harap = set(pemeriksaan) & DAPAT_DINILAI
+            if didapat != harap:
+                self.lapor(b, "contoh-uji", f"kasus {kode}: diharapkan {', '.join(sorted(harap)) or 'tanpa temuan'}"
+                                            f" untuk pemeriksaan yang dapat dinilai alat ini, didapat {', '.join(sorted(didapat)) or 'tanpa temuan'}")
 
     # -- Jalankan ----------------------------------------------------------
 
@@ -570,11 +656,50 @@ class Pemeriksa:
         self.periksa_daftar_isi(dok, heading)
         self.periksa_identitas(dok, bagian_utama)
         self.periksa_kode_aturan(dok, nomor_bagian, lampiran)
-        self.periksa_skema(dok, heading)
+        skema = self.periksa_skema(dok, heading)
+        self.periksa_contoh_uji(dok, heading, skema)
         if self.gaya:
             self.periksa_gaya(dok)
         self.temuan.sort(key=lambda t: t.baris)
         return self.temuan
+
+
+def tanggal_ke_string(nilai):
+    """Meniru skema inti YAML 1.2: tanggal yang diurai PyYAML (YAML 1.1) dikembalikan menjadi string."""
+    if isinstance(nilai, dict):
+        return {k: tanggal_ke_string(v) for k, v in nilai.items()}
+    if isinstance(nilai, list):
+        return [tanggal_ke_string(v) for v in nilai]
+    if isinstance(nilai, (datetime.date, datetime.datetime)):
+        return nilai.isoformat()
+    return nilai
+
+
+def nilai_berkas_uji(data: bytes, skema: dict) -> set[str]:
+    """Kode pemeriksaan Bagian 12 yang dilanggar sebuah berkas transkripsi, terbatas pada DAPAT_DINILAI."""
+    pemeriksa = Pemeriksa("uji")
+    teks = pemeriksa.periksa_byte(data)
+    hasil = {PETA_FORMAT[t.kode] for t in pemeriksa.temuan}
+    if teks is None:
+        return hasil
+    baris = teks.split("\n")
+    if baris[0] != "---" or "---" not in baris[1:]:
+        return hasil | {"L-05"}
+    try:
+        fm = tanggal_ke_string(yaml.safe_load("\n".join(baris[1:baris.index("---", 1)])))
+    except yaml.YAMLError:
+        return hasil | {"L-05"}
+    if not Draft202012Validator(skema).is_valid(fm):
+        hasil.add("L-05")
+    if isinstance(fm, dict) and isinstance(fm.get("karya"), dict) and isinstance(fm.get("ekspresi"), dict):
+        karya, ekspresi = fm["karya"], fm["ekspresi"]
+        if ekspresi.get("id") != f"{karya.get('id')}/{ekspresi.get('bahasa')}@{ekspresi.get('tanggal')}":
+            hasil.add("L-19")
+        sumber = fm.get("sumber") if isinstance(fm.get("sumber"), list) else []
+        gabungan = {c for s in sumber if isinstance(s, dict) for c in (s.get("komponen") or [])}
+        if gabungan != set(ekspresi.get("komponen") or []):
+            hasil.add("L-22")
+    return hasil
 
 
 def periksa_berkas(jalur: Path, nama: str | None = None, gaya: bool = False,

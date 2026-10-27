@@ -129,6 +129,45 @@ class UjiSkema(unittest.TestCase):
         self.assertTrue(t and t[0].startswith("bukan JSON Schema Draft 2020-12 yang valid"))
 
 
+class UjiContohUji(unittest.TestCase):
+    """Lampiran contoh uji pada dokumen kerja: berkas dasar lolos dan setiap kasus menghasilkan temuan yang ditetapkan."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.dok = pk.DOKUMEN_KERJA.read_text(encoding="utf-8")
+
+    def temuan_contoh(self, teks: str) -> list[str]:
+        return [t.pesan for t in periksa(teks) if t.kode == "contoh-uji"]
+
+    def ubah(self, lama: str, baru: str) -> list[str]:
+        self.assertEqual(self.dok.count(lama), 1, lama)
+        return self.temuan_contoh(self.dok.replace(lama, baru))
+
+    def test_dokumen_kerja_lolos(self):
+        self.assertEqual(self.temuan_contoh(self.dok), [])
+
+    def test_harapan_salah_terdeteksi(self):
+        lama = "  aturan: [M-4, M-9]\n  pemeriksaan: [L-05]"
+        t = self.ubah(lama, "  aturan: [M-4, M-9]\n  pemeriksaan: [L-07]")
+        self.assertEqual(t, ["kasus U-18: diharapkan tanpa temuan untuk pemeriksaan yang dapat dinilai alat ini, didapat L-05"])
+
+    def test_berkas_dasar_rusak(self):
+        t = self.ubah("  transkriptor: [Transkriptor Contoh]\n", "  transkriptor: []\n")
+        self.assertIn("berkas dasar menimbulkan temuan L-05", t)
+
+    def test_teks_dari_tidak_unik(self):
+        t = self.ubah('    dari: "MEMUTUSKAN:\\n"', '    dari: "Cukup jelas."')
+        self.assertTrue(any(p.startswith("kasus U-15: teks `dari` muncul") for p in t), t)
+
+    def test_tingkat_berbeda(self):
+        t = self.ubah("- kode: U-41\n  hasil: peringatan", "- kode: U-41\n  hasil: galat")
+        self.assertIn("kasus U-41: tingkat L-11 (peringatan) berbeda dengan hasil `galat`", t)
+
+    def test_kode_tidak_didefinisikan(self):
+        t = self.ubah("  aturan: [K-4]\n  pemeriksaan: [L-20]", "  aturan: [K-4]\n  pemeriksaan: [L-99]")
+        self.assertIn("kasus U-31 merujuk kode L-99 yang tidak didefinisikan", t)
+
+
 class UjiPemeriksa(unittest.TestCase):
     def test_contoh_sesuai_bersih(self):
         self.assertEqual(periksa(CONTOH_SESUAI), [])
