@@ -1063,12 +1063,13 @@ TAMBAHAN LEMBARAN NEGARA REPUBLIK INDONESIA NOMOR 6820
 ## 15. Lampiran B: Pemetaan ke Akoma Ntoso (Informatif)
 
 Pemetaan ini disediakan untuk memudahkan konversi ke Akoma Ntoso di kemudian hari.
-Pemetaan belum divalidasi terhadap skema Akoma Ntoso 1.0 dan dapat berubah.
+Nama dan susunan elemen di bawah telah dicocokkan dengan skema XML Akoma Ntoso 1.0 (ruang nama `http://docs.oasis-open.org/legaldocml/ns/akn/3.0`), dan pola IRI dengan Akoma Ntoso Naming Convention 1.0.
+Pemetaan tetap informatif; konversi lengkap juga memerlukan bagian `meta` yang tidak diatur di sini.
 
 | Unsur konvensi | Elemen Akoma Ntoso |
 |---|---|
-| Berkas transkripsi (batang tubuh) | `act` |
-| Judul peraturan | `preface` / `docTitle` |
+| Naskah utama | `act`, dengan batang tubuh di dalam `body` |
+| Judul peraturan | `preface`, dengan judul ditandai `docTitle` |
 | Konsiderans | `preamble` / `recitals` / `recital` |
 | Dasar hukum | `preamble` / `citations` / `citation` |
 | Diktum | `preamble` / `formula` |
@@ -1080,8 +1081,8 @@ Pemetaan belum divalidasi terhadap skema Akoma Ntoso 1.0 dan dapat berubah.
 | Ayat | `paragraph` |
 | Rincian | `list` / `point` |
 | Penutup | `conclusions` |
-| Penjelasan | `attachment` berisi dokumen penjelasan |
-| Lampiran | `attachment` |
+| Penjelasan | `attachments` / `attachment` berisi `doc` dengan `name="penjelasan"` |
+| Lampiran | `attachments` / `attachment` berisi `doc` dengan `name="lampiran"` |
 | Kutipan rumusan perubahan | `mod` / `quotedStructure` |
 
 Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berikut:
@@ -1091,6 +1092,9 @@ Pengenal FRBR konvensi ini dapat dipetakan ke pola IRI Akoma Ntoso sebagai berik
 | Karya | `uu/2022/27` | `/akn/id/act/uu/2022-10-17/27` |
 | Ekspresi | `uu/2022/27/ind@2022-10-17` | `/akn/id/act/uu/2022-10-17/27/ind@2022-10-17` |
 | Manifestasi | `uu-2022-27.md` versi 1.0.0 | `/akn/id/act/uu/2022-10-17/27/ind@2022-10-17.akn` |
+
+Menurut Naming Convention, kode negara mengikuti ISO 3166-1 (`id`), kode bahasa mengikuti ISO 639-2 alpha-3, dan akhiran `.akn` menandai paket Akoma Ntoso.
+Kode ISO 639-3 yang dipakai konvensi ini (`ekspresi.bahasa`) sama dengan kode ISO 639-2 untuk bahasa Indonesia (`ind`); untuk bahasa lain kedua kode perlu dicocokkan.
 
 ## 16. Lampiran C: JSON Schema Frontmatter (Normatif)
 
@@ -1910,7 +1914,7 @@ Isian setiap kasus:
 - Peraturan Menteri Hukum dan Hak Asasi Manusia Nomor 8 Tahun 2019 tentang Standar Pengelolaan Dokumen dan Informasi Hukum (Berita Negara Republik Indonesia Tahun 2019 Nomor 692), khususnya Lampiran BAB III huruf A tentang Standar Metadata Peraturan.
 - Format integrasi data Portal JDIHN, Badan Pembinaan Hukum Nasional, sebagaimana dicontohkan dalam paket aplikasi ILDIS (https://github.com/bphndigitalservice/ildis, berkas `feed/dokumen.json`).
 - Council conclusions inviting the introduction of the European Legislation Identifier (ELI), Dewan Uni Eropa, 2012.
-- Akoma Ntoso Version 1.0, OASIS Standard, OASIS LegalDocML Technical Committee.
+- Akoma Ntoso Version 1.0, OASIS Standard, OASIS LegalDocML Technical Committee, termasuk Part 1 (Vocabulary), skema XML `akomantoso30.xsd`, dan Akoma Ntoso Naming Convention Version 1.0.
 - IFLA, Functional Requirements for Bibliographic Records (FRBR).
 - RFC 7322, RFC Style Guide.
 - BCP 14 (RFC 2119 dan RFC 8174), kata kunci untuk menyatakan tingkat persyaratan.
@@ -1920,4 +1924,4 @@ Isian setiap kasus:
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di lampiran Referensi (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). Menambah JSON Schema frontmatter sebagai Lampiran C yang normatif, [M-9], dan L-22; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran D dan E (usulan 0016). Menambah contoh uji sebagai Lampiran D yang normatif, [V-14], dan L-23; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran E dan F (usulan 0017). Menyelaraskan Bagian 9.6 dengan unsur metadata Permenkumham 8/2019 dan isian Portal JDIHN (usulan 0018). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di lampiran Referensi (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). Menambah JSON Schema frontmatter sebagai Lampiran C yang normatif, [M-9], dan L-22; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran D dan E (usulan 0016). Menambah contoh uji sebagai Lampiran D yang normatif, [V-14], dan L-23; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran E dan F (usulan 0017). Menyelaraskan Bagian 9.6 dengan unsur metadata Permenkumham 8/2019 dan isian Portal JDIHN (usulan 0018). Memvalidasi Lampiran B terhadap skema dan konvensi penamaan Akoma Ntoso 1.0 (usulan 0019). |
