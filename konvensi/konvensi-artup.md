@@ -336,8 +336,8 @@ Pembeda antara judul peraturan, Buku, Penjelasan, dan Lampiran adalah labelnya (
 Unsur-unsurnya WAJIB ditulis berurutan setelah judul peraturan, sebagai paragraf atau daftar menurut [S-6] dan [S-7].
 
 [S-6] Kata "Menimbang" dan "Mengingat" WAJIB ditulis sebagai awal paragraf diikuti titik dua tanpa spasi di depannya, misalnya `Menimbang:`.
-Apabila konsiderans atau dasar hukum terdiri atas beberapa rincian, kata tersebut berdiri sebagai paragraf sendiri dan rinciannya ditulis sebagai daftar menurut Bagian 6.5.
-Apabila hanya terdiri atas satu rumusan tanpa label, rumusannya ditulis langsung setelah titik dua dalam paragraf yang sama.
+Apabila konsiderans atau dasar hukum terdiri atas beberapa rincian, kata tersebut WAJIB berdiri sebagai paragraf sendiri dan rinciannya WAJIB ditulis sebagai daftar menurut Bagian 6.5.
+Apabila hanya terdiri atas satu rumusan tanpa label, rumusannya WAJIB ditulis langsung setelah titik dua dalam paragraf yang sama.
 
 [S-7] Frasa diktum WAJIB ditulis sebagai paragraf terpisah: `MEMUTUSKAN:` dan `Menetapkan: …`.
 
@@ -371,12 +371,12 @@ Contoh (Pasal 2 ayat (1) UU 27/2022):
 
 [S-13] Penutup TIDAK BOLEH diberi heading.
 Setiap blok penutup (misalnya tempat dan tanggal pengesahan, jabatan, keterangan "ttd", nama) WAJIB ditulis sebagai paragraf terpisah.
-Baris-baris dalam satu blok WAJIB digabung dengan satu spasi menurut N-3, misalnya `Disahkan di Jakarta pada tanggal 17 Oktober 2022`.
+Baris-baris dalam satu blok WAJIB digabung dengan satu spasi menurut [N-3], misalnya `Disahkan di Jakarta pada tanggal 17 Oktober 2022`.
 
 ### 6.7. Penjelasan
 
 [S-14] Penjelasan WAJIB diawali heading `#` berisi judul Penjelasan sebagaimana tertulis di sumber.
-Bagian utama Penjelasan memakai heading `##`, dan Pasal dalam penjelasan pasal demi pasal memakai heading `#####`.
+Bagian utama Penjelasan WAJIB memakai heading `##`, dan Pasal dalam penjelasan pasal demi pasal WAJIB memakai heading `#####`.
 
 [S-15] Label dalam penjelasan pasal demi pasal, misalnya "Ayat (1)", "Huruf a", "Angka 3", WAJIB ditulis sebagai paragraf tersendiri, diikuti teks penjelasannya sebagai paragraf berikutnya.
 
@@ -408,8 +408,8 @@ Apabila perintah perubahan ditulis sebagai butir rincian, kutipan WAJIB disarang
 Apabila perintah perubahan ditulis sebagai paragraf, kutipan WAJIB ditulis tanpa indentasi setelah paragraf tersebut.
 
 [S-19] Label unsur struktur di dalam kutipan, misalnya "BAB IIA" atau "Pasal 5", TIDAK BOLEH ditulis sebagai heading.
-Label tersebut ditulis sebagai paragraf biasa di dalam kutipan.
-Ayat dan rincian di dalam kutipan mengikuti Bagian 6.4 dan Bagian 6.5.
+Label tersebut WAJIB ditulis sebagai paragraf biasa di dalam kutipan.
+Ayat dan rincian di dalam kutipan WAJIB ditulis menurut Bagian 6.4 dan Bagian 6.5.
 
 [S-24] Dalam penjelasan pasal demi pasal peraturan perubahan, Pasal berangka Romawi WAJIB ditulis sebagai heading `#####`.
 Label lain, termasuk label angka perubahan (misalnya "Angka 1") dan label Pasal yang diubah, WAJIB ditulis sebagai paragraf tersendiri menurut [S-15], tidak sebagai heading.
@@ -436,7 +436,7 @@ Beberapa ketentuan dalam Undang-Undang Nomor … diubah sebagai berikut:
 ### 6.9. Lampiran
 
 [S-20] Setiap Lampiran WAJIB diawali heading `#` berisi baris-baris identitas lampiran yang digabung dengan spasi, misalnya `# LAMPIRAN I PERATURAN PEMERINTAH REPUBLIK INDONESIA NOMOR … TAHUN … TENTANG …`.
-Heading di dalam Lampiran mengikuti label yang tertulis, dengan tingkat `##` sampai `####` menurut hierarkinya.
+Heading di dalam Lampiran WAJIB mengikuti label yang tertulis, dengan tingkat `##` sampai `####` menurut hierarkinya.
 Tabel, rumus, dan gambar di dalam Lampiran mengikuti Bagian 6.10.
 
 ### 6.10. Tabel, Rumus, dan Gambar
@@ -505,7 +505,7 @@ Verifikator WAJIB menghapus penanda apabila teksnya benar, atau mengganti teksny
 
 ### 8.3. Rujukan Berkas Pendamping
 
-[K-6] Notasi `{berkas:nama-berkas}` pada satu baris tersendiri menandai letak gambar, diagram, formulir, atau rumus yang disimpan sebagai berkas pendamping.
+[K-6] Letak gambar, diagram, formulir, atau rumus yang disimpan sebagai berkas pendamping WAJIB ditandai dengan notasi `{berkas:nama-berkas}` pada satu baris tersendiri.
 Nama berkas WAJIB tercantum dalam isian `berkas_pendamping` pada frontmatter beserta nilai hashnya.
 
 [K-7] Teks yang tertulis di dalam gambar, misalnya judul tabel atau keterangan gambar, SEBAIKNYA tetap ditranskripsi sebagai teks di dekat notasi tersebut apabila teks itu terpisah dari gambarnya di sumber.
@@ -722,6 +722,7 @@ Pemetaan ini informatif dan dipakai untuk mengekspor metadata berkas transkripsi
 
 Skema pengenal diilhami templat URI ELI dan model FRBR.
 Pengenal bersifat menjelaskan dirinya sendiri, stabil, dan tidak bergantung pada lokasi penyimpanan.
+
 [I-10] Apabila diterbitkan di web, pengenal BOLEH diawali URI dasar, misalnya `https://contoh.id/eli/`.
 
 ### 10.2. Pengenal Karya
@@ -812,7 +813,7 @@ Fragmen dihitung dari struktur badan teks dan TIDAK BOLEH ditulis sebagai jangka
 
 [I-9] Seluruh fragmen WAJIB berhuruf kecil, termasuk angka Romawi.
 Nomor Pasal bersifat unik dalam satu peraturan, sehingga rujukan Pasal tidak memerlukan BAB.
-Rincian bertingkat `a)` dan `1)` dirujuk dengan kata yang sama (`huruf`, `angka`) secara berurutan menurut tingkatnya.
+Rincian bertingkat `a)` dan `1)` WAJIB dirujuk dengan kata yang sama (`huruf`, `angka`) secara berurutan menurut tingkatnya.
 Segmen `urutan` adalah bilangan dari kata bilangan bertingkat, misalnya "Buku Kedua" menjadi `buku-2` dan "Bagian Kesatu" menjadi `bagian-1`.
 Apabila peraturan memiliki Buku, fragmen BAB, Bagian, dan Paragraf WAJIB diawali fragmen Bukunya, misalnya `#buku-2-bab-i`, karena penomoran BAB dapat dimulai ulang pada setiap Buku.
 
@@ -916,7 +917,7 @@ Pemeriksaan bertanda "(verified)" hanya berlaku sejak berkas akan berstatus `ver
 [V-11] Setiap temuan pemeriksaan bertingkat `peringatan` WAJIB diperiksa verifikator terhadap naskah sumber.
 Apabila teks yang menimbulkan temuan sesuai dengan naskah sumber, verifikator WAJIB mencatatnya dalam isian `catatan` pada entri verifikasi.
 
-[V-14] Alat pemeriksa yang dipakai untuk [V-10] WAJIB tidak menimbulkan temuan pada berkas dasar di Lampiran D dan pada setiap kasus uji berhasil `sesuai`.
+[V-14] Alat pemeriksa yang dipakai untuk [V-10] TIDAK BOLEH menimbulkan temuan pada berkas dasar di Lampiran D dan pada setiap kasus uji yang isian `hasil`-nya `sesuai`.
 Untuk setiap kasus uji lainnya, alat tersebut WAJIB menimbulkan sekurang-kurangnya satu temuan berkode yang tercantum pada isian `pemeriksaan` kasus itu.
 
 | Kode | Pemeriksaan | Tingkat | Ketentuan |
@@ -1925,4 +1926,4 @@ Isian setiap kasus:
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di lampiran Referensi (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). Menambah JSON Schema frontmatter sebagai Lampiran C yang normatif, [M-9], dan L-22; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran D dan E (usulan 0016). Menambah contoh uji sebagai Lampiran D yang normatif, [V-14], dan L-23; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran E dan F (usulan 0017). Menyelaraskan Bagian 9.6 dengan unsur metadata Permenkumham 8/2019 dan isian Portal JDIHN (usulan 0018). Memvalidasi Lampiran B terhadap skema dan konvensi penamaan Akoma Ntoso 1.0 (usulan 0019). Mengganti daftar kode kementerian dan lembaga dengan aturan pembentukan kode dari judul peraturan, dan memperjelas acuan kode wilayah [I-2] (usulan 0020). Memperjelas rujukan kalimat pengesahan di [C-1] butir 9 menjadi Pasal 73 ayat (4) UU 12/2011 sebagaimana diubah dengan UU 13/2022 (usulan 0021). Merumuskan ulang [I-1], [K-3], [R-1], dan [R-4] agar setiap ketentuan berkode memuat kata kunci normatif dan tidak ada kata kunci di luar ketentuan berkode (usulan 0022). |
+| 0.1.0 | 2026-10-26 | Draf pertama, dengan nama Konvensi Artup. Menambah [R-6] tentang rujukan ke versi draf dan mengubah L-06 (usulan 0003). Membatasi penerapan aturan format pada dokumen ini ke Bagian 4.1 (usulan 0001). Menyeragamkan pengenal dokumen menjadi `transkripsi-peraturan`, menghapus isian `digantikan_oleh`, dan menambah [R-7] dan [R-8] (usulan 0002). Mewajibkan penggabungan baris dalam blok penutup [S-13] dan memastikan satu hasil untuk N-8 (usulan 0004). Mempersempit [F-11], memperluas [F-12] dan [F-13], dan menambah [F-15] (usulan 0011). Memberi kode pada ketentuan yang belum berkode ([F-16], [C-5], [I-10], [V-8]), menambah [M-6], [M-7], dan [V-9], mengubah tabel Bagian 7 menjadi daftar berkode, dan menambahkan kata kunci normatif pada [S-2], [S-5], [S-8], [N-9], [N-11], [K-1], [K-5], dan [I-8] (usulan 0005). Menambah tingkat pemeriksaan, [V-10], [V-11], dan L-19 sampai L-21, serta membetulkan rujukan L-11, L-12, dan L-17 (usulan 0006). Menambah istilah dan catatan homonim di Bagian 2.2, membetulkan contoh Label, dan mengganti nama isian `ekspresi.bagian` menjadi `ekspresi.komponen` (usulan 0007). Membatasi [S-1] pada batang tubuh dan Penjelasan, memperjelas [S-2] dan [S-18], dan menambah [S-24] dan [S-25] (usulan 0008). Memindahkan [S-21] sampai [S-23] ke Bagian 6.10 agar berlaku di seluruh badan teks dan menambah [S-26] (usulan 0009). Mengubah isian `sumber` menjadi daftar dengan `sumber[].komponen`, menambah [M-8] dan [V-12], dan menyesuaikan L-17 (usulan 0012). Melengkapi [V-7] untuk versi sebelum `verified` dan penetapan `1.0.0`, dan menambah [V-13] (usulan 0014). Perbaikan redaksional: sifat acuan metadata di Bagian 1.4, langkah 2 Bagian 11.2, contoh Bagian 6.5 dan 6.7, serta referensi di lampiran Referensi (usulan 0015). Melengkapi daftar [C-1] dan [C-2], memperjelas [C-5], dan menjadikan `karya.penandatangan` "WAJIB bila ada" (usulan 0010). Melengkapi kode jenis [I-1] menurut Pasal 8 ayat (1) UU 12/2011 dan memecah `perkada`, menambah aturan nomenklatur pada [I-2], dan menambah fragmen Buku, Bagian, dan Paragraf (usulan 0013). Menambah JSON Schema frontmatter sebagai Lampiran C yang normatif, [M-9], dan L-22; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran D dan E (usulan 0016). Menambah contoh uji sebagai Lampiran D yang normatif, [V-14], dan L-23; lampiran Referensi dan Riwayat Perubahan bergeser menjadi Lampiran E dan F (usulan 0017). Menyelaraskan Bagian 9.6 dengan unsur metadata Permenkumham 8/2019 dan isian Portal JDIHN (usulan 0018). Memvalidasi Lampiran B terhadap skema dan konvensi penamaan Akoma Ntoso 1.0 (usulan 0019). Mengganti daftar kode kementerian dan lembaga dengan aturan pembentukan kode dari judul peraturan, dan memperjelas acuan kode wilayah [I-2] (usulan 0020). Memperjelas rujukan kalimat pengesahan di [C-1] butir 9 menjadi Pasal 73 ayat (4) UU 12/2011 sebagaimana diubah dengan UU 13/2022 (usulan 0021). Merumuskan ulang [I-1], [K-3], [R-1], dan [R-4] agar setiap ketentuan berkode memuat kata kunci normatif dan tidak ada kata kunci di luar ketentuan berkode (usulan 0022). Menambahkan kata kunci normatif pada kalimat lanjutan [S-6], [S-14], [S-19], [S-20], [K-6], dan [I-9], serta memperbaiki rumusan [V-14], letak [I-10], dan rujukan di [S-13] (usulan 0023). |
